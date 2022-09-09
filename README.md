@@ -47,8 +47,8 @@ To demonstrate our knowledge in web development using proper MVC design pattern 
 We will use online resources and model our solutions on the Amazon web application. The time estimation we have for this project is about 160 hours or 80 hours per team member.
 
 # Project Team
-Jeffrey Grospe
-Philip Rieck
+- Jeffrey Grospe
+- Philip Rieck
 
 # Instructor
 Michel Paquette
