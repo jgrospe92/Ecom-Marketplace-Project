@@ -50,7 +50,7 @@ We will use online resources and model our solutions on the Amazon web applicati
 
 # Project Team :goat:
 ## TEAM NAME
-- Les PokPok
+- CodeBros
 ### Team member
     - Jeffrey Grospe
     - Philip Rieck
