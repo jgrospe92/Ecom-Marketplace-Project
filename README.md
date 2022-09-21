@@ -56,4 +56,4 @@ We will use online resources and model our solutions on the Amazon web applicati
     - Philip Rieck
 
 # Instructor :dragon:
-Michel Paquette
+Michel Paquette **(and I approved this project)**
