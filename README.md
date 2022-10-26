@@ -26,22 +26,24 @@ To demonstrate our knowledge in web development using proper MVC design pattern 
 
 1. As a buyer, I can register, login, and logout or sign in as a guest
 2. As a buyer, I can add, modify, and delete products from my cart
-3. As a buyer, I can favorite products
-4. As a buyer, I can see sales
-5. As a buyer, I can see product details and rating
-6. As a buyer, I can modify my personal info/shipping
+3. As a buyer, I can favorite products/ add to my wishlist
+4. As a buyer, I can see sales and other promotions
+5. As a buyer, I can see product details and product review
+6. As a buyer, I can modify my profile info/shipping
 7. As a buyer, I can search up products
 8. As a buyer, i can checkout my order
+9. As a buyer, I can check other user profile
+10. As a buyer, I can see my purchase history
 - - -
 **Client/Sellers** :bust_in_silhouette:
 
 1. As a seller, i can register, login and logout
-2. As a seller, I can add, modify and delete product from my list
+2. As a seller, I can add, modify and delete product from my listing
 3. As a seller, I can create and modify my seller profile
 4. As a seller, I can view product purchase history, add shipping tracking numbers and mark them as shipped.
 5. As a seller, I can modify the product cost and and quantity
 6. As a seller, I can monitor my sales daily, weekly, monthly and annually.
-7. As a seller, I can search for a different sellers and buyers
+7. As a seller, I can check other user profile
 8. As a seller, I can advertise my online store from the main marketplace page
 
 # Project time Estimation :calendar:
