@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2022 at 09:31 PM
+-- Generation Time: Oct 30, 2022 at 11:32 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -58,6 +58,18 @@ CREATE TABLE `inventory` (
   `num_stock` int(11) NOT NULL,
   `outofstock` tinyint(1) NOT NULL,
   `prod_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `marketplace_admin`
+--
+
+CREATE TABLE `marketplace_admin` (
+  `m_id` int(11) NOT NULL,
+  `m_income` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -194,10 +206,12 @@ CREATE TABLE `user` (
 CREATE TABLE `vendor` (
   `vendor_id` int(11) NOT NULL,
   `vendor_name` varchar(100) NOT NULL,
+  `vendor_income` int(11) NOT NULL,
   `vendor_desc` text NOT NULL,
   `vendor_location` varchar(150) NOT NULL,
   `profile_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL
+  `product_id` int(11) DEFAULT NULL,
+  `m_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -259,6 +273,13 @@ ALTER TABLE `buyer_wishlist`
 ALTER TABLE `inventory`
   ADD PRIMARY KEY (`inventory_id`),
   ADD KEY `prod_id` (`prod_id`);
+
+--
+-- Indexes for table `marketplace_admin`
+--
+ALTER TABLE `marketplace_admin`
+  ADD PRIMARY KEY (`m_id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `product`
@@ -330,6 +351,7 @@ ALTER TABLE `user`
 ALTER TABLE `vendor`
   ADD PRIMARY KEY (`vendor_id`),
   ADD UNIQUE KEY `vendor_name` (`vendor_name`),
+  ADD UNIQUE KEY `m_id` (`m_id`),
   ADD KEY `profile_id` (`profile_id`),
   ADD KEY `product_id` (`product_id`);
 
@@ -454,6 +476,12 @@ ALTER TABLE `inventory`
   ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`);
 
 --
+-- Constraints for table `marketplace_admin`
+--
+ALTER TABLE `marketplace_admin`
+  ADD CONSTRAINT `m_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
@@ -507,6 +535,7 @@ ALTER TABLE `shipping`
 -- Constraints for table `vendor`
 --
 ALTER TABLE `vendor`
+  ADD CONSTRAINT `m_vendor_fk` FOREIGN KEY (`m_id`) REFERENCES `marketplace_admin` (`m_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `vendor_ibfk_1` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `vendor_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`prod_id`) ON DELETE CASCADE;
 
