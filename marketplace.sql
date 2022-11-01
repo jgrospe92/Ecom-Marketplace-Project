@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2022 at 11:32 PM
+-- Generation Time: Nov 02, 2022 at 12:16 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `marketplace`
 --
+DROP DATABASE IF EXISTS `marketplace`
+
+CREATE DATABASE `marketplace`
+USE `marketplace`
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `admin_id` int(11) NOT NULL,
+  `profit` int(11) NOT NULL,
+  `profile_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -31,45 +46,37 @@ CREATE TABLE `buyer` (
   `buyer_id` int(11) NOT NULL,
   `shipping_add` varchar(100) NOT NULL,
   `billing_add` varchar(100) DEFAULT NULL,
-  `credit` int(11) DEFAULT NULL,
-  `profile_id` int(11) DEFAULT NULL
+  `credit` int(11) NOT NULL,
+  `profile_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `buyer_wishlist`
+-- Table structure for table `order`
 --
 
-CREATE TABLE `buyer_wishlist` (
-  `buyer_id` int(11) NOT NULL,
-  `wishlist_id` int(11) NOT NULL,
-  `date_added` date NOT NULL
+CREATE TABLE `order` (
+  `order_id` int(11) NOT NULL,
+  `order_number` int(7) NOT NULL,
+  `order_date` date NOT NULL,
+  `paid` tinyint(1) NOT NULL,
+  `buyer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `inventory`
+-- Table structure for table `order_details`
 --
 
-CREATE TABLE `inventory` (
-  `inventory_id` int(11) NOT NULL,
-  `num_stock` int(11) NOT NULL,
-  `outofstock` tinyint(1) NOT NULL,
+CREATE TABLE `order_details` (
+  `order_details_id` int(11) NOT NULL,
+  `unit_price` float NOT NULL,
+  `unit_discount` float NOT NULL,
+  `unit_qty` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
   `prod_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `marketplace_admin`
---
-
-CREATE TABLE `marketplace_admin` (
-  `m_id` int(11) NOT NULL,
-  `m_income` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -82,8 +89,11 @@ CREATE TABLE `product` (
   `prod_id` int(11) NOT NULL,
   `pod_name` varchar(50) NOT NULL,
   `prod_desc` text NOT NULL,
-  `prod_cost` int(11) NOT NULL,
-  `vendor_id` int(11) NOT NULL
+  `rating` int(6) NOT NULL,
+  `prod_cost` float NOT NULL,
+  `num_of_stock` int(11) NOT NULL,
+  `vendor_id` int(11) NOT NULL,
+  `wishlist_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -95,9 +105,8 @@ CREATE TABLE `product` (
 CREATE TABLE `product_rating` (
   `prod_rating_id` int(11) NOT NULL,
   `comments` text NOT NULL,
-  `rating` int(6) NOT NULL,
   `prod_id` int(11) NOT NULL,
-  `profile_id` int(11) NOT NULL
+  `buyer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -122,8 +131,9 @@ CREATE TABLE `profile` (
   `profile_id` int(11) NOT NULL,
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
+  `role` varchar(30) NOT NULL,
   `profile_photo` varchar(30) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -135,6 +145,7 @@ CREATE TABLE `profile` (
 CREATE TABLE `promotion` (
   `promo_id` int(11) NOT NULL,
   `promo_name` varchar(25) NOT NULL,
+  `has_discount` tinyint(1) NOT NULL,
   `discount_percent` int(11) NOT NULL,
   `prod_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -142,29 +153,14 @@ CREATE TABLE `promotion` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `purchased`
+-- Table structure for table `service_transaction`
 --
 
-CREATE TABLE `purchased` (
-  `order_id` int(11) NOT NULL,
-  `order_number` int(7) NOT NULL,
-  `order_data` date NOT NULL,
-  `unit_price` int(11) NOT NULL,
-  `discount` int(11) DEFAULT NULL,
-  `buyer_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `purchased_product`
---
-
-CREATE TABLE `purchased_product` (
-  `order_id` int(11) NOT NULL,
-  `prod_id` int(11) NOT NULL,
-  `unit_price` int(11) NOT NULL,
-  `paid` tinyint(1) NOT NULL
+CREATE TABLE `service_transaction` (
+  `transaction_id` int(11) NOT NULL,
+  `transaction_cost` int(11) NOT NULL,
+  `admin_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -197,6 +193,15 @@ CREATE TABLE `user` (
   `secret_key` varchar(90) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `username`, `password_hash`, `secret_key`) VALUES
+(1, 'jgrospe', '1234', 'secreet1'),
+(2, 'buyer', '2222', 'secreet2'),
+(3, 'vendor', '3333', 'secret3');
+
 -- --------------------------------------------------------
 
 --
@@ -206,12 +211,11 @@ CREATE TABLE `user` (
 CREATE TABLE `vendor` (
   `vendor_id` int(11) NOT NULL,
   `vendor_name` varchar(100) NOT NULL,
-  `vendor_income` int(11) NOT NULL,
+  `vendor_profit` float NOT NULL,
   `vendor_desc` text NOT NULL,
+  `v_raing` int(6) NOT NULL,
   `vendor_location` varchar(150) NOT NULL,
-  `profile_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `m_id` int(11) NOT NULL
+  `profile_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -223,9 +227,8 @@ CREATE TABLE `vendor` (
 CREATE TABLE `vendor_rating` (
   `vendorRating_id` int(11) NOT NULL,
   `v_comments` text DEFAULT NULL,
-  `v_rating` int(6) DEFAULT NULL,
   `vendor_id` int(11) DEFAULT NULL,
-  `profile_id` int(11) NOT NULL
+  `buyer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -235,23 +238,22 @@ CREATE TABLE `vendor_rating` (
 --
 
 CREATE TABLE `wishlist` (
-  `wishlist_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wishtlist_product`
---
-
-CREATE TABLE `wishtlist_product` (
-  `wishlist_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL
+  `wishlist_id` int(11) NOT NULL,
+  `buyer_id` int(11) NOT NULL,
+  `name` varchar(80) NOT NULL,
+  `date_created` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`admin_id`),
+  ADD UNIQUE KEY `profile_id` (`profile_id`);
 
 --
 -- Indexes for table `buyer`
@@ -261,32 +263,27 @@ ALTER TABLE `buyer`
   ADD UNIQUE KEY `profile_id` (`profile_id`);
 
 --
--- Indexes for table `buyer_wishlist`
+-- Indexes for table `order`
 --
-ALTER TABLE `buyer_wishlist`
-  ADD KEY `buyer_id` (`buyer_id`),
-  ADD KEY `wishlist_id` (`wishlist_id`);
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `buyer_id` (`buyer_id`);
 
 --
--- Indexes for table `inventory`
+-- Indexes for table `order_details`
 --
-ALTER TABLE `inventory`
-  ADD PRIMARY KEY (`inventory_id`),
+ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`order_details_id`),
+  ADD KEY `order_id` (`order_id`),
   ADD KEY `prod_id` (`prod_id`);
-
---
--- Indexes for table `marketplace_admin`
---
-ALTER TABLE `marketplace_admin`
-  ADD PRIMARY KEY (`m_id`),
-  ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`prod_id`),
-  ADD KEY `vendor_id` (`vendor_id`);
+  ADD KEY `vendor_id` (`vendor_id`),
+  ADD KEY `wishlist_id` (`wishlist_id`);
 
 --
 -- Indexes for table `product_rating`
@@ -294,7 +291,7 @@ ALTER TABLE `product`
 ALTER TABLE `product_rating`
   ADD PRIMARY KEY (`prod_rating_id`),
   ADD KEY `prod_id` (`prod_id`),
-  ADD KEY `profile_id` (`profile_id`);
+  ADD KEY `buyer_id` (`buyer_id`);
 
 --
 -- Indexes for table `prod_category`
@@ -308,6 +305,7 @@ ALTER TABLE `prod_category`
 --
 ALTER TABLE `profile`
   ADD PRIMARY KEY (`profile_id`),
+  ADD UNIQUE KEY `user_id_2` (`user_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -315,21 +313,15 @@ ALTER TABLE `profile`
 --
 ALTER TABLE `promotion`
   ADD PRIMARY KEY (`promo_id`),
-  ADD KEY `product_id` (`prod_id`);
+  ADD UNIQUE KEY `product_id` (`prod_id`) USING BTREE;
 
 --
--- Indexes for table `purchased`
+-- Indexes for table `service_transaction`
 --
-ALTER TABLE `purchased`
-  ADD PRIMARY KEY (`order_id`),
-  ADD KEY `buyer_id` (`buyer_id`);
-
---
--- Indexes for table `purchased_product`
---
-ALTER TABLE `purchased_product`
-  ADD KEY `order_id` (`order_id`),
-  ADD KEY `prod_id` (`prod_id`);
+ALTER TABLE `service_transaction`
+  ADD PRIMARY KEY (`transaction_id`),
+  ADD UNIQUE KEY `order_id` (`order_id`) USING BTREE,
+  ADD KEY `admin_id` (`admin_id`) USING BTREE;
 
 --
 -- Indexes for table `shipping`
@@ -351,9 +343,7 @@ ALTER TABLE `user`
 ALTER TABLE `vendor`
   ADD PRIMARY KEY (`vendor_id`),
   ADD UNIQUE KEY `vendor_name` (`vendor_name`),
-  ADD UNIQUE KEY `m_id` (`m_id`),
-  ADD KEY `profile_id` (`profile_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY `profile_id` (`profile_id`);
 
 --
 -- Indexes for table `vendor_rating`
@@ -361,20 +351,14 @@ ALTER TABLE `vendor`
 ALTER TABLE `vendor_rating`
   ADD PRIMARY KEY (`vendorRating_id`),
   ADD KEY `vendor_id` (`vendor_id`),
-  ADD KEY `profile_id` (`profile_id`);
+  ADD KEY `buyer_id` (`buyer_id`);
 
 --
 -- Indexes for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  ADD PRIMARY KEY (`wishlist_id`);
-
---
--- Indexes for table `wishtlist_product`
---
-ALTER TABLE `wishtlist_product`
-  ADD KEY `wishlist_id` (`wishlist_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD PRIMARY KEY (`wishlist_id`),
+  ADD UNIQUE KEY `buyer_id_unique` (`buyer_id`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -384,13 +368,19 @@ ALTER TABLE `wishtlist_product`
 -- AUTO_INCREMENT for table `buyer`
 --
 ALTER TABLE `buyer`
-  MODIFY `buyer_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `buyer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `inventory`
+-- AUTO_INCREMENT for table `order`
 --
-ALTER TABLE `inventory`
-  MODIFY `inventory_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `order`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `order_details_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -414,19 +404,13 @@ ALTER TABLE `prod_category`
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `promotion`
 --
 ALTER TABLE `promotion`
   MODIFY `promo_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `purchased`
---
-ALTER TABLE `purchased`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `shipping`
@@ -438,7 +422,7 @@ ALTER TABLE `shipping`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `vendor`
@@ -457,42 +441,43 @@ ALTER TABLE `vendor_rating`
 --
 
 --
+-- Constraints for table `admin`
+--
+ALTER TABLE `admin`
+  ADD CONSTRAINT `admin_profile_fk` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `buyer`
 --
 ALTER TABLE `buyer`
   ADD CONSTRAINT `buyer_ibfk_1` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `buyer_wishlist`
+-- Constraints for table `order`
 --
-ALTER TABLE `buyer_wishlist`
-  ADD CONSTRAINT `buyer_wishlist_ibfk_1` FOREIGN KEY (`buyer_id`) REFERENCES `buyer` (`buyer_id`),
-  ADD CONSTRAINT `buyer_wishlist_ibfk_2` FOREIGN KEY (`wishlist_id`) REFERENCES `wishlist` (`wishlist_id`) ON DELETE CASCADE;
+ALTER TABLE `order`
+  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`buyer_id`) REFERENCES `buyer` (`buyer_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `inventory`
+-- Constraints for table `order_details`
 --
-ALTER TABLE `inventory`
-  ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`);
-
---
--- Constraints for table `marketplace_admin`
---
-ALTER TABLE `marketplace_admin`
-  ADD CONSTRAINT `m_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
+ALTER TABLE `order_details`
+  ADD CONSTRAINT `orderDetails_order` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `orderDetails_prod` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`);
 
 --
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendor` (`vendor_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendor` (`vendor_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_wishlist_fk` FOREIGN KEY (`wishlist_id`) REFERENCES `wishlist` (`wishlist_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `product_rating`
 --
 ALTER TABLE `product_rating`
-  ADD CONSTRAINT `product_profiile_FK` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`),
-  ADD CONSTRAINT `product_rating_ibfk_1` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `product_rating_ibfk_1` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `rating_buyer` FOREIGN KEY (`buyer_id`) REFERENCES `buyer` (`buyer_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `prod_category`
@@ -513,45 +498,36 @@ ALTER TABLE `promotion`
   ADD CONSTRAINT `promotion_ibfk_1` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`);
 
 --
--- Constraints for table `purchased`
+-- Constraints for table `service_transaction`
 --
-ALTER TABLE `purchased`
-  ADD CONSTRAINT `purchased_ibfk_1` FOREIGN KEY (`buyer_id`) REFERENCES `buyer` (`buyer_id`);
-
---
--- Constraints for table `purchased_product`
---
-ALTER TABLE `purchased_product`
-  ADD CONSTRAINT `purchased_product_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `purchased` (`order_id`),
-  ADD CONSTRAINT `purchased_product_ibfk_2` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`);
+ALTER TABLE `service_transaction`
+  ADD CONSTRAINT `admim_service` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`admin_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `service_order_index` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`);
 
 --
 -- Constraints for table `shipping`
 --
 ALTER TABLE `shipping`
-  ADD CONSTRAINT `shipping_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `purchased` (`order_id`);
+  ADD CONSTRAINT `shipping_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`);
 
 --
 -- Constraints for table `vendor`
 --
 ALTER TABLE `vendor`
-  ADD CONSTRAINT `m_vendor_fk` FOREIGN KEY (`m_id`) REFERENCES `marketplace_admin` (`m_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `vendor_ibfk_1` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `vendor_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`prod_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `vendor_ibfk_1` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `vendor_rating`
 --
 ALTER TABLE `vendor_rating`
-  ADD CONSTRAINT `vendor_rating_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendor` (`vendor_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `vendor_rating_profile_fk` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `vendor_buyer` FOREIGN KEY (`buyer_id`) REFERENCES `buyer` (`buyer_id`),
+  ADD CONSTRAINT `vendor_rating_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendor` (`vendor_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `wishtlist_product`
+-- Constraints for table `wishlist`
 --
-ALTER TABLE `wishtlist_product`
-  ADD CONSTRAINT `wishtlist_product_ibfk_1` FOREIGN KEY (`wishlist_id`) REFERENCES `wishlist` (`wishlist_id`),
-  ADD CONSTRAINT `wishtlist_product_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`prod_id`);
+ALTER TABLE `wishlist`
+  ADD CONSTRAINT `wishlist_buyer_fk` FOREIGN KEY (`buyer_id`) REFERENCES `buyer` (`buyer_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
