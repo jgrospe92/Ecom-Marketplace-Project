@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2022 at 05:31 PM
+-- Generation Time: Nov 10, 2022 at 12:11 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,10 +20,12 @@ SET time_zone = "+00:00";
 --
 -- Database: `marketplace`
 --
+
 DROP DATABASE IF EXISTS `marketplace`;
 
 CREATE DATABASE `marketplace`;
 USE `marketplace`;
+
 
 -- --------------------------------------------------------
 
