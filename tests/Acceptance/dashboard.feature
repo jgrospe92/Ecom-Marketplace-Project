@@ -1,21 +1,32 @@
 Feature: dashboard
-  In order to see income report
+  In order to see vendor income report
   As a vendor
   I need to be able to see income report monthly or annually
 
   Scenario: view monthly report
-    Given I have sold $300 for the first week of the month
-    And I have sold $600 for the second week of the month
-    And I have sold $100 for the third week of the month
-    And I have sold $0 for the fourth week of the month
-    When I go my dashboard
-    And I click monthly report
-    Then I should see my total income for this month is $1000
+    Given I log in with my "vendor" account
+    And I have username "vendor3000" with password "2222"
+    And I see a "login successful"
+    Then I am redirected to the marketplace "/home"
+    And I click "profile" icon on the navigation bar
+    Then I am on "/vendor/profile"
+    And I click "dashboard"
+    When I click "sales"
+    And I selected "monthly" on the filter by dropdown option
+    And I see that for the month of "January" I have total profit of "$3000"
+    And I see that for the month of "February" I have total profit of "$2000"
+    And I see that for the month of "March" I have total profit of "$1000"
 
   Scenario: view annual report
-    Given I have sold $40000 for the year 2019
-    And I have sold $60000 for the year 2020
-    And I have sold $80000 for the year 2021
-    When I go my dashboard
-    And I click monthly report
-    Then I should see my total income for last month is $1000
+    Given I log in with my "vendor" account
+    And I have username "vendor3000" with password "2222"
+    And I see a "login successful"
+    Then I am redirected to the marketplace "/home"
+    And I click "profile" icon on the navigation bar
+    Then I am on "/vendor/profile"
+    And I click "dashboard"
+    When I click "sales"
+    And I selected "annually" on the filter by dropdown option
+    And I see that for the year of "2021" I have total profit of "$70000"
+    And I see that for the year of "2020" I have total profit of "$60000"
+    And I see that for the year of "2019" I have total profit of "$90000"

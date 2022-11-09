@@ -1,12 +1,20 @@
 Feature: advertise
-  In order to promote my products
+  In order to advertise my products
   As a vendor
-  I need to be able to promote my products
+  I need to be able to advertise my products
 
-  Scenario: advertise my product
-    Given I have a product
-    Given I have $10000 amount balance
-    When I click advertise
-    And I pay $100 for the service
-    Then users should see my ads from the main page of the marketplace
-    and my new amount balance is $9900 
+Scenario: advertise my product
+  Given I am logged in a as "vendor" with the password "v3ndor"
+  And I have the "widget" product that costs "100$" and has the "This is a widget" description
+  And I have "10000" amount balance
+  When I click "advertise"
+  And I see "100.00$" service fee
+  And I click "pay"
+  And I see "transaction completed" alert
+  Then I am on "/Profile"
+  And I see "Balance: 9900.00$"
+  When I click "home"
+  Then I am on marketplace "/home"
+  And I click "ads"
+  And I see the "widget" product that costs "100$" and has the "This is a widget" description
+  
