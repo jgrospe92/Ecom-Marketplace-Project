@@ -2,7 +2,7 @@
 <body>
     <h1>Register</h1>
     <div>
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-pills ">
             <li class="nav-item">
                 <a id="buyer" class="nav-link active" onclick="registerUser(id);" aria-current="page">Buyer</a>
             </li>

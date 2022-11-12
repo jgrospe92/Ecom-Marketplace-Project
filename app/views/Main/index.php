@@ -8,6 +8,7 @@
         <?php 
             if (isset($_SESSION['user_id'])){
                 $link = "href='/User/logout'";
+                //TODO: Add who is currently login "Welcome, current user"
                 $status = 'Logout';
             } else {
                 $link = "href='\User\login'";
