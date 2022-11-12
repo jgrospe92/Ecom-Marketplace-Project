@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2022 at 12:11 AM
+-- Generation Time: Nov 12, 2022 at 01:37 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,9 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `marketplace`
 --
-
-DROP DATABASE IF EXISTS `marketplace`;
-
 CREATE DATABASE `marketplace`;
 USE `marketplace`;
 
@@ -37,6 +34,20 @@ CREATE TABLE `admin` (
   `admin_id` int(11) NOT NULL,
   `profit` int(11) NOT NULL,
   `profile_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `advertisement`
+--
+
+CREATE TABLE `advertisement` (
+  `ads_id` int(11) NOT NULL,
+  `description` varchar(250) NOT NULL,
+  `start_data` date NOT NULL,
+  `end_data` date NOT NULL,
+  `prod_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -95,6 +106,7 @@ CREATE TABLE `product` (
   `rating` int(6) NOT NULL,
   `prod_cost` float NOT NULL,
   `num_of_stock` int(11) NOT NULL,
+  `has_discount` tinyint(1) NOT NULL,
   `vendor_id` int(11) NOT NULL,
   `prod_cat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -108,6 +120,7 @@ CREATE TABLE `product` (
 CREATE TABLE `product_rating` (
   `prod_rating_id` int(11) NOT NULL,
   `comments` text NOT NULL,
+  `product_rate` varchar(6) DEFAULT NULL,
   `prod_id` int(11) NOT NULL,
   `order_details_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -161,7 +174,8 @@ CREATE TABLE `service_transaction` (
   `transaction_id` int(11) NOT NULL,
   `transaction_cost` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL
+  `order_id` int(11) DEFAULT NULL,
+  `ads_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -192,17 +206,8 @@ CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password_hash` varchar(90) NOT NULL,
-  `secret_key` varchar(90) NOT NULL
+  `secret_key` varchar(90) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`user_id`, `username`, `password_hash`, `secret_key`) VALUES
-(1, 'jgrospe', '1234', 'secreet1'),
-(2, 'buyer', '2222', 'secreet2'),
-(3, 'vendor', '3333', 'secret3');
 
 -- --------------------------------------------------------
 
@@ -228,6 +233,7 @@ CREATE TABLE `vendor` (
 CREATE TABLE `vendor_rating` (
   `vendorRating_id` int(11) NOT NULL,
   `v_comments` text DEFAULT NULL,
+  `vendor_rate` varchar(6) DEFAULT NULL,
   `vendor_id` int(11) DEFAULT NULL,
   `buyer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -268,6 +274,13 @@ CREATE TABLE `wishlistdetails` (
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`),
   ADD UNIQUE KEY `profile_id` (`profile_id`);
+
+--
+-- Indexes for table `advertisement`
+--
+ALTER TABLE `advertisement`
+  ADD PRIMARY KEY (`ads_id`),
+  ADD UNIQUE KEY `prod_id_unique` (`prod_id`) USING BTREE;
 
 --
 -- Indexes for table `buyer`
@@ -326,7 +339,7 @@ ALTER TABLE `profile`
 --
 ALTER TABLE `promotion`
   ADD PRIMARY KEY (`promo_id`),
-  ADD UNIQUE KEY `product_id` (`prod_id`) USING BTREE;
+  ADD UNIQUE KEY `prod_id` (`prod_id`);
 
 --
 -- Indexes for table `service_transaction`
@@ -334,7 +347,8 @@ ALTER TABLE `promotion`
 ALTER TABLE `service_transaction`
   ADD PRIMARY KEY (`transaction_id`),
   ADD UNIQUE KEY `order_id` (`order_id`) USING BTREE,
-  ADD KEY `admin_id` (`admin_id`) USING BTREE;
+  ADD KEY `admin_id` (`admin_id`) USING BTREE,
+  ADD KEY `ads_id` (`ads_id`);
 
 --
 -- Indexes for table `shipping`
@@ -356,7 +370,7 @@ ALTER TABLE `user`
 ALTER TABLE `vendor`
   ADD PRIMARY KEY (`vendor_id`),
   ADD UNIQUE KEY `vendor_name` (`vendor_name`),
-  ADD KEY `profile_id` (`profile_id`);
+  ADD UNIQUE KEY `profile_id_unique` (`profile_id`) USING BTREE;
 
 --
 -- Indexes for table `vendor_rating`
@@ -384,6 +398,12 @@ ALTER TABLE `wishlistdetails`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `advertisement`
+--
+ALTER TABLE `advertisement`
+  MODIFY `ads_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `buyer`
@@ -443,7 +463,7 @@ ALTER TABLE `shipping`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `vendor`
@@ -474,6 +494,12 @@ ALTER TABLE `admin`
   ADD CONSTRAINT `admin_profile_fk` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `advertisement`
+--
+ALTER TABLE `advertisement`
+  ADD CONSTRAINT `ads_product_unique` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `buyer`
 --
 ALTER TABLE `buyer`
@@ -497,7 +523,7 @@ ALTER TABLE `order_details`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendor` (`vendor_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `product_prod_cat_fk` FOREIGN KEY (`prod_cat_id`) REFERENCES `prod_category` (`prod_cat_id`);
+  ADD CONSTRAINT `product_prod_cat_fk` FOREIGN KEY (`prod_cat_id`) REFERENCES `prod_category` (`prod_cat_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `product_rating`
@@ -516,14 +542,15 @@ ALTER TABLE `profile`
 -- Constraints for table `promotion`
 --
 ALTER TABLE `promotion`
-  ADD CONSTRAINT `promotion_ibfk_1` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`);
+  ADD CONSTRAINT `promo_product_unique` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `service_transaction`
 --
 ALTER TABLE `service_transaction`
   ADD CONSTRAINT `admim_service` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`admin_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `service_order_index` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`);
+  ADD CONSTRAINT `service_ads_index` FOREIGN KEY (`ads_id`) REFERENCES `advertisement` (`ads_id`),
+  ADD CONSTRAINT `service_order_index` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `shipping`
