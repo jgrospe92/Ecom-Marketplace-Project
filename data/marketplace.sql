@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `marketplace`
 --
+DROP DATABASE IF EXISTS `marketplace`;
+
 CREATE DATABASE `marketplace`;
 USE `marketplace`;
 
