@@ -1,11 +1,13 @@
 <?php 
 
-namespace app\core\Controllers {
+namespace app\controllers {
 
     class Main extends \app\core\Controller{
 
         public function index(){
-            echo "main";
+            //TODO: display ads using with POST
+            //TODO:  
+            $this->view('Main/index');
         }
     }
 }

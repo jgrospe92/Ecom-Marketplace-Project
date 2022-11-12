@@ -1,12 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<?php $this->view('includes/header') ?>
 <body>
-    <h1>Welcome to the  Marketplace</h1>
+    <header>
+        <!-- LOGO -->
+        <!-- Catalogue button/ scroll to the catalogue section -->
+        <!-- search bar -->
+        <!-- login button -->
+        <a href='/User/login'>Login</a>
+        <!-- cart button -->
+    </header>
+    <h1>Welcome to the Marketplace</h1>
+    <section>
+        <h1>This area is for carousel</h1>
+    </section>
+    <section>
+        <h1>This section displays advertisement</h1>
+    </section>
+    <section>
+        <h1>This section display product catalogue</h1>
+        <p>Sorted by the newest product added by default</p>
+    </section>
+
 </body>
 </html>
