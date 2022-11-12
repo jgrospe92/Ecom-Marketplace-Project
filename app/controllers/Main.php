@@ -9,5 +9,6 @@ namespace app\controllers {
             //TODO:  
             $this->view('Main/index');
         }
+        
     }
 }

@@ -5,7 +5,16 @@
         <!-- Catalogue button/ scroll to the catalogue section -->
         <!-- search bar -->
         <!-- login button -->
-        <a href='/User/login'>Login</a>
+        <?php 
+            if (isset($_SESSION['user_id'])){
+                $link = "href='/User/logout'";
+                $status = 'Logout';
+            } else {
+                $link = "href='\User\login'";
+                $status = 'Login';
+            }
+        ?>
+        <a <?= $link ?>><?= $status ?></a>
         <!-- cart button -->
     </header>
     <h1>Welcome to the Marketplace</h1>

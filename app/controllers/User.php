@@ -3,11 +3,27 @@ namespace app\controllers;
 
 class User extends \app\core\Controller {
 
+	//NOTE: USER LOGIN
     public function index(){
-        $this->view('User/login');
+	
+		if (isset($_POST['action'])){
+			$user = new \app\models\User();
+			$user = $user->get($_POST['username']);
+			if (password_verify($_POST['password'], $user->password_hash)){
+				$_SESSION['user_id'] = $user->user_id;
+				$_SESSION['username'] = $user->username;
+				// TODO: get profile
+				// TODO: create SESSION for profile
+				header('location:/Main/index');
+			} else {
+				header('location:/User/index?error=Wrong username/password combination');
+			}
+		}else {
+			$this->view('User/login');
+		} 
     }
 
-    // NOTE: 
+    //NOTE: Register account for buyer and vendor
     public function register()
     {
 		if (isset($_POST['action'])){
@@ -30,10 +46,11 @@ class User extends \app\core\Controller {
 			$this->view('User/register');
 		}
     }
+
     //NOTE: LOGOUT USER
     public function logout()
     {
 		session_destroy();
-		header('location:/User/index');
+		header('location:/Main/index');
 	}
 }

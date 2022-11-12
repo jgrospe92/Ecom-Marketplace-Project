@@ -4,11 +4,11 @@
     <h1>LOG IN</h1>
     <form action="" method="post">
 
-        <label for="">Username: <input type="text" name="username"></label><br>
-        <label for="">Username: <input type="text" name="username"></label><br>
+        <label for="username">Username: <input id="username" type="text" name="username" required></label><br>
+        <label for="password">Password: <input id="password" type="password" name="password" required></label><br>
         <div>
             <a href="/Main/index" class="btn btn-danger">CANCEL</a>
-            <input name="action" type="button" class="btn btn-success" onclick="alert('login success')" value="LOGIN">
+            <input name="action" type="submit" class="btn btn-success" onclick="alert('login success')" value="LOGIN">
         </div>
         <a href='/User/register'>Not a member? click me to register</a>
     </form>

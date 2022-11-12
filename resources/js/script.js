@@ -37,3 +37,6 @@ function registerUser(id){
     }
 
 }
+
+
+//NOTE: AJAX CALLS
