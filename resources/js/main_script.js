@@ -38,7 +38,6 @@ function createProfile(){
 }
 createProfile();
 
-
 // function for buyer
 function registerUser(id){
   

@@ -6,9 +6,8 @@ namespace app\controllers {
 
         public function index(){
             //TODO: display ads using with POST
-            //TODO:  
+            //TODO: display products and filter it by newest
             $this->view('Main/index');
         }
-        
     }
 }

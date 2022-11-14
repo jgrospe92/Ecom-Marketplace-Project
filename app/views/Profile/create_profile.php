@@ -17,7 +17,7 @@
                     <label for="billing_add">Billing Address: <input id="billing_add" type="text" name="billing_add" require></label><br>
                     <label for="credit">Add Credit: <input id="credit" type="text" name="credit" require></label><br>
                 </div>
-                <a class="btn btn-danger" href="/">CANCEL</a>
+                <input type="submit" class="btn btn-danger" name="cancel" value="CANCEL">
                 <input type="submit" class="btn btn-success" name='action' value="CREATE">
             <?php } else { ?>
 
@@ -32,7 +32,7 @@
                     <label for="description">Store Description: <textarea id="description" placeholder="Tell us something about your store"  name="description" require></textarea></label>
                     <label for="store_location">Store Location: <input id="store_location" type="text" name="location" require></label><br>
                 </div>
-                <a class="btn btn-danger" href="/">CANCEL</a>
+                <input type="submit" class="btn btn-danger" name="cancel" value="CANCEL">
                 <input type="submit" class="btn btn-success" name='action' value="CREATE">
 
 

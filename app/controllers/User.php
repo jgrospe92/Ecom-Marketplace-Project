@@ -4,7 +4,8 @@ namespace app\controllers;
 class User extends \app\core\Controller {
 
 	//NOTE: USER LOGIN
-    public function index(){
+    public function index()
+	{
 	
 		if (isset($_POST['action'])){
 			$user = new \app\models\User();
