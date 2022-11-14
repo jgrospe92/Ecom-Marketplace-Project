@@ -20,6 +20,7 @@ class User extends \app\core\Model
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(['username'=>$this->username,
                         'password_hash'=>$this->password_hash]);
+        return self::$_connection->lastInsertId();
     }
 
     // NOTE: UPDATE PASSWORD

@@ -1,5 +1,8 @@
 // js is detected
 
+// GLOBAL properties
+
+var role = "buyer";
 // Events
 
 
@@ -7,10 +10,40 @@
 function clearForm(){
     document.getElementById("reg_form").innerHTML = "";
 }
+
+// load event
+// var user_role = document.getElementById('current-user');
+// window.onload = (event) => {
+//     console.log(role + 'event: ' + event);
+//   };
+
+// DEBUG:
+var btn = document.getElementById('btn');
+if (btn != null) {
+    btn.addEventListener('click', function(){alert("you click the button " + role)})
+}
+
+// AJAX FUNCTIONS
+var btnRegister = document.getElementById('btnRegister');
+function createProfile(){
+    if (btnRegister != null) {
+        btnRegister.addEventListener('click', function(e){
+            $.ajax({
+                url: '/User/register',
+                type: 'POST',
+                data: {role : role}
+            });
+        });
+    }
+}
+createProfile();
+
+
 // function for buyer
 function registerUser(id){
   
     var container =  document.getElementById("reg_form");
+    
 
     if (id === 'buyer'){
         clearForm();
@@ -23,6 +56,9 @@ function registerUser(id){
             content += '<label for="password_verify">Confirm Password: <input placeholder="Re-enter password"';
             content += 'type="password" name="password_verify" id="password_verify" required></label><br>';
         container.innerHTML += content;
+        role = "buyer";
+
+     
     } else if (id === "vendor") {
         clearForm();
         document.getElementById("buyer").classList.remove("active");
@@ -34,6 +70,8 @@ function registerUser(id){
             content += '<label for="password_verify">Confirm Password: <input placeholder="Re-enter password"';
             content += 'type="password" name="password_verify" id="password_verify" required></label><br>';
         container.innerHTML = content;
+       role = "vendor";
+
     }
 
 }

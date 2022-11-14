@@ -14,7 +14,7 @@
     </div>
     <form method="POST" action="">
         <div id="reg_form">
-        
+            <span name="buyer">buyer</span>
             <label for="username">Username: <input placeholder="Enter buyer username"
                 type="text" name="username" id="username" required></label><br>
             <label for="password">Password: <input placeholder="Enter password"
@@ -23,7 +23,7 @@
                 type="password" name="password_verify" id="password_verify" required></label><br>
         </div>
             <a class="btn btn-danger"  href="/Main/index">CANCEL</a>
-            <button type="submit" name="action" class="btn btn-success" onclick="alert('success')">REGISTER</button>
+            <button type="submit" name="action" class="btn btn-success" id="btnRegister">REGISTER</button>
     </form>
     <?php
     if(isset($_GET['error'])){
@@ -34,6 +34,6 @@
     <?php
     }
     ?>
-    <script src="/resources/js/script.js"></script>
+    <script src="/resources/js/main_script.js"></script>
 </body>
 </html>

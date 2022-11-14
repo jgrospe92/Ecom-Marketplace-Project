@@ -26,6 +26,10 @@ class User extends \app\core\Controller {
     //NOTE: Register account for buyer and vendor
     public function register()
     {
+		if (isset($_POST['role'])){
+			$_SESSION['role'] = $_POST['role'];
+		}
+		
 		if (isset($_POST['action'])){
 			if ($_POST['password'] == $_POST['password_verify']) {
 				$user = new \app\models\User();
@@ -33,8 +37,12 @@ class User extends \app\core\Controller {
 				if (!$check) {
 					$user->username = $_POST['username'];
 					$user->password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-					$user->insert();
-                    header('location:/Main/index');
+					$_SESSION['user_id'] = $user->insert();
+					$_SESSION['username'] = $user->username;
+					
+					header('location:/Profile/create_profile?role=' . $_SESSION['role']);
+					
+					
 				}else {
 					header('location:/User/register?error=The username "'.$_POST['username'].'" is already in use. Select another.');
 				}
@@ -44,6 +52,7 @@ class User extends \app\core\Controller {
 
 		}else {
 			$this->view('User/register');
+			
 		}
     }
 
