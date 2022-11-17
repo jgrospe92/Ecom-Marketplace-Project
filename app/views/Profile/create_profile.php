@@ -33,12 +33,23 @@
                     <label for="description">Store Description: <textarea id="description" placeholder="Tell us something about your store"  name="vendor_desc" required></textarea></label>
                     <label for="store_location">Store Location: <input id="store_location" type="text" name="vendor_location" required></label><br>
                 </div>
-                <input id="btnCancel" type="button"  class="btn btn-danger" name="cancel" value="CANCEL">
+                <input id="btnCancel" type="submit"  class="btn btn-danger" name="cancel" value="CANCEL">
                 <input type="submit" class="btn btn-success" name='action' value="CREATE">
 
 
             <?php } ?>
         </form>
+    </div>
+    <div>
+          <?php
+        if (isset($_GET['error'])) {
+        ?>
+        <div class="alert alert-danger" role="alert">
+            <?=$_GET['error']?>
+        </div>
+        <?php
+        }
+    ?>
     </div>
 
     <!-- IMAGE PREVIEW -->
@@ -49,20 +60,20 @@
                 pic_preview.src = URL.createObjectURL(file)
             }
         }
+
         $('#btnCancel').on('click', function(e){
             e.preventDefault();
             $.ajax(
                 {
                     url: '/Profile/create_profile',
                     type: 'POST',
-                    data: {cancel: 'cancel'},
-                    success: function(data, status) {
-                        console.log(data + 'status ' + status);
-                    }   
+                    data: {'cancel': 'cancel'},
                 }
 
-            )
-        })
+            ).done(function(){
+                location.href = '/Main/index';
+            })
+        });
     
     </script>
     <script src="/resources/js/main_script.js"></script>

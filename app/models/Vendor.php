@@ -26,4 +26,12 @@ class Vendor extends \app\core\Model
                         'profile_id'=>$this->profile_id]);
         return self::$_connection->lastInsertId();
     }
+
+    public function checkVendorName(){
+        $SQL = "SELECT * FROM vendor where vendor_name = :vendor_name";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['vendor_name'=>$this->vendor_name]);
+        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
+        return $STMT->fetch();
+    }
 }

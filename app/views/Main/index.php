@@ -10,12 +10,26 @@
                 $link = "href='/User/logout'";
                 //TODO: Add who is currently login "Welcome, current user"
                 $status = 'Logout';
+
+                $profile = new \app\models\Profile();
+                $profile->user_id = $_SESSION['user_id'];
+                $profile = $profile->get();
+                $name = $profile->first_name;
+                $currentUser = "<p>Welcome, " . $name;
+
             } else {
                 $link = "href='\User\login'";
                 $status = 'Login';
+
+                $currentUser = '';
             }
+
         ?>
-        <a <?= $link ?>><?= $status ?></a>
+        <div>
+            <a <?= $link ?>><?= $status ?></a>
+            <?= $currentUser ?>
+        </div>
+        
         <!-- cart button -->
     </header>
     <h1>Welcome to the Marketplace</h1>
