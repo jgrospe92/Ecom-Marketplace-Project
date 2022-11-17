@@ -13,8 +13,13 @@ class User extends \app\core\Controller {
 			if (password_verify($_POST['password'], $user->password_hash)){
 				$_SESSION['user_id'] = $user->user_id;
 				$_SESSION['username'] = $user->username;
-				// TODO: get profile
-				// TODO: create SESSION for profile
+	
+				$profile = new \app\models\Profile();
+                $profile->user_id = $_SESSION['user_id'];
+                $profile = $profile->get();
+                $_SESSION['profile_id'] = $profile->profile_id;
+                $_SESSION['role'] = $profile->role;
+
 				header('location:/Main/index');
 			} else {
 				header('location:/User/index?error=Wrong username/password combination');
@@ -42,8 +47,7 @@ class User extends \app\core\Controller {
 					$_SESSION['username'] = $user->username;
 					
 					header('location:/Profile/create_profile?role=' . $_SESSION['role']);
-					
-					
+						
 				}else {
 					header('location:/User/register?error=The username "'.$_POST['username'].'" is already in use. Select another.');
 				}

@@ -8,7 +8,7 @@
         <label for="password">Password: <input id="password" type="password" name="password" required></label><br>
         <div>
             <a href="/Main/index" class="btn btn-danger">CANCEL</a>
-            <input name="action" type="submit" class="btn btn-success" onclick="alert('login success')" value="LOGIN">
+            <input name="action" type="submit" class="btn btn-success" value="LOGIN">
         </div>
         <a href='/User/register'>Not a member? click me to register</a>
     </form>
