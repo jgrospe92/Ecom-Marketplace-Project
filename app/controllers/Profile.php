@@ -28,10 +28,13 @@ class Profile extends \app\core\Controller {
                 if ($filename) {
                     $profile->profile_photo = $filename;
                     $_SESSION['profile_id'] = $profile->insert();
-                   
+                } else {
+                    $_SESSION['profile_id'] = $profile->insertWithoutImage();
                 }
+                
+               
 
-                //buyer table
+                // As buyer
                 $buyer = new \app\models\Buyer();
                 $buyer->shipping_add = $_POST['shipping_add'];
                 $buyer->billing_add = $_POST['billing_add'];
@@ -39,24 +42,34 @@ class Profile extends \app\core\Controller {
                 $buyer->profile_id = $_SESSION['profile_id'];
                 
                 $_SESSION['buyer_id'] =  $buyer->insert(); // TODO
-                echo "complete";
-                exit;
                 header('location:/Main/index');
               
             } else {
+
                 $profile = new \app\models\Profile();
                 $profile->first_name = $_POST['first_name'];
                 $profile->last_name = $_POST['last_name'];
                 $profile->role = $_SESSION['role'];
                 $profile->user_id = $_SESSION['user_id'];
-                $filename = $this->saveFile($_POST['profile_photo']);
-                $_SESSION['profile_id'] = $profile->insert();
+                $filename = $this->saveFile($_FILES['profile_photo']);
+
                 if ($filename) {
                     $profile->profile_photo = $filename;
                     $_SESSION['profile_id'] = $profile->insert();
-                    header('location:/Main/index');
+                } else {
+                    $_SESSION['profile_id'] = $profile->insertWithoutImage();
+                }
+                
+                // As vendor
+                $vendor = new \app\models\Vendor();
+                $vendor->vendor_name = $_POST['vendor_name'];
+                $vendor->vendor_profit = floatval($_POST['vendor_profit']);
+                $vendor->vendor_desc = $_POST['vendor_desc'];
+                $vendor->vendor_location = $_POST['vendor_location'];
+                $vendor->profile_id = $_SESSION['profile_id'];
 
-            }
+                $_SESSION['vendor_id'] =  $vendor->insert(); // TODO
+                exit;
         }
 
      }else {

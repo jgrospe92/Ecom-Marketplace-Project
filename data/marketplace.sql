@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2022 at 01:37 AM
+-- Generation Time: Nov 17, 2022 at 01:30 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -24,7 +24,6 @@ DROP DATABASE IF EXISTS `marketplace`;
 
 CREATE DATABASE `marketplace`;
 USE `marketplace`;
-
 
 -- --------------------------------------------------------
 
@@ -149,7 +148,7 @@ CREATE TABLE `profile` (
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
   `role` varchar(30) NOT NULL,
-  `profile_photo` varchar(30) DEFAULT NULL,
+  `profile_photo` varchar(30) DEFAULT 'blank.jpg',
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -210,6 +209,14 @@ CREATE TABLE `user` (
   `password_hash` varchar(90) NOT NULL,
   `secret_key` varchar(90) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `username`, `password_hash`, `secret_key`) VALUES
+(1, 'jeffrey', '$2y$10$jOkgbELpWEvSNKzMtqjw/.LkkChb8fqVfgQ5ttH752NdKMCc1A3s6', NULL),
+(2, 'aa', '$2y$10$FNzilcTQVJgPOGtjuxt7neNbik8MFdrkDLUglwiNfw7nl8FTl4Z/C', NULL);
 
 -- --------------------------------------------------------
 
@@ -465,7 +472,7 @@ ALTER TABLE `shipping`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `vendor`

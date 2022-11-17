@@ -28,9 +28,10 @@
                         <label for="picture">Profile Photo: <input id="picture" type="file" name="profile_photo"></label>
                         <img id="pic_preview" src="/resources/images/blank.jpg" style="max-width:200px;max-height:200px" alt="profile photo">
                     </div>
-                    <label for="store_name">Store Name: <input id="store_name" type="text" name="store_name" required></label><br>
-                    <label for="description">Store Description: <textarea id="description" placeholder="Tell us something about your store"  name="description" required></textarea></label>
-                    <label for="store_location">Store Location: <input id="store_location" type="text" name="location" required></label><br>
+                    <label for="store_name">Store Name: <input id="store_name" type="text" name="vendor_name" required></label><br>
+                    <label for="vendor_profit">Capital amount: <input id="vendor_profit" type="text" name="vendor_profit" required></label><br>
+                    <label for="description">Store Description: <textarea id="description" placeholder="Tell us something about your store"  name="vendor_desc" required></textarea></label>
+                    <label for="store_location">Store Location: <input id="store_location" type="text" name="vendor_location" required></label><br>
                 </div>
                 <input type="submit" class="btn btn-danger" name="cancel" value="CANCEL">
                 <input type="submit" class="btn btn-success" name='action' value="CREATE">

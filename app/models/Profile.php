@@ -28,4 +28,20 @@ class Profile extends \app\core\Model {
         return self::$_connection->lastInsertId();
     }
 
+    public function insertWithoutImage() {
+        $SQL = "INSERT INTO profile(first_name, last_name, role, user_id)
+            VALUES (:first_name, :last_name, :role,:user_id)";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(
+            [
+                'first_name'=>$this->first_name,
+                'last_name'=>$this->last_name,
+                'role'=>$this->role,
+                'user_id'=>$this->user_id,
+
+            ]
+            );
+        return self::$_connection->lastInsertId();
+    }
+
 }
