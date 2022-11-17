@@ -17,7 +17,7 @@
                     <label for="billing_add">Billing Address: <input id="billing_add" type="text" name="billing_add" required></label><br>
                     <label for="credit">Add Credit: <input id="credit" type="text" name="credit" required></label><br>
                 </div>
-                <input type="submit" class="btn btn-danger" name="cancel" value="CANCEL">
+                <input id="btnCancel" type="submit" class="btn btn-danger" name="cancel" value="CANCEL">
                 <input type="submit" class="btn btn-success" name='action' value="CREATE">
             <?php } else { ?>
 
@@ -33,7 +33,7 @@
                     <label for="description">Store Description: <textarea id="description" placeholder="Tell us something about your store"  name="vendor_desc" required></textarea></label>
                     <label for="store_location">Store Location: <input id="store_location" type="text" name="vendor_location" required></label><br>
                 </div>
-                <input type="submit" class="btn btn-danger" name="cancel" value="CANCEL">
+                <input id="btnCancel" type="button"  class="btn btn-danger" name="cancel" value="CANCEL">
                 <input type="submit" class="btn btn-success" name='action' value="CREATE">
 
 
@@ -49,6 +49,21 @@
                 pic_preview.src = URL.createObjectURL(file)
             }
         }
+        $('#btnCancel').on('click', function(e){
+            e.preventDefault();
+            $.ajax(
+                {
+                    url: '/Profile/create_profile',
+                    type: 'POST',
+                    data: {cancel: 'cancel'},
+                    success: function(data, status) {
+                        console.log(data + 'status ' + status);
+                    }   
+                }
+
+            )
+        })
+    
     </script>
     <script src="/resources/js/main_script.js"></script>
 </body>

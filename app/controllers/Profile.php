@@ -7,13 +7,14 @@ class Profile extends \app\core\Controller {
     public function create_profile()
     {
 
-        if (isset($_POST['cancel'])) {
-            $user = new \app\models\User();
-            $user = $user->getUserByID($_SESSION['user_id']);
-            $user->delete();
-            session_destroy();
-            header('location:/Main/index');
-            exit;
+        if (isset($_POST['data']) == 'cancel') {
+            // $user = new \app\models\User();
+            // $user = $user->getUserByID($_SESSION['user_id']);
+            // $user->delete();
+            // session_destroy();
+            //header('location:/Main/index');
+            echo "alert('okay')";
+            //exit;
         }
 
         if (isset($_POST['action'])) {
@@ -33,7 +34,6 @@ class Profile extends \app\core\Controller {
                 }
                 
                
-
                 // As buyer
                 $buyer = new \app\models\Buyer();
                 $buyer->shipping_add = $_POST['shipping_add'];
