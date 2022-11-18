@@ -14,7 +14,7 @@
     </div>
     <form method="POST" action="">
         <div id="reg_form">
-            <span name="buyer">buyer</span>
+            
             <label for="username">Username: <input placeholder="Enter buyer username"
                 type="text" name="username" id="username" required></label><br>
             <label for="password">Password: <input placeholder="Enter password"

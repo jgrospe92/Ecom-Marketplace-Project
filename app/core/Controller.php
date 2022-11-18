@@ -16,7 +16,7 @@ class Controller {
 		if (in_array($check['mime'], array_keys($allowed_types))){
 			 $ext = $allowed_types[$check['mime']];
 			 $filename = uniqid() . ".$ext";
-			 move_uploaded_file($file['tmp_name'], '/Applications/XAMPP/xamppfiles/htdocs/images/'.$filename);
+			 move_uploaded_file($file['tmp_name'], 'images/'.$filename);
 			 return $filename;
 		} else
 			return '';
