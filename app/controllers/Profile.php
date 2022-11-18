@@ -5,10 +5,7 @@ class Profile extends \app\core\Controller {
 
 
 
-    public functin index(){
-        
-    }
-
+   
     public function create_profile()
     {
 
