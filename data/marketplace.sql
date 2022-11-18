@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 17, 2022 at 01:30 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Host: localhost
+-- Generation Time: Nov 18, 2022 at 09:33 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `marketplace`
 --
+
 DROP DATABASE IF EXISTS `marketplace`;
 
 CREATE DATABASE `marketplace`;
@@ -64,6 +65,13 @@ CREATE TABLE `buyer` (
   `credit` varchar(11) NOT NULL,
   `profile_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `buyer`
+--
+
+INSERT INTO `buyer` (`buyer_id`, `shipping_add`, `billing_add`, `credit`, `profile_id`) VALUES
+(1, '4210 ave', '4210 ave', '300', 1);
 
 -- --------------------------------------------------------
 
@@ -152,6 +160,13 @@ CREATE TABLE `profile` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `profile`
+--
+
+INSERT INTO `profile` (`profile_id`, `first_name`, `last_name`, `role`, `profile_photo`, `user_id`) VALUES
+(1, 'jeffrey', 'Grospe', 'buyer', '6377934dd1fb5.jpg', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -215,8 +230,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password_hash`, `secret_key`) VALUES
-(1, 'jeffrey', '$2y$10$jOkgbELpWEvSNKzMtqjw/.LkkChb8fqVfgQ5ttH752NdKMCc1A3s6', NULL),
-(2, 'aa', '$2y$10$FNzilcTQVJgPOGtjuxt7neNbik8MFdrkDLUglwiNfw7nl8FTl4Z/C', NULL);
+(2, 'jeffrey', '$2y$10$0ANGn/EN.n5xDtKGo2YMWe9VvFocvS.pzYi9N4PWbDCDOqoUg0nHa', NULL);
 
 -- --------------------------------------------------------
 
@@ -418,7 +432,7 @@ ALTER TABLE `advertisement`
 -- AUTO_INCREMENT for table `buyer`
 --
 ALTER TABLE `buyer`
-  MODIFY `buyer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `buyer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order`
@@ -454,7 +468,7 @@ ALTER TABLE `prod_category`
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `promotion`
@@ -545,7 +559,7 @@ ALTER TABLE `product_rating`
 -- Constraints for table `profile`
 --
 ALTER TABLE `profile`
-  ADD CONSTRAINT `profile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `profile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `promotion`
