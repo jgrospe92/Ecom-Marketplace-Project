@@ -16,7 +16,7 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="text"  name="username" id="username" class="form-control" />
+                                            <input type="text" name="username" id="username" class="form-control" />
                                             <label class="form-label" for="username"> Username</label>
                                         </div>
                                     </div>
@@ -40,7 +40,7 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <select id="role "required name="role" class="form-select" aria-label="Default select example">
+                                            <select id="role " required name="role" class="form-select" aria-label="Default select example">
                                                 <option selected value="buyer">Buyer</option>
                                                 <option value="vendor">Vendor</option>
                                             </select>
@@ -64,8 +64,7 @@
                             </div>
                             <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center align-self-center  order-1 order-lg-2">
 
-                                <img src="https://images.unsplash.com/photo-1605902711622-cfb43c4437b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80"
-                                    class="img-fluid " alt="Sample image">
+                                <img src="https://images.unsplash.com/photo-1605902711622-cfb43c4437b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80" class="img-fluid " alt="Sample image">
 
                             </div>
                         </div>
@@ -75,32 +74,42 @@
         </div>
     </div>
 </section>
-
-<script>
-$(function(){
-    $('#regUser').submit(function(e){
-        e.preventDefault();
-       $.ajax(
-        {
-            url: '/User/register',
-            type: 'POST',
-            data: $(this).serialize(),
-        })
-    })
-});
-</script>
-
-
+<!-- TOAST START -->
 <?php
 if (isset($_GET['error'])) {
 ?>
-    <div class="alert alert-danger" role="alert">
-        <?= $_GET['error'] ?>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="/resources/images/warning.png" class="rounded me-2" alt="...">
+                <strong class="me-auto">Invalid Credentials</strong>
+                <small id="currenTime"></small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <?= $_GET['error'] ?>
+            </div>
+        </div>
     </div>
+    <!-- SCRIPT -->
+    <script>
+        // var today = new Date();
+        // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+        // $('currenTime').html = time;
+        const toastLiveExample = document.getElementById('liveToast')
+        const toast = new bootstrap.Toast(toastLiveExample)
+        toast.show()
+    </script>
+    <!-- SCRIPT ENDS -->
+
+
 <?php
 }
 ?>
 
+<!-- TOAST ENDS -->
 <script src="/resources/js/main_script.js"></script>
 </body>
+
 </html>

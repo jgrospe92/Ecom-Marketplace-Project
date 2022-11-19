@@ -41,21 +41,10 @@
 
                     </div>
 
-                    <div class="d-flex justify-content-between align-items-center">
-                        <!-- Checkbox -->
-                        <div class="form-check mb-0">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                            <label class="form-check-label" for="form2Example3">
-                                Remember me
-                            </label>
-                        </div>
-                        <!-- <a href="#!" class="text-body">Forgot password?</a> TODO:-->
-                    </div>
-
                     <div class="text-center text-lg-start mt-4 pt-2">
-                        <input type="submit" name="action" value="LOGIN" class="btn btn-success btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;"></input>
+                        <input type="submit" id="loginUser" name="action" value="LOGIN" class="btn btn-success btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;"></input>
                         <a href="/Main/index" class="btn btn-lg btn-danger" style="padding-left: 2.5rem; padding-right: 2.5rem;">CANCEL</a>
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href='/User/register' class="link-danger">Register</a></p>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href='/User/register' class="link-danger">REGISTER</a></p>
                     </div>
 
                 </form>
@@ -64,15 +53,43 @@
     </div>
 </section>
 <!-- LOGIN END -->
+<!-- TOAST START -->
 <?php
 if (isset($_GET['error'])) {
 ?>
-    <div class="alert alert-danger" role="alert">
-        <?= $_GET['error'] ?>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="/resources/images/warning.png" class="rounded me-2" alt="...">
+                <strong class="me-auto">Invalid Credentials</strong>
+                <small id="currenTime"></small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <?= $_GET['error'] ?>
+            </div>
+        </div>
     </div>
+    <!-- SCRIPT -->
+    <script>
+        // var today = new Date();
+        // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+        // $('currenTime').html = time;
+        const toastLiveExample = document.getElementById('liveToast')
+        const toast = new bootstrap.Toast(toastLiveExample)
+        toast.show()
+    </script>
+    <!-- SCRIPT ENDS -->
+
+
 <?php
 }
 ?>
+
+<!-- TOAST ENDS -->
+
+
 <script src="/resources/js/main_script.js"></script>
 </body>
 
