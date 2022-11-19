@@ -1,9 +1,16 @@
-$(function() {
-    
+// js is detected
+$(function(){
+    $('#regUser').submit(function(e){
+        e.preventDefault();
+       $.ajax(
+        {
+            url: '/User/register',
+            type: 'POST',
+            data: $(this).serialize(),
+        })
+    })
 });
 
-// js is detected
-    
 // GLOBAL properties
 
 var role = "buyer";
@@ -19,6 +26,13 @@ function clearForm(){
 
 
 // DEBUG:
+
+
+function testClick(){
+    alert("success");
+}
+
+
 var btn = document.getElementById('btn');
 if (btn != null) {
     btn.addEventListener('click', function(){alert("you click the button " + role)})
@@ -29,10 +43,11 @@ var btnRegister = document.getElementById('btnRegister');
 function createProfile(){
     if (btnRegister != null) {
         btnRegister.addEventListener('click', function(e){
+            e.preventDefault();
             $.ajax({
                 url: '/User/register',
                 type: 'POST',
-                data: {role : role}
+                data:  $(this).serialize()
             });
         });
     }
