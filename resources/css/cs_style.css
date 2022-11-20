@@ -39,6 +39,41 @@ height: 100%;
 }
 }
 
+/* Profile */
+
+#picture {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+
+
+
+/* .carousel-inner .carousel-item img {
+
+  max-height: 80% !important;
+  width: 100% !important;
+  margin: 0 auto;
+  object-fit: contain;
+}
+@media screen and (min-width:950px){
+
+  .carousel-inner {
+
+    height: 450px !important;
+  }
+
+  .carousel-inner .carousel-item .img {
+
+    max-height: 250 !important;
+  	margin: auto;
+    object-fit: contain;
+  }
+
+} */
+
+
 
 /* responsiveness */
 @media screen and (max-width:540px){
