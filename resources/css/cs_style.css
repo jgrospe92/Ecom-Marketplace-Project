@@ -47,6 +47,11 @@ height: 100%;
   z-index: -1;
 }
 
+/* table */
+.table_body {
+max-height: clamp(5em,10vh,250px) !important;
+overflow: auto !important;
+}
 
 
 

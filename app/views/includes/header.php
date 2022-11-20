@@ -120,7 +120,7 @@
         </div>
         <div class="offcanvas-body">
             <ul class="list-group">
-                <l1><a class="list-group-item list-group-item-action" href="">Profile</a></l1>
+                <l1><a class="list-group-item list-group-item-action" href="/Main/profile">Profile</a></l1>
                 <l1><a class="list-group-item list-group-item-action" href="">Wishlist</a></l1>
                 <l1><a class="list-group-item list-group-item-action" href="">Order History</a></l1>
                 <l1><a class="list-group-item list-group-item-action" href="">Remaining Credit: <?php  ?></a></l1>

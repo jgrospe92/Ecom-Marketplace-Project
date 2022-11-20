@@ -1,5 +1,4 @@
 <?php $this->view('includes/header'); ?>
-
 <body id="current-user">
     <!-- Create profile starts -->
     <section class="vh-100" style="background-color: #f4f5f7;">
@@ -123,17 +122,11 @@ if (isset($_GET['error'])) {
     </div>
     <!-- SCRIPT -->
     <script>
-        // var today = new Date();
-        // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-
-        // $('currenTime').html = time;
         const toastLiveExample = document.getElementById('liveToast')
         const toast = new bootstrap.Toast(toastLiveExample)
         toast.show()
     </script>
     <!-- SCRIPT ENDS -->
-
-
 <?php
 }
 ?>

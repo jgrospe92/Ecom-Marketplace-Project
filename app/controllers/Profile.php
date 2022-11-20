@@ -6,8 +6,6 @@ class Profile extends \app\core\Controller
 {
 
 
-
-
     public function create_profile()
     {
 
@@ -61,7 +59,6 @@ class Profile extends \app\core\Controller
                 // As vendor, I should have a unique vendor name
                 if ($vendor->checkVendorName()) {
                     header('location:/Profile/create_profile?role=' . $_SESSION['role'] . '&error=Store name ' . $_POST['vendor_name'] . ' already exists!');
-                    // header("Location: index.php?id=".$_POST['ac_id']."&err=".$login);
                     return;
                 }
 
