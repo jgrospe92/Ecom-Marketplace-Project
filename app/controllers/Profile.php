@@ -1,11 +1,13 @@
 <?php
+
 namespace app\controllers;
 
-class Profile extends \app\core\Controller {
+class Profile extends \app\core\Controller
+{
 
 
 
-   
+
     public function create_profile()
     {
 
@@ -15,9 +17,10 @@ class Profile extends \app\core\Controller {
             $user->delete();
             session_destroy();
             exit;
-        }   
+        }
 
         if (isset($_POST['action'])) {
+
             if ($_SESSION['role'] == 'buyer') {
                 $profile = new \app\models\Profile();
                 $profile->first_name = $_POST['first_name'];
@@ -31,7 +34,7 @@ class Profile extends \app\core\Controller {
                 } else {
                     $_SESSION['profile_id'] = $profile->insertWithoutImage();
                 }
-                
+
 
                 // As buyer
                 $buyer = new \app\models\Buyer();
@@ -42,8 +45,6 @@ class Profile extends \app\core\Controller {
 
                 $_SESSION['buyer_id'] =  $buyer->insert(); // TODO
                 header('location:/Main/index');
-
-              
             } else {
 
                 $profile = new \app\models\Profile();
@@ -53,13 +54,13 @@ class Profile extends \app\core\Controller {
                 $profile->user_id = $_SESSION['user_id'];
                 $filename = $this->saveFile($_FILES['profile_photo']);
 
-             
+
                 // As vendor
                 $vendor = new \app\models\Vendor();
                 $vendor->vendor_name = $_POST['vendor_name'];
                 // As vendor, I should have a unique vendor name
                 if ($vendor->checkVendorName()) {
-                    header('location:/Profile/create_profile?role='.$_SESSION['role'].'&error=Store name '.$_POST['vendor_name']. ' already exists!');
+                    header('location:/Profile/create_profile?role=' . $_SESSION['role'] . '&error=Store name ' . $_POST['vendor_name'] . ' already exists!');
                     // header("Location: index.php?id=".$_POST['ac_id']."&err=".$login);
                     return;
                 }
@@ -71,8 +72,8 @@ class Profile extends \app\core\Controller {
                 } else {
                     $_SESSION['profile_id'] = $profile->insertWithoutImage();
                 }
-                
-              
+
+
 
                 $vendor->vendor_profit = floatval($_POST['vendor_profit']);
                 $vendor->vendor_desc = $_POST['vendor_desc'];
@@ -81,11 +82,9 @@ class Profile extends \app\core\Controller {
 
                 $_SESSION['vendor_id'] =  $vendor->insert();
                 header('location:/Main/index');
-
+            }
+        } else {
+            $this->view('Profile/create_profile');
         }
-
-     }else {
-        $this->view('Profile/create_profile');
-    }
     }
 }

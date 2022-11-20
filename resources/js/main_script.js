@@ -19,8 +19,6 @@ $(function(){
             data: $(this).serialize(),
         })
     })
-
-    
 });
 
 // GLOBAL properties

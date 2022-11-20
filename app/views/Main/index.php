@@ -12,6 +12,6 @@
     <p>Sorted by the newest product added by default</p>
 </section>
 
+<?php $this->view('includes/footer'); ?>
 </body>
-
 </html>

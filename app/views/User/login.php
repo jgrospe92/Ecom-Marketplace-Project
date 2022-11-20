@@ -42,8 +42,8 @@
                     </div>
 
                     <div class="text-center text-lg-start mt-4 pt-2">
-                        <input type="submit" id="loginUser" name="action" value="LOGIN" class="btn btn-success btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;"></input>
                         <a href="/Main/index" class="btn btn-lg btn-danger" style="padding-left: 2.5rem; padding-right: 2.5rem;">CANCEL</a>
+                        <input type="submit" id="loginUser" name="action" value="LOGIN" class="btn btn-success btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;"></input>
                         <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href='/User/register' class="link-danger">REGISTER</a></p>
                     </div>
 
@@ -89,7 +89,9 @@ if (isset($_GET['error'])) {
 
 <!-- TOAST ENDS -->
 
-
+<!-- FOOTER STARTS -->
+<?php $this->view('includes/footer') ?>
+<!-- FOOTER ENDS -->
 <script src="/resources/js/main_script.js"></script>
 </body>
 

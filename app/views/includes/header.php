@@ -6,20 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <!-- CUSTOM CSS STYLING -->
     <link rel="stylesheet" href="/resources/css/cs_style.css">
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.1.js"
-    integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="/resources/js/head.js"></script>
 
     <!-- Bootstrap ICONS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
- 
+
     <title>Marketplace</title>
 </head>
 
@@ -29,8 +26,9 @@
         <!-- Catalogue button/ scroll to the catalogue section -->
         <!-- search bar -->
         <!-- login button -->
+        
         <?php
-        if (isset($_SESSION['user_id'])) {
+        if (isset($_SESSION['user_id']) && isset($_SESSION['profile_id'])){
             $link = "href='/User/logout'";
             //TODO: Add who is currently login "Welcome, current user"
             $status = 'Logout';
@@ -38,21 +36,27 @@
             $profile = new \app\models\Profile();
             $profile->user_id = $_SESSION['user_id'];
             $profile = $profile->get();
-            if ($profile){
+            if ($profile) {
                 $name = $profile->first_name;
             }
             $currentUser = "<p>Welcome, " . $name;
             $profile_icon = ' <a class="btn btn-outline-primary" type="button"
                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-person-bounding-box"></i></a>';
-            $cart = '<button type="button" class="btn btn-success">
-                    <i class="bi bi-cart pe-2"></i><span id="item_counter" class="badge text-bg-secondary">0</span>
-                    </button>';
+            if ($profile->role == 'buyer'){
+                $cart = '<button type="button" class="btn btn-success">
+                <i class="bi bi-cart pe-2"></i><span id="item_counter" class="badge text-bg-secondary">0</span>
+                </button>';
+            } else {
+                $cart = '';
+            }
+            $registerBTN = '';
         } else {
             $link = "href='\User\login'";
             $status = 'Login';
             $cart = '';
             $currentUser = '';
             $profile_icon = '';
+            $registerBTN = '<a id="index_reg" href="/User/register" class="btn btn-outline-primary">Register</a>';
         }
 
         ?>
@@ -89,22 +93,24 @@
                         </li>
                     </ul>
                     <form class="d-flex " role="search">
-                        <div class="d-flex align-items-center" >
+                        <div class="d-flex align-items-center">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </div>
-                        
+
                     </form>
-                    <a <?= $link ?> class="btn btn-outline-primary m-2"><?= $status ?></a>
-                    <a href="\User\register" class="btn btn-outline-primary">Register</a>
-                    <?= $profile_icon ?>
+                    <form method="POST">
+                        <a <?= $link ?> class="btn btn-outline-primary m-2"><?= $status ?></a>
+                        <?=$registerBTN?>
+                        <?= $profile_icon ?>
+                        <?= $cart ?>
+                    </form>
+
+
                 </div>
             </div>
         </nav>
         <!--END NAV -->
-        <div>
-            <?= $cart ?>
-        </div>
     </header>
     <!-- OFF CANVAS -->
     <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
