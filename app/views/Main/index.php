@@ -13,5 +13,6 @@
 </section>
 
 <?php $this->view('includes/footer'); ?>
+<script src="/resources/js/main_script.js"></script>
 </body>
 </html>

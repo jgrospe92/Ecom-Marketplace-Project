@@ -14,6 +14,15 @@ class Buyer extends \app\core\Model
         return $STMT->fetch();
     }
 
+    public function getBuyerUsingProfileId($profile_id)
+    {
+        $SQL = "SELECT * FROM buyer WHERE profile_id=:profile_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['profile_id' => $profile_id]);
+        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
+        return $STMT->fetch();
+    }
+
     public function insert() {
 
         $SQL = "INSERT INTO buyer(shipping_add, billing_add, credit, profile_id)
