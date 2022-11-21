@@ -4,7 +4,7 @@
 <!-- LOGIN START -->
 <section class="vh-100" style="background-color: #eee;">
     <div class="container-fluid card text-black h-custom">
-        <div style="border-radius: 25px;" class="card-body row d-flex justify-content-center align-items-center h-100 ">
+        <div style="border-radius: 25px;" class="card-body row d-flex justify-content-center align-items-center vh-100 ">
             <div class="col-md-9 col-lg-6 col-xl-5 ">
                 <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="img-fluid" alt="Business image">
             </div>
