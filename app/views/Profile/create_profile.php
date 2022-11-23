@@ -1,4 +1,5 @@
 <?php $this->view('includes/header'); ?>
+
 <body id="current-user">
     <!-- Create profile starts -->
     <section class="vh-100" style="background-color: #f4f5f7;">
@@ -36,7 +37,10 @@
                                         <div class="row pt-1">
                                             <div class="col-6 mb-3">
                                                 <h6>Virtual Wallet</h6>
-                                                <label for="credit">Add Credit: <input id="credit" type="text" name="credit" required></label><br>
+                                                <label class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" for="credit">Add Credit</label>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <br><input class="form-control-plaintext" value="$0.00" id="credit" type="text" name="credit" readonly required>
                                             </div>
 
                                         </div>
@@ -81,7 +85,7 @@
                                         <div class="row pt-1">
                                             <div class="col-6 mb-3">
                                                 <h6>Virtual Wallet</h6>
-                                                <label for="vendor_profit">Capital amount: <input id="vendor_profit" type="text" name="vendor_profit" required></label><br>
+                                                <label for="vendor_profit">Capital amount: <input id="vendor_profit" class="form-control-plaintext" type="text" name="vendor_profit"></label><br>
                                             </div>
 
                                         </div>
@@ -103,37 +107,157 @@
     </section>
     <!-- create profile end -->
 
-<!-- TOAST START -->
-<?php
-if (isset($_GET['error'])) {
-?>
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <img src="/resources/images/warning.png" class="rounded me-2" alt="...">
-                <strong class="me-auto">Error</strong>
-                <small id="currenTime"></small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    <!-- TOAST START -->
+    <?php
+    if (isset($_GET['error'])) {
+    ?>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img src="/resources/images/warning.png" class="rounded me-2" alt="...">
+                    <strong class="me-auto">Error</strong>
+                    <small id="currenTime"></small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <?= $_GET['error'] ?>
+                </div>
             </div>
-            <div class="toast-body">
-                <?= $_GET['error'] ?>
+        </div>
+        <!-- SCRIPT -->
+        <script>
+            const toastLiveExample = document.getElementById('liveToast')
+            const toast = new bootstrap.Toast(toastLiveExample)
+            toast.show()
+        </script>
+        <!-- SCRIPT ENDS -->
+    <?php
+    }
+    ?>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Reload virtual wallet</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="modal_payment" class="row g-3 align-items-center">
+                        <div class="col-5">
+                            <label for="card_number" class="col-form-label">Credit Card Number</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" id="card_number" class="form-control" aria-describedby="card_number">
+                        </div>
+                        <div class="col-5">
+                            <label for="card_holder" class="col-form-label">Card Holder Name</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" id="card_holder" class="form-control" aria-describedby="card_holder">
+                        </div>
+                        <div class="col-5">
+                            <label for="card_expiration" class="col-form-label">Expiration date</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="month" id="card_expiration" class="form-control" aria-describedby="card_expiration">
+                        </div>
+                        <div class="col-5">
+                            <label for="card_csc" class="col-form-label">Security Number</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="password" id="card_csc" class="form-control w-25" aria-describedby="card_csc">
+                        </div>
+                        <div class="col-5">
+                            <label for="reload_amount" class="col-form-label">Amount</label>
+                            
+                        </div>
+                        <div class="col-5">
+                           <input type="text" id="reload_amount" class="form-control w-50" aria-describedby="reload_amount_line">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="reload_virtual_wallet" type="button" data-bs-dismiss="modal" class="btn btn-primary" disabled>Done</button>
+                </div>
             </div>
         </div>
     </div>
-    <!-- SCRIPT -->
-    <script>
-        const toastLiveExample = document.getElementById('liveToast')
-        const toast = new bootstrap.Toast(toastLiveExample)
-        toast.show()
-    </script>
-    <!-- SCRIPT ENDS -->
-<?php
-}
-?>
-
-<!-- TOAST ENDS -->
+    <!-- MODAL ENDS -->
+    <!-- TOAST ENDS -->
     <!-- IMAGE PREVIEW -->
     <script>
+          function debugMe(value){
+            console.log(value);
+        }
+
+        function round(value, decimals) {
+            return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals).toFixed(decimals);
+        }
+
+        // Modal Script
+        var hasCreditNum ;
+        var hasCreditName ;
+        var hasDate;
+        var hasSecNum ;
+        var hasAmount;
+
+        var creditNum, creditName, scs, amount;
+        var expDate;
+
+        $("#card_number").focusout(function (){
+            credit_num = $("#card_number").val();
+            hasCreditNum = (!credit_num) ? false : true
+            checkIfValid();
+       
+        })
+
+        $("#card_holder").focusout(function (){
+            creditName = $("#card_holder").val();
+            hasCreditName = (!creditName) ? false : true;
+            checkIfValid();
+        })
+
+        $("#card_expiration").focusout(function (){
+            expDate = new Date($("#card_expiration").val());
+            hasDate = (isNaN(expDate)) ? false : true
+            checkIfValid();
+        })
+
+        $("#card_csc").focusout(function (){
+            scs = $("#card_csc").val();
+            hasSecNum = (!scs) ? false : true;
+            checkIfValid();
+        })
+
+        $("#reload_amount").focusout(function (){
+            amount = $("#reload_amount").val();
+            hasAmount = (!amount) ? false : true;
+            checkIfValid();
+            
+        })
+
+        $("#reload_virtual_wallet").on('click', function(){
+            var num = round(amount, 2)
+            var value = num;
+            $("#credit").val(value);
+           
+        })
+        
+        function checkIfValid(){
+            if (hasCreditNum, hasCreditNum, hasAmount, hasDate, hasSecNum, hasAmount){
+                $("#reload_virtual_wallet").removeAttr("disabled");
+            } else {
+                $("#reload_virtual_wallet").attr("disabled", true)
+            }
+        }
+
+        // DEBUG:
+      
+
+        // image preview
         picture.onchange = evt => {
             const [file] = picture.files
             if (file) {

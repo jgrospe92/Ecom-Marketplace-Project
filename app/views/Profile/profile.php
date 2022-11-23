@@ -20,7 +20,7 @@ if ($data['role'] == 'buyer') {
                     <div class="card">
                         <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                             <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                                <img src="/images/<?= $profile->profile_photo ?>" alt="Profile photo" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                                <img src="/images/<?= $profile->profile_photo ?>" alt="Profile photo" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1; max-height: 180px; object-fit: contain;">
                                 <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
                                     Edit profile
                                 </button>
