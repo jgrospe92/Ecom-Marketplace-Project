@@ -179,7 +179,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" onclick="clearForm()" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button id="reload_virtual_wallet" type="button" data-bs-dismiss="modal" class="btn btn-primary" disabled>Done</button>
                 </div>
             </div>
@@ -243,8 +243,17 @@
             var num = round(amount, 2)
             var value = num;
             $("#credit").val(value);
+            clearForm();
            
         })
+
+        function clearForm(){
+            $("#card_number").val("");
+            $("#card_holder").val("");
+            $("#card_expiration").val("");
+            $("#card_csc").val("");
+            $("#reload_amount").val("");
+        }
         
         function checkIfValid(){
             if (hasCreditNum, hasCreditNum, hasAmount, hasDate, hasSecNum, hasAmount){
