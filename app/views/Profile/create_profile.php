@@ -40,7 +40,7 @@
                                                 <label class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" for="credit">Add Credit</label>
                                             </div>
                                             <div class="col-6 mb-3">
-                                                <br><input class="form-control-plaintext" value="$0.00" id="credit" type="text" name="credit" readonly required>
+                                                <br><input class="form-control-plaintext" value="0.00" id="credit" type="text" name="credit" readonly required>
                                             </div>
 
                                         </div>
@@ -134,7 +134,7 @@
     <?php
     }
     ?>
-
+    <!-- TOAST ENDS -->
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -186,7 +186,21 @@
         </div>
     </div>
     <!-- MODAL ENDS -->
-    <!-- TOAST ENDS -->
+    <!-- TOAST FOR MODAL STARTS -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="modalToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img src="/resources/images/profits.png" class="rounded me-2" alt="...">
+                    <strong class="me-auto">Success</strong>
+                    <small id="currenTime"></small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <p id="addedAmount"></p>
+                </div>
+            </div>
+        </div>
+     <!-- TOAST FOR MODAL ENDS -->
     <!-- IMAGE PREVIEW -->
     <script>
           function debugMe(value){
@@ -194,7 +208,7 @@
         }
 
         function round(value, decimals) {
-            return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals).toFixed(decimals);
+            return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals)
         }
 
         // Modal Script
@@ -204,8 +218,11 @@
         var hasSecNum ;
         var hasAmount;
 
-        var creditNum, creditName, scs, amount;
+        var totalAmount = 0;
+
+        var creditNum, creditName, scs;
         var expDate;
+        var amount;
 
         $("#card_number").focusout(function (){
             credit_num = $("#card_number").val();
@@ -240,9 +257,13 @@
         })
 
         $("#reload_virtual_wallet").on('click', function(){
-            var num = round(amount, 2)
-            var value = num;
+            totalAmount += round(amount, 2)
+            var value = totalAmount.toString();
             $("#credit").val(value);
+            $("#addedAmount").html("$" + value + " added to your account");
+            let toastLiveExample = document.getElementById('modalToast');
+            let toast = new bootstrap.Toast(toastLiveExample);
+            toast.show();
             clearForm();
            
         })
@@ -253,6 +274,13 @@
             $("#card_expiration").val("");
             $("#card_csc").val("");
             $("#reload_amount").val("");
+
+            hasCreditNum = false; 
+            hasCreditName = false; 
+            hasDate = false;
+            hasSecNum = false;
+            hasAmount = false;
+            $("#reload_virtual_wallet").attr("disabled", true);
         }
         
         function checkIfValid(){
@@ -261,11 +289,7 @@
             } else {
                 $("#reload_virtual_wallet").attr("disabled", true)
             }
-        }
-
-        // DEBUG:
-      
-
+        }    
         // image preview
         picture.onchange = evt => {
             const [file] = picture.files
@@ -273,7 +297,7 @@
                 pic_preview.src = URL.createObjectURL(file)
             }
         }
-        // AJAX CALSS
+        // AJAX CALLS
         $('#btnCancel').on('click', function(e) {
             e.preventDefault();
             $.ajax({
