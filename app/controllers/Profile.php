@@ -72,7 +72,7 @@ class Profile extends \app\core\Controller
 
 
 
-                $vendor->vendor_profit = floatval($_POST['vendor_profit']);
+                $vendor->vendor_profit = ($_POST['credit']);
                 $vendor->vendor_desc = $_POST['vendor_desc'];
                 $vendor->vendor_location = $_POST['vendor_location'];
                 $vendor->profile_id = $_SESSION['profile_id'];

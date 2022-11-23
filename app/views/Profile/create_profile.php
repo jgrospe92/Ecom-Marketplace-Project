@@ -83,9 +83,12 @@
                                         </div>
                                         <hr class="mt-0 mb-4">
                                         <div class="row pt-1">
-                                            <div class="col-6 mb-3">
+                                        <div class="col-6 mb-3">
                                                 <h6>Virtual Wallet</h6>
-                                                <label for="vendor_profit">Capital amount: <input id="vendor_profit" class="form-control-plaintext" type="text" name="vendor_profit"></label><br>
+                                                <label class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" for="credit">Add Credit</label>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <br><input class="form-control-plaintext" value="0.00" id="credit" type="text" name="credit" readonly required>
                                             </div>
 
                                         </div>
@@ -149,7 +152,7 @@
                             <label for="card_number" class="col-form-label">Credit Card Number</label>
                         </div>
                         <div class="col-5">
-                            <input type="text" id="card_number" class="form-control" aria-describedby="card_number">
+                            <input type="text" maxlength="16" id="card_number" class="form-control" aria-describedby="card_number">
                         </div>
                         <div class="col-5">
                             <label for="card_holder" class="col-form-label">Card Holder Name</label>
@@ -164,7 +167,7 @@
                             <input type="month" id="card_expiration" class="form-control" aria-describedby="card_expiration">
                         </div>
                         <div class="col-5">
-                            <label for="card_csc" class="col-form-label">Security Number</label>
+                            <label for="card_csc" maxlength="3" class="col-form-label">Security Number</label>
                         </div>
                         <div class="col-5">
                             <input type="password" id="card_csc" class="form-control w-25" aria-describedby="card_csc">
@@ -252,6 +255,7 @@
         $("#reload_amount").focusout(function (){
             amount = $("#reload_amount").val();
             hasAmount = (!amount) ? false : true;
+            debugMe(hasAmount);
             checkIfValid();
             
         })
@@ -284,7 +288,7 @@
         }
         
         function checkIfValid(){
-            if (hasCreditNum, hasCreditNum, hasAmount, hasDate, hasSecNum, hasAmount){
+            if (hasCreditNum && hasCreditNum && hasAmount && hasDate && hasSecNum && hasAmount){
                 $("#reload_virtual_wallet").removeAttr("disabled");
             } else {
                 $("#reload_virtual_wallet").attr("disabled", true)
