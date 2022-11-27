@@ -1,5 +1,7 @@
 // js is detected
+
 $(function(){
+
     $('#regUser').submit(function(e){
         e.preventDefault();
        $.ajax(
@@ -20,8 +22,14 @@ $(function(){
         })
     })
 
-    
+    $("#edit_profile").click(function(){
+        alert("yes");
+    })  
+
 });
+
+
+
 
 // GLOBAL properties
 
@@ -54,3 +62,4 @@ function createProfile(){
     }
 }
 createProfile();
+

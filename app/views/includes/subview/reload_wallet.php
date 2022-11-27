@@ -168,6 +168,10 @@
             }
         })
         }
+
+        $("#upload_new_prof").click(function (){
+            alert("click click");
+        })
       
 
 

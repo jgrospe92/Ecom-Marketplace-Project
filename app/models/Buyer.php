@@ -43,4 +43,12 @@ class Buyer extends \app\core\Model
         $STMT->execute(['credit'=>$this->credit,
                         'buyer_id'=>$this->buyer_id]);
     }
+
+    public function updateBuyer(){
+        $SQL = "UPDATE buyer SET shipping_add=:shipping_add, billing_add=:billing_add WHERE buyer_id=:buyer_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['shipping_add'=>$this->shipping_add,
+                        'billing_add'=>$this->billing_add,
+                        'buyer_id'=>$this->buyer_id]);
+    }
 }
