@@ -14,6 +14,15 @@ class Buyer extends \app\core\Model
         return $STMT->fetch();
     }
 
+    public function getBuyerByBuyerID($buyer_id)
+    {
+        $SQL = "SELECT * FROM buyer WHERE buyer_id=:buyer_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['buyer_id' => $buyer_id]);
+        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Buyer');
+        return $STMT->fetch();
+    }
+
     public function getBuyerUsingProfileId($profile_id)
     {
         $SQL = "SELECT * FROM buyer WHERE profile_id=:profile_id";
@@ -22,8 +31,6 @@ class Buyer extends \app\core\Model
         $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Buyer');
         return $STMT->fetch();
     }
-
-    
 
     public function insert() {
 
@@ -50,5 +57,15 @@ class Buyer extends \app\core\Model
         $STMT->execute(['shipping_add'=>$this->shipping_add,
                         'billing_add'=>$this->billing_add,
                         'buyer_id'=>$this->buyer_id]);
+    }
+
+    // GET WISHLIST
+    public function checkWishlist(){
+        $SQL = "SELECT * FROM wishlist WHERE buyer_id=:buyer_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['buyer_id'=>$this->buyer_id]);
+        $colcount = $STMT->fetchColumn();
+        return $colcount;
+       
     }
 }
