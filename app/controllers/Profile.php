@@ -68,9 +68,7 @@ class Profile extends \app\core\Controller
                 } else {
                     $_SESSION['profile_id'] = $profile->insertWithoutImage();
                 }
-
-
-
+                
                 $vendor->vendor_profit = ($_POST['credit']);
                 $vendor->vendor_desc = $_POST['vendor_desc'];
                 $vendor->vendor_location = $_POST['vendor_location'];

@@ -14,6 +14,15 @@ class Vendor extends \app\core\Model
         return $STMT->fetch();
     }
 
+    public function getVendorUsingProfileId($profile_id)
+    {
+        $SQL = "SELECT * FROM vendor WHERE profile_id=:profile_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['profile_id' => $profile_id]);
+        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Vendor');
+        return $STMT->fetch();
+    }
+
     public function insert() {
 
         $SQL = "INSERT INTO vendor(vendor_name, vendor_profit, vendor_desc, vendor_location, profile_id)
