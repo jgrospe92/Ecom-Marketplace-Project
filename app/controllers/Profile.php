@@ -84,4 +84,21 @@ class Profile extends \app\core\Controller
             $this->view('Profile/create_profile');
         }
     }
+
+    public function updateWallet(){
+        if (isset($_SESSION['role']) == 'buyer'){
+          
+            if($_POST['credit']) {
+                
+                $buyer = new \app\models\Buyer();
+                $buyer = $buyer->getBuyerUsingProfileId($_SESSION['profile_id']);
+                $buyer->credit = $_POST['credit'];
+                $buyer->updateWallet();
+             
+               
+                
+            }
+            exit;
+        }
+    }
 }

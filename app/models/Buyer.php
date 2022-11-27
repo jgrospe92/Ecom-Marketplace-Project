@@ -19,9 +19,11 @@ class Buyer extends \app\core\Model
         $SQL = "SELECT * FROM buyer WHERE profile_id=:profile_id";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(['profile_id' => $profile_id]);
-        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
+        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Buyer');
         return $STMT->fetch();
     }
+
+    
 
     public function insert() {
 
@@ -33,5 +35,12 @@ class Buyer extends \app\core\Model
                         'credit'=>$this->credit,
                         'profile_id'=>$this->profile_id]);
         return self::$_connection->lastInsertId();
+    }
+
+    public function updateWallet() {
+        $SQL = "UPDATE buyer SET credit=:credit WHERE buyer_id=:buyer_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['credit'=>$this->credit,
+                        'buyer_id'=>$this->buyer_id]);
     }
 }

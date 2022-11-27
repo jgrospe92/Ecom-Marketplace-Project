@@ -43,6 +43,10 @@
             $profile_icon = ' <a class="btn btn-outline-primary" type="button"
                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-person-bounding-box"></i></a>';
             if ($profile->role == 'buyer'){
+                
+                $buyer = new \app\models\Buyer();
+                $buyer = $buyer->getBuyerUsingProfileId($_SESSION['profile_id']);
+                $virtualWallet = number_format((float)$buyer->credit, 2, '.', '');
                 $cart = '<button type="button" class="btn btn-success">
                 <i class="bi bi-cart pe-2"></i><span id="item_counter" class="badge text-bg-secondary">0</span>
                 </button>';
@@ -123,7 +127,7 @@
                 <l1><a class="list-group-item list-group-item-action" href="/Main/profile">Profile</a></l1>
                 <l1><a class="list-group-item list-group-item-action" href="">Wishlist</a></l1>
                 <l1><a class="list-group-item list-group-item-action" href="">Order History</a></l1>
-                <l1><a class="list-group-item list-group-item-action" href="">Remaining Credit: <?php  ?></a></l1>
+                <l1><a class="list-group-item list-group-item-action" href="">Virtual Wallet  $<?= $virtualWallet  ?></a></l1>
             </ul>
 
         </div>

@@ -19,12 +19,14 @@ if ($data['role'] == 'buyer') {
                 <div class="col col-lg-9 col-xl-7">
                     <div class="card">
                         <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
-                            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+                            <div class="ms-4 mt-5 d-flex flex-column " style="width: 150px;">
                                 <img src="/images/<?= $profile->profile_photo ?>" alt="Profile photo" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1; max-height: 180px; object-fit: contain;">
-                                <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
+                           
+                                <button type="button" class="btn btn-outline-dark btn-sm w-75 m-auto p-auto" data-mdb-ripple-color="dark" style="z-index: 1;">
                                     Edit profile
                                 </button>
                             </div>
+                       
                             <div class="ms-3" style="margin-top: 130px;">
                                 <h5><?= $fullname ?></h5>
                                 <p><?= strtoupper($profile->role) ?></p>
@@ -42,7 +44,7 @@ if ($data['role'] == 'buyer') {
                                 </div>
                                 <div>
                                     <p class="mb-1 h5">478</p>
-                                    <p class="small text-muted mb-0">Following</p>
+                                    <p class="small text-muted mb-0">Followers</p>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +54,8 @@ if ($data['role'] == 'buyer') {
                                 <div class="p-4" style="background-color: #f8f9fa;">
                                     <p class="font-italic mb-1">Shipping : <?= $buyer->shipping_add ?></p>
                                     <p class="font-italic mb-1">Billing : <?= $buyer->billing_add ?></p>
-                                    <p class="font-italic mb-0">Virtual Waller : $<?= $buyer->credit ?></p>
+                                    <p class="font-italic mb-0">Virtual Wallet : $<span id="virtualWallet"><?= $buyer->credit;?></span></p>
+                                    <label class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" for="credit">Add Credit</label>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -67,6 +70,8 @@ if ($data['role'] == 'buyer') {
     </section>
 </div>
 <!-- Profile ends -->
+<!-- RELOAD WALLET MODAL  -->
+<?php $this->view('includes/subview/reload_wallet'); ?>
 
 <?php $this->view('includes/footer'); ?>
 <script src="/resources/js/main_script.js"></script>

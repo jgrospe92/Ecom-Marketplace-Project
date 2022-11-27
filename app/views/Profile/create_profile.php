@@ -294,6 +294,7 @@
                 $("#reload_virtual_wallet").attr("disabled", true)
             }
         }    
+        
         // image preview
         picture.onchange = evt => {
             const [file] = picture.files

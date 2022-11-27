@@ -10,7 +10,7 @@ class Vendor extends \app\core\Model
         $SQL = "SELECT * FROM profile WHERE user_id=:user_id";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(['user_id' => $this->user_id]);
-        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
+        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Vendor');
         return $STMT->fetch();
     }
 
@@ -31,7 +31,7 @@ class Vendor extends \app\core\Model
         $SQL = "SELECT * FROM vendor where vendor_name = :vendor_name";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(['vendor_name'=>$this->vendor_name]);
-        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
+        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Vendor');
         return $STMT->fetch();
     }
 }
