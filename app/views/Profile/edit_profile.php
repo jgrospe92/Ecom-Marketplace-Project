@@ -96,7 +96,7 @@ if ($data['role'] == 'buyer') {
                                     <button onclick="updateImage()" id="upload_new_prof" type="button" class="btn btn-outline-dark mb-2 btn-sm w-75 m-auto p-auto" data-mdb-ripple-color="dark" style="z-index: 1;">
                                         UPLOAD
                                     </button>
-                                    <button onclick="updateVendorProfile()" type="button" class="btn btn-outline-dark btn-sm w-75 mb-2 m-auto p-auto" data-mdb-ripple-color="dark" style="z-index: 1;">
+                                    <button onclick="updateVendorProfile(); showUpdateProfileToast();" type="button" class="btn btn-outline-dark btn-sm w-75 mb-2 m-auto p-auto" data-mdb-ripple-color="dark" style="z-index: 1;">
                                         SAVE
                                     </button>
                                     <input id="picture" type="file" name="picture" hidden>
@@ -129,7 +129,7 @@ if ($data['role'] == 'buyer') {
                                     <div class="p-4" style="background-color: #f8f9fa;">
                                         <div class="row">
                                             <p class="font-italic  mb-1">Owner : <input class="w-25 me-2" id="new_fname" type="text" value="<?= $fname ?>"><input class="w-25 me-2" id="new_lname" type="text" value="<?= $lname ?>"></p>
-                                            <p class="font-italic  mb-1">Description  : <textarea id="new_vendor_desc" class="form-control col-auto" id="new_vendor_desc"><?= $vendor->vendor_desc ?></textarea></p>
+                                            <p class="font-italic  mb-1">Description : <textarea id="new_vendor_desc" class="form-control col-auto" id="new_vendor_desc"><?= $vendor->vendor_desc ?></textarea></p>
                                             <p class="font-italic mb-0">Location: <input class="w-25 me-2" id="new_vendor_location" type="text" value="<?= $vendor->vendor_location ?>"></p>
                                             <p class="font-italic mb-0">Virtual Wallet : $<span id="virtualWallet"><?= $vendor->vendor_profit; ?></span></p>
                                         </div>
@@ -149,3 +149,4 @@ if ($data['role'] == 'buyer') {
         </section>
     </div>
 <?php } ?>
+

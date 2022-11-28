@@ -134,11 +134,11 @@ if ($data['role'] == 'buyer') {
         </section>
     <?php } ?>
     <!-- PROFILE VENDOR ENDS -->
+
     <!-- RELOAD WALLET MODAL  -->
     <?php $this->view('includes/subview/reload_wallet'); ?>
     <?php $this->view('includes/footer'); ?>
     <script>
-        
         function updateImage() {
             $("#picture").click();
             picture.onchange = evt => {
@@ -153,7 +153,6 @@ if ($data['role'] == 'buyer') {
             var form_data = new FormData();
             var file_data = $("#picture").prop("files")[0];
             form_data.append("file", file_data);
-
             $.ajax({
                 url: " /Profile/edit_profile",
                 type: 'POST',
@@ -161,7 +160,7 @@ if ($data['role'] == 'buyer') {
                 contentType: false, // important
                 data: form_data,
                 success: function(data) {
-
+                    
                 }
 
             })
@@ -180,15 +179,17 @@ if ($data['role'] == 'buyer') {
 
                 },
                 success: function(data) {
+                   
                     location.href = "/Main/profile";
                 }
             })
         }
         function updateVendorProfile() {
+        
             var form_data = new FormData();
             var file_data = $("#picture").prop("files")[0];
             form_data.append("file", file_data);
-
+          
             $.ajax({
                 url: " /Profile/edit_profile",
                 type: 'POST',
@@ -196,10 +197,9 @@ if ($data['role'] == 'buyer') {
                 contentType: false, // important
                 data: form_data,
                 success: function(data) {
-
+                    
                 }
             })
-
             $.ajax({
                 url: " /Profile/edit_profile",
                 type: "POST",
@@ -218,9 +218,11 @@ if ($data['role'] == 'buyer') {
                 }
             })
         }
-
+      
         $(function() {
+          
             $("#edit_profile").click(function() {
+              
                 var url = "/Profile/edit_profile"
                 $("#section_profile").remove();
                 $("#context").load(url + " #section_profile");
