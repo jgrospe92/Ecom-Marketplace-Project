@@ -134,11 +134,16 @@ if ($data['role'] == 'buyer') {
         </section>
     <?php } ?>
     <!-- PROFILE VENDOR ENDS -->
+    <!-- TOAST MESSAGE STARTS -->
 
+    <?php $this->view('includes/subview/ToastMsg') ?>
+    <!-- TOAST MESSAGE ENDS -->
     <!-- RELOAD WALLET MODAL  -->
     <?php $this->view('includes/subview/reload_wallet'); ?>
     <?php $this->view('includes/footer'); ?>
     <script>
+        
+        
         function updateImage() {
             $("#picture").click();
             picture.onchange = evt => {
@@ -179,13 +184,25 @@ if ($data['role'] == 'buyer') {
 
                 },
                 success: function(data) {
-                   
-                    location.href = "/Main/profile";
+                    showMsgToast();
                 }
             })
+         
         }
+        function showMsgToast(){
+            let toastLiveExample = document.getElementById('toastUpdate');
+                let toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();
+                setTimeout(
+                    function() 
+                    {
+                        location.href = "/Main/profile";
+                    }, 3000);
+        }
+      
+            
         function updateVendorProfile() {
-        
+            
             var form_data = new FormData();
             var file_data = $("#picture").prop("files")[0];
             form_data.append("file", file_data);
@@ -197,7 +214,7 @@ if ($data['role'] == 'buyer') {
                 contentType: false, // important
                 data: form_data,
                 success: function(data) {
-                    
+                  
                 }
             })
             $.ajax({
@@ -214,11 +231,11 @@ if ($data['role'] == 'buyer') {
 
                 },
                 success: function(data) {
-                    location.href = "/Main/profile";
+                    showMsgToast();
                 }
             })
         }
-      
+        
         $(function() {
           
             $("#edit_profile").click(function() {
