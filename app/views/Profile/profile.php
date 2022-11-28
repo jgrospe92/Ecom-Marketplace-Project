@@ -11,6 +11,9 @@ if ($data['role'] == 'buyer') {
     $profile = $data['profile'];
     $vendor = $data['vendor'];
     $fullname = ucfirst($profile->first_name) . " " . ucfirst($profile->last_name);
+    $products = new \app\models\Product();
+    $products = $products->getMyProducts($vendor->vendor_id);
+  
 }
 
 ?>
@@ -125,7 +128,7 @@ if ($data['role'] == 'buyer') {
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <p class="lead fw-normal mb-0">Product Listing</p>
                                 </div>
-                                <?php $this->view('includes/table', $profile) ?>
+                                <?php $this->view('includes/table', ['profile'=>$profile, 'products'=>$products])?>
                             </div>
                         </div>
                     </div>
