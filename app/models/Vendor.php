@@ -43,4 +43,20 @@ class Vendor extends \app\core\Model
         $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Vendor');
         return $STMT->fetch();
     }
+
+    public function updateVendor(){
+        $SQL = "UPDATE vendor SET vendor_name=:vendor_name, vendor_desc=:vendor_desc, vendor_location=:vendor_location WHERE profile_id=:profile_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['vendor_name'=>$this->vendor_name,
+                        'vendor_desc'=>$this->vendor_desc,
+                        'vendor_location'=>$this->vendor_location,
+                        'profile_id'=>$this->profile_id]);
+    }
+
+    public function updateWallet() {
+        $SQL = "UPDATE vendor SET vendor_profit=:vendor_profit WHERE vendor_id=:vendor_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['vendor_profit'=>$this->vendor_profit,
+                        'vendor_id'=>$this->vendor_id]);
+    }
 }
