@@ -13,7 +13,7 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="/resources/js/head.js"></script>
-    
+
     <!-- Bootstrap ICONS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
@@ -26,9 +26,9 @@
         <!-- Catalogue button/ scroll to the catalogue section -->
         <!-- search bar -->
         <!-- login button -->
-        
+
         <?php
-        if (isset($_SESSION['user_id']) && isset($_SESSION['profile_id'])){
+        if (isset($_SESSION['user_id']) && isset($_SESSION['profile_id'])) {
             $link = "href='/User/logout'";
             //TODO: Add who is currently login "Welcome, current user"
             $status = 'Logout';
@@ -42,8 +42,8 @@
             $currentUser = "<p>Welcome, " . $name;
             $profile_icon = ' <a class="btn btn-outline-primary" type="button"
                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-person-bounding-box"></i></a>';
-            if ($profile->role == 'buyer'){
-                
+            if ($profile->role == 'buyer') {
+
                 $buyer = new \app\models\Buyer();
                 $buyer = $buyer->getBuyerUsingProfileId($_SESSION['profile_id']);
                 $virtualWallet = number_format((float)$buyer->credit, 2, '.', '');
@@ -88,7 +88,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
+                                Products
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Newest</a></li>
@@ -103,8 +103,17 @@
                             <a class="nav-link disabled">Disabled</a>
                         </li> -->
                     </ul>
+
+
                     <form class="d-flex " role="search">
                         <div class="d-flex align-items-center">
+                            <!-- LOCALIZATION STARTS -->
+                            <select class="form-control form-select w-50 me-2" aria-label="Default select example">
+                                <option selected>Choose Language</option>
+                                <option value="english">English</option>
+                                <option value="french">French</option>
+                            </select>
+                            <!-- LOCALIZATION ENDS -->
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </div>
@@ -112,7 +121,7 @@
                     </form>
                     <form method="POST">
                         <a <?= $link ?> class="btn btn-outline-primary m-2"><?= $status ?></a>
-                        <?=$registerBTN?>
+                        <?= $registerBTN ?>
                         <?= $profile_icon ?>
                         <?= $cart ?>
                     </form>
@@ -134,7 +143,7 @@
                 <l1><a class="list-group-item list-group-item-action" href="/Main/profile">Profile</a></l1>
                 <l1><a class="list-group-item list-group-item-action" <?= $dashboard ?>><?= $dashboard_name ?></a></l1>
                 <l1><a class="list-group-item list-group-item-action" href="">Order History</a></l1>
-                <l1><a class="list-group-item list-group-item-action" href="">Virtual Wallet  $<?= $virtualWallet  ?></a></l1>
+                <l1><a class="list-group-item list-group-item-action" href="">Virtual Wallet $<?= $virtualWallet  ?></a></l1>
             </ul>
 
         </div>
