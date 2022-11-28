@@ -33,7 +33,6 @@ class Profile extends \app\core\Controller
                     $_SESSION['profile_id'] = $profile->insertWithoutImage();
                 }
 
-
                 // As buyer
                 $buyer = new \app\models\Buyer();
                 $buyer->shipping_add = $_POST['shipping_add'];
@@ -69,10 +68,8 @@ class Profile extends \app\core\Controller
                 } else {
                     $_SESSION['profile_id'] = $profile->insertWithoutImage();
                 }
-
-
-
-                $vendor->vendor_profit = floatval($_POST['vendor_profit']);
+                
+                $vendor->vendor_profit = ($_POST['credit']);
                 $vendor->vendor_desc = $_POST['vendor_desc'];
                 $vendor->vendor_location = $_POST['vendor_location'];
                 $vendor->profile_id = $_SESSION['profile_id'];
@@ -83,5 +80,99 @@ class Profile extends \app\core\Controller
         } else {
             $this->view('Profile/create_profile');
         }
+    }
+
+    public function updateWallet()
+    {
+        if (($_SESSION['role']) == 'buyer') {
+
+            if ($_POST['credit']) {
+
+                $buyer = new \app\models\Buyer();
+                $buyer = $buyer->getBuyerUsingProfileId($_SESSION['profile_id']);
+                $buyer->credit = $_POST['credit'];
+                $buyer->updateWallet();
+            }
+            exit;
+        } else {
+            if ($_POST['credit']) {
+
+                $vendor = new \app\models\Vendor();
+                $vendor = $vendor->getVendorUsingProfileId($_SESSION['profile_id']);
+                $vendor->vendor_profit = $_POST['credit'];
+                $vendor->updateWallet();
+            }
+            exit;
+        }
+    }
+
+    public function edit_profile()
+    {
+        $profile = new \app\models\Profile();
+        $buyer = new \app\models\Buyer();
+        $vendor = new \app\models\Vendor();
+        $profile = $profile->getProfileWithProfileId($_SESSION['profile_id']);
+        var_dump(  $profile);
+        if ($profile->role == 'buyer') {
+
+            $buyer = $buyer->getBuyerUsingProfileId($profile->profile_id);
+    
+            if (isset($_FILES['file'])) {
+                if ($profile->profile_photo !== "blank.jpg") {
+                    unlink("images/$profile->profile_photo");
+                }
+                $filename = $this->saveFile($_FILES['file']);
+                $profile->profile_photo = $filename;
+                $profile->changeProfilePhoto();
+            }
+    
+            if (isset($_POST['update'])) {
+    
+                // UPDATE PROFILE
+                $profile->first_name = $_POST['first_name'];
+                $profile->last_name = $_POST['last_name'];
+    
+                // UPDATE BUYER
+                $buyer->shipping_add = $_POST['shipping_add'];
+                $buyer->billing_add = $_POST['billing_add'];
+    
+                // UPDATE
+                $profile->updateProfile();
+                $buyer->updateBuyer();
+            }
+    
+            $this->view('Profile/edit_profile', ['profile' => $profile, 'buyer' => $buyer, 'role' => $profile->role]);
+
+        } else {
+
+            $vendor =  $vendor->getVendorUsingProfileId($profile->profile_id);
+
+            if (isset($_FILES['file'])) {
+                if ($profile->profile_photo !== "blank.jpg") {
+                    unlink("images/$profile->profile_photo");
+                }
+                $filename = $this->saveFile($_FILES['file']);
+                $profile->profile_photo = $filename;
+                $profile->changeProfilePhoto();
+            }
+
+            if (isset($_POST['update'])) {
+    
+                // UPDATE PROFILE
+                $profile->first_name = $_POST['first_name'];
+                $profile->last_name = $_POST['last_name'];
+    
+                // UPDATE VENDOR
+                $vendor->vendor_desc = $_POST['vendor_desc'];
+                $vendor->vendor_location = $_POST['vendor_location'];
+    
+                // UPDATE
+                $profile->updateProfile();
+                $vendor->updateVendor();
+            }
+    
+            $this->view('Profile/edit_profile', ['profile' => $profile, 'vendor' => $vendor, 'role' => $profile->role]);
+        }
+        
     }
 }

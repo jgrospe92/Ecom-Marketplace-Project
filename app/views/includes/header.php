@@ -13,7 +13,7 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="/resources/js/head.js"></script>
-
+    
     <!-- Bootstrap ICONS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
@@ -43,11 +43,22 @@
             $profile_icon = ' <a class="btn btn-outline-primary" type="button"
                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-person-bounding-box"></i></a>';
             if ($profile->role == 'buyer'){
+                
+                $buyer = new \app\models\Buyer();
+                $buyer = $buyer->getBuyerUsingProfileId($_SESSION['profile_id']);
+                $virtualWallet = number_format((float)$buyer->credit, 2, '.', '');
                 $cart = '<button type="button" class="btn btn-success">
                 <i class="bi bi-cart pe-2"></i><span id="item_counter" class="badge text-bg-secondary">0</span>
                 </button>';
+                $dashboard = 'href="/Buyer/wishlist/<?= $buyer->buyer_id?>" ';
+                $dashboard_name = 'Wishlist';
             } else {
+                $vendor = new \app\models\Vendor();
+                $vendor = $vendor->getVendorUsingProfileId($_SESSION['profile_id']);
                 $cart = '';
+                $dashboard = 'href="/Vendor/dashboard/<?= $vendor->vendor_id?>"';
+                $dashboard_name = "Dashboard";
+                $virtualWallet =  number_format((float)$vendor->vendor_profit, 2, '.', '');
             }
             $registerBTN = '';
         } else {
@@ -121,9 +132,9 @@
         <div class="offcanvas-body">
             <ul class="list-group">
                 <l1><a class="list-group-item list-group-item-action" href="/Main/profile">Profile</a></l1>
-                <l1><a class="list-group-item list-group-item-action" href="">Wishlist</a></l1>
+                <l1><a class="list-group-item list-group-item-action" <?= $dashboard ?>><?= $dashboard_name ?></a></l1>
                 <l1><a class="list-group-item list-group-item-action" href="">Order History</a></l1>
-                <l1><a class="list-group-item list-group-item-action" href="">Remaining Credit: <?php  ?></a></l1>
+                <l1><a class="list-group-item list-group-item-action" href="">Virtual Wallet  $<?= $virtualWallet  ?></a></l1>
             </ul>
 
         </div>

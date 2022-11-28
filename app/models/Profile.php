@@ -1,55 +1,88 @@
 <?php
+
 namespace app\models;
 
-class Profile extends \app\core\Model {
+class Profile extends \app\core\Model
+{
 
-    public function get() {
+    public function get()
+    {
         $SQL = "SELECT * FROM profile WHERE user_id=:user_id";
         $STMT = self::$_connection->prepare($SQL);
-        $STMT->execute(['user_id'=>$this->user_id]);
+        $STMT->execute(['user_id' => $this->user_id]);
         $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
         return $STMT->fetch();
     }
 
-    public function getProfileWithProfileId($profile_id) {
+    public function getProfileWithProfileId($profile_id)
+    {
         $SQL = "SELECT * FROM profile WHERE profile_id=:profile_id";
         $STMT = self::$_connection->prepare($SQL);
-        $STMT->execute(['profile_id'=>$profile_id]);
+        $STMT->execute(['profile_id' => $profile_id]);
         $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
         return $STMT->fetch();
     }
 
-    public function insert() {
+    public function insert()
+    {
         $SQL = "INSERT INTO profile(first_name, last_name, role, profile_photo, user_id)
             VALUES (:first_name, :last_name, :role, :profile_photo, :user_id)";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(
             [
-                'first_name'=>$this->first_name,
-                'last_name'=>$this->last_name,
-                'role'=>$this->role,
-                'profile_photo'=>$this->profile_photo,
-                'user_id'=>$this->user_id,
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'role' => $this->role,
+                'profile_photo' => $this->profile_photo,
+                'user_id' => $this->user_id,
 
             ]
-            );
+        );
         return self::$_connection->lastInsertId();
     }
 
-    public function insertWithoutImage() {
+    public function insertWithoutImage()
+    {
         $SQL = "INSERT INTO profile(first_name, last_name, role, user_id)
             VALUES (:first_name, :last_name, :role,:user_id)";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(
             [
-                'first_name'=>$this->first_name,
-                'last_name'=>$this->last_name,
-                'role'=>$this->role,
-                'user_id'=>$this->user_id,
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'role' => $this->role,
+                'user_id' => $this->user_id,
 
             ]
-            );
+        );
         return self::$_connection->lastInsertId();
     }
 
+    public function updateProfile()
+    {
+        $SQL = "UPDATE profile SET first_name=:first_name, last_name=:last_name, profile_photo=:profile_photo
+                WHERE profile_id=:profile_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(
+            [
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'profile_photo' => $this->profile_photo,
+                'profile_id' => $this->profile_id,
+            ]
+        );
+    }
+
+    public function changeProfilePhoto()
+    {
+        $SQL = "UPDATE profile SET profile_photo=:profile_photo
+        WHERE profile_id=:profile_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(
+            [
+                'profile_photo' => $this->profile_photo,
+                'profile_id' => $this->profile_id,
+            ]
+        );
+    }
 }
