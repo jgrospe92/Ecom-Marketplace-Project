@@ -64,4 +64,12 @@ class Product extends \app\core\Controller {
         header('location:/Main/index');
     
     }
+
+    public function details($prod_id) {
+        $product = new \app\models\Product();
+        $product =   $product->get($prod_id);
+      
+        echo $this->view('/includes/subview/productDetail', $product);
+    
+    }
 }

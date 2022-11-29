@@ -14,6 +14,14 @@ class Product extends \app\core\Model
         return $STMT->fetchAll();
     }
 
+    public function getAds(){
+        $SQL = "SELECT * from advertisement inner join product on product.prod_id =:prod_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['prod_id'=>$this->prod_id]);
+        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Ads');
+        return $STMT->fetch();
+    }
+
     public function get($prod_id)
     {
         $SQL = "SELECT * FROM product WHERE prod_id=:prod_id";

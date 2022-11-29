@@ -32,7 +32,7 @@
                                 <strong>$<?= $product->prod_cost ?></strong>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-question-square"></i></i></button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"><i onclick="checkDetails(<?=$product->prod_id?>);" class="bi bi-question-square"></i></i></button>
                                         <button <?php if($_SESSION['role'] == 'vendor') echo "disabled" ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-heart"></i></button>
                                         <button <?php if($_SESSION['role'] == 'vendor') echo "disabled" ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
                                     </div>
@@ -46,3 +46,21 @@
         </div>
     </div>
 <?php } ?>
+<div id="check_details"></div>
+<script>
+    
+    function checkDetails(id){
+        $.ajax({
+            type: 'GET',
+            url: '/Product/details/'+id,
+            success: function(data){
+                
+                $('#check_details').html(data);
+                console.log(data);
+                $('#productDetailModal').modal('show')
+            }
+        })
+       
+    }
+
+</script>

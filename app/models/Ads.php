@@ -11,6 +11,7 @@ class Ads extends \app\core\Model {
         return $STMT->fetchAll();
     }
 
+
     public function insert(){
         $SQL = "INSERT INTO advertisement(description, start_date, end_date, prod_id) VALUES (:description, :start_date, :end_date, :prod_id )";
         $STMT = self::$_connection->prepare($SQL);
@@ -26,6 +27,5 @@ class Ads extends \app\core\Model {
         $STMT->execute(['prod_id'=>$this->prod_id]);
         $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Product');
         return $STMT->fetch();
-
     }
 }

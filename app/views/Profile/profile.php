@@ -150,11 +150,12 @@ if ($data['role'] == 'buyer') {
     </div>
 <?php } ?>
 <!-- PROFILE VENDOR ENDS -->
-<!-- SUB VIEW ADD PRODUCT STARTS -->
+
+<!-- ADD PRODUCT STARTS -->
 <?php if (isset($categories)) {
     $this->view('includes/subview/add_product',  ['categories' => $categories]);
 } ?>
-<!-- SUB VIEW ADD PRODUCT ENDS -->
+<!-- ADD PRODUCT ENDS -->
 <!-- TOAST MESSAGE STARTS -->
 <?php $this->view('includes/subview/ToastMsg') ?>
 <!-- TOAST MESSAGE ENDS -->
