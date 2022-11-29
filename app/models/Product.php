@@ -33,8 +33,8 @@ class Product extends \app\core\Model
 
     public function insert()
     {
-        $SQL = "INSERT INTO product(prod_name, prod_desc, date_added,prod_cost, num_of_stock, has_discount, product_image, vendor_id, prod_cat_id) VALUES (:prod_name, :prod_desc, :date_added, :prod_cost,
-            :num_of_stock, :has_discount, :product_image, :vendor_id, :prod_cat_id)";
+        $SQL = "INSERT INTO product(prod_name, prod_desc, date_added, prod_cost, num_of_stock, has_discount, has_ads, product_image, vendor_id, prod_cat_id) VALUES (:prod_name, :prod_desc, :date_added, :prod_cost,
+            :num_of_stock, :has_discount, :has_ads, :product_image, :vendor_id, :prod_cat_id)";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(
             [
@@ -44,11 +44,13 @@ class Product extends \app\core\Model
                 'prod_cost' => $this->prod_cost,
                 'num_of_stock' => $this->num_of_stock,
                 'has_discount' => $this->has_discount,
+                'has_ads'=> $this->has_ads,
                 'product_image' =>$this->product_image,
                 'vendor_id' => $this->vendor_id,
                 'prod_cat_id' => $this->prod_cat_id,
             ]
         );
+        return self::$_connection->lastInsertId();
     }
 
     public function edit()

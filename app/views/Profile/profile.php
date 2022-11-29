@@ -271,11 +271,11 @@ if ($data['role'] == 'buyer') {
         if ($(e.target).is(':checked')) {
             $('#endDate').prop('disabled', false);
             $('#startDate').prop('disabled', false);
-            alert('Enable Button B');
+      
         } else {
             $('#startDate').prop('disabled', true);
             $('#endDate').prop('disabled', true);
-            alert('Disable Button B');
+       
         }
 
     });

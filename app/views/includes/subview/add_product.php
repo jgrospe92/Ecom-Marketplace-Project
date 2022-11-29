@@ -51,8 +51,8 @@ $categories = $data['categories'];
                                                 <label class="form-check-label" for="has_ads">
                                                     Ads (flat rate 5 CAD)
                                                 </label>
-                                                <label class="text-muted" for="start_date">Start: <input id="startDate" name="startDate" type="date" class="form-control " > </label>
-                                                <label lass="text-muted" for="end_date">Ends: <input id="endDate" name="endDate" type="date" class="form-control " ></label>
+                                                <label class="text-muted" for="start_date">Start: <input id="startDate" name="startDate" type="date" class="form-control" required > </label>
+                                                <label lass="text-muted" for="end_date">Ends: <input id="endDate" name="endDate" type="date" class="form-control "required ></label>
 
                                             </div>
                                         </div>
