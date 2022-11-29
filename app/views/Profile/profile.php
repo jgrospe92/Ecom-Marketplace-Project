@@ -1,7 +1,9 @@
 <?php $this->view('includes/header') ?>
 
 <?php
-
+   // CATEGORY
+   $categories = new \app\models\Category();
+   $categories = $categories->getAll();
 
 if ($data['role'] == 'buyer') {
 
@@ -138,7 +140,7 @@ if ($data['role'] == 'buyer') {
                                     </button>
                                     <!-- Button trigger modal ENDS -->
                                 </div>
-                                <?php $this->view('includes/table', ['profile' => $profile, 'products' => $products]) ?>
+                                <?php $this->view('includes/table', ['profile' => $profile, 'products' => $products,]) ?>
                             </div>
                         </div>
                     </div>

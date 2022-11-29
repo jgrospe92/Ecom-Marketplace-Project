@@ -1,7 +1,4 @@
 <?php
-
-
-
 if ($data['role'] == 'buyer') {
 
     $profile = $data['profile'];
@@ -9,7 +6,6 @@ if ($data['role'] == 'buyer') {
     $fname = ucfirst($profile->first_name);
     $lname = ucfirst($profile->last_name);
     $fullname = ucfirst($profile->first_name) . " " . ucfirst($profile->last_name);
-
 } else {
     $profile = $data['profile'];
     $fname = ucfirst($profile->first_name);
@@ -24,7 +20,8 @@ if ($data['role'] == 'buyer') {
     // CATEGORY
     $categories = new \app\models\Category();
     $categories = $categories->getAll();
-} ?>
+} 
+?>
 
 <!-- Profile starts -->
 <?php if ($data['role'] == 'buyer') { ?>

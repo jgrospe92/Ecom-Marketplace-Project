@@ -1,3 +1,4 @@
+<?php $category = new \app\models\Category(); ?>
 <?php if ($data['profile']->role == 'buyer') { ?>
     <div id="table_body" class="table-responsive">
         <table class="table table-dark table-striped table-hover table-bordered caption-top">
@@ -47,7 +48,7 @@
                 <?php foreach($data['products'] as $product){ ?>
                 <tr>
                     <td><?= $product->prod_name ?></td>
-                    <td><?= $product->prod_cat_id ?></td>
+                    <td><?= $category->get($product->prod_cat_id) ?></td>
                     <td><?= $product->num_of_stock ?></td>
                     <td><?= $product->prod_cost ?></td>
                     <td class="m-auto p-auto"><i class="bi bi-question-square align-bottom"></i></td>

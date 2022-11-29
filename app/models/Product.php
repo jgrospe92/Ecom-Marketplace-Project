@@ -33,8 +33,8 @@ class Product extends \app\core\Model
 
     public function insert()
     {
-        $SQL = "INSERT INTO product(prod_name, prod_desc, prod_cost, num_of_stock, has_discount, vendor_id, prod_cat_id) VALUES (:prod_name, :prod_desc, :prod_cost,
-            :num_of_stock, :has_discount, :vendor_id, :prod_cat_id)";
+        $SQL = "INSERT INTO product(prod_name, prod_desc, prod_cost, num_of_stock, has_discount, product_image, vendor_id, prod_cat_id) VALUES (:prod_name, :prod_desc, :prod_cost,
+            :num_of_stock, :has_discount, :product_image, :vendor_id, :prod_cat_id)";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(
             [
@@ -43,9 +43,9 @@ class Product extends \app\core\Model
                 'prod_cost' => $this->prod_cost,
                 'num_of_stock' => $this->num_of_stock,
                 'has_discount' => $this->has_discount,
+                'product_image' =>$this->product_image,
                 'vendor_id' => $this->vendor_id,
                 'prod_cat_id' => $this->prod_cat_id,
-                'prod_id' => $this->prod_id,
             ]
         );
     }
@@ -71,6 +71,13 @@ class Product extends \app\core\Model
 
     public function delete(){
         $SQL = "DELETE FROM product WHERE prod_id=:prod_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['prod_id'=>'prod_id']);
+    }
+
+    // 1 for true and 0 for false
+    public function hasDiscount(){
+        $SQL = "UPDATE product SET has_discount=:has_discount WHERE prod_id=:prod_id";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(['prod_id'=>'prod_id']);
     }
