@@ -10,7 +10,7 @@
                     <h1 class=" fst-italic text-center">Newest</h1>
                 </div>
             </div>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-3 ">
                 <?php foreach ($data as $prod) {?>
                     <?php
                     $product = $prod->get($prod->prod_id);

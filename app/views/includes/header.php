@@ -52,6 +52,7 @@
                 </button>';
                 $dashboard = 'href="/Buyer/wishlist/<?= $buyer->buyer_id?>" ';
                 $dashboard_name = 'Wishlist';
+                $dashboard_two = ' <l1><a class="list-group-item list-group-item-action" href="">Order History</a></l1>';
             } else {
                 $vendor = new \app\models\Vendor();
                 $vendor = $vendor->getVendorUsingProfileId($_SESSION['profile_id']);
@@ -59,6 +60,7 @@
                 $dashboard = 'href="/Vendor/dashboard/<?= $vendor->vendor_id?>"';
                 $dashboard_name = "Dashboard";
                 $virtualWallet =  number_format((float)$vendor->vendor_profit, 2, '.', '');
+                $dashboard_two = '';
             }
             $registerBTN = '';
         } else {
@@ -142,7 +144,7 @@
             <ul class="list-group">
                 <l1><a class="list-group-item list-group-item-action" href="/Main/profile">Profile</a></l1>
                 <l1><a class="list-group-item list-group-item-action" <?= $dashboard ?>><?= $dashboard_name ?></a></l1>
-                <l1><a class="list-group-item list-group-item-action" href="">Order History</a></l1>
+                <?=  $dashboard_two ?>
                 <l1><a class="list-group-item list-group-item-action" href="">Virtual Wallet $<?= $virtualWallet  ?></a></l1>
             </ul>
 

@@ -50,4 +50,18 @@ class Product extends \app\core\Controller {
             
         } 
     }
+
+    public function delete($prod_id){
+        $vendor = new \app\models\Vendor();
+        $vendor = $vendor->getVendorUsingProfileId($_SESSION['profile_id']);
+
+        $product = new \app\models\Product();
+        $product =   $product->get($prod_id);
+        if ($vendor->vendor_id == $product->vendor_id){
+            unlink("images/$product->product_image");
+            $product->delete();
+        }
+        header('location:/Main/index');
+    
+    }
 }

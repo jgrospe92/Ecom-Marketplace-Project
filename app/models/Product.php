@@ -75,7 +75,7 @@ class Product extends \app\core\Model
     public function delete(){
         $SQL = "DELETE FROM product WHERE prod_id=:prod_id";
         $STMT = self::$_connection->prepare($SQL);
-        $STMT->execute(['prod_id'=>'prod_id']);
+        $STMT->execute(['prod_id'=>$this->prod_id]);
     }
 
     // 1 for true and 0 for false

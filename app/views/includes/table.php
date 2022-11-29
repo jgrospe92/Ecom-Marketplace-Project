@@ -39,20 +39,19 @@
                     <th scope="col">Category</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Cost</th>
-                    <th scope="col">Action</th>
+                    <th class="w-25" scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- TODO: Loop through the order details -->
                 <?php if (count($data['products']) > 0 ){ ?>
                 <?php foreach($data['products'] as $product){ ?>
-                <tr>
+                <tr id=<?=$product->prod_id ?>>
                     <td><?= $product->prod_name ?></td>
                     <td><?= $category->get($product->prod_cat_id) ?></td>
                     <td><?= $product->num_of_stock ?></td>
                     <td><?= $product->prod_cost ?></td>
-                    <td class="m-auto p-auto"><i class="bi bi-question-square btn text-light"></i><i class="bi bi-trash btn text-light"></i></td>
-                    
+                    <td class="m-auto p-auto"><i class="bi bi-question-square btn text-light"></i><i class="bi bi-pencil-square btn text-light"></i><i onclick="deleteItem(<?=$product->prod_id?>);" class="bi bi-trash btn text-light"></i></td>  
                 </tr>
                 <?php } ?>
                 <?php } ?>      

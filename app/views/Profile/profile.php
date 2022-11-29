@@ -165,6 +165,21 @@ if ($data['role'] == 'buyer') {
     const myToastEl = document.getElementById('toastUpdate');
     const myToast = bootstrap.Toast.getOrCreateInstance(myToastEl);
 
+    function deleteItem($pro_id) {
+
+
+        $.ajax({
+            type: 'GET',
+            url: "/Product/delete/" + $pro_id,
+            success: function(data) {
+                $("#" + $pro_id).fadeOut('slow', function() {
+                    $(this).remove();
+                });
+            }
+
+        });
+    }
+
     function updateImage() {
         $("#picture").click();
         picture.onchange = evt => {
@@ -271,11 +286,11 @@ if ($data['role'] == 'buyer') {
         if ($(e.target).is(':checked')) {
             $('#endDate').prop('disabled', false);
             $('#startDate').prop('disabled', false);
-      
+
         } else {
             $('#startDate').prop('disabled', true);
             $('#endDate').prop('disabled', true);
-       
+
         }
 
     });
