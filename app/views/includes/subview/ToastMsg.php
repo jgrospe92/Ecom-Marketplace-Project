@@ -1,6 +1,3 @@
-
-
-
 <div id="updateToastDiv">
     <div class="toast-container position-fixed bottom-0 end-0 p-3 ">
         <div id="toastUpdate" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000">
@@ -16,8 +13,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
- 
-</script>

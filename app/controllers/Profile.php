@@ -142,6 +142,7 @@ class Profile extends \app\core\Controller
             }
     
             $this->view('Profile/edit_profile', ['profile' => $profile, 'buyer' => $buyer, 'role' => $profile->role]);
+            exit;
 
         } else {
 
@@ -172,6 +173,7 @@ class Profile extends \app\core\Controller
             }
     
             $this->view('Profile/edit_profile', ['profile' => $profile, 'vendor' => $vendor, 'role' => $profile->role]);
+            exit;
         }
         
     }

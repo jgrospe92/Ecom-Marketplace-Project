@@ -9,6 +9,7 @@ if ($data['role'] == 'buyer') {
     $fname = ucfirst($profile->first_name);
     $lname = ucfirst($profile->last_name);
     $fullname = ucfirst($profile->first_name) . " " . ucfirst($profile->last_name);
+
 } else {
     $profile = $data['profile'];
     $fname = ucfirst($profile->first_name);
@@ -23,9 +24,8 @@ if ($data['role'] == 'buyer') {
     // CATEGORY
     $categories = new \app\models\Category();
     $categories = $categories->getAll();
-}
+} ?>
 
-?>
 <!-- Profile starts -->
 <?php if ($data['role'] == 'buyer') { ?>
     <div id="context">
@@ -94,7 +94,7 @@ if ($data['role'] == 'buyer') {
     </div>
 <?php } else { ?>
     <div id="context">
-        <section id="section_profile" class="h-100 gradient-custom-2">
+        <section id="section_profile" name="vendor" class="h-100 gradient-custom-2">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col col-lg-9 col-xl-7">
@@ -158,4 +158,4 @@ if ($data['role'] == 'buyer') {
             </div>
         </section>
     </div>
-<?php } ?>
+<?php }; ?>

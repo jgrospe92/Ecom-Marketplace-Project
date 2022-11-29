@@ -80,9 +80,9 @@ if ($data['role'] == 'buyer') {
                 </div>
             </div>
         </section>
-    </div> <?php } else { ?>
+    </div>
     <!-- Profile BUYER ends -->
-    <!-- PROFILE VENDOR STARTS -->
+<?php } else { ?>
     <div id="context">
         <section id="section_profile" class="h-100 gradient-custom-2">
             <div class="container py-5 h-100">
@@ -145,122 +145,126 @@ if ($data['role'] == 'buyer') {
                 </div>
             </div>
         </section>
-    <?php } ?>
-    <!-- PROFILE VENDOR ENDS -->
-    <!-- SUB VIEW ADD PRODUCT STARTS -->
-    <?php if(isset( $categories)) {$this->view('includes/subview/add_product',  ['categories' => $categories]);} ?>
-    <!-- SUB VIEW ADD PRODUCT ENDS -->
-    <!-- TOAST MESSAGE STARTS -->
-    <?php $this->view('includes/subview/ToastMsg') ?>
-    <!-- TOAST MESSAGE ENDS -->
-    <!-- RELOAD WALLET MODAL  -->
-    <?php $this->view('includes/subview/reload_wallet'); ?>
-    <?php $this->view('includes/footer'); ?>
-    <script>
-        const myToastEl = document.getElementById('toastUpdate');
-        const myToast = bootstrap.Toast.getOrCreateInstance(myToastEl)
+    </div>
+<?php } ?>
+<!-- PROFILE VENDOR ENDS -->
+<!-- SUB VIEW ADD PRODUCT STARTS -->
+<?php if (isset($categories)) {
+    $this->view('includes/subview/add_product',  ['categories' => $categories]);
+} ?>
+<!-- SUB VIEW ADD PRODUCT ENDS -->
+<!-- TOAST MESSAGE STARTS -->
+<?php $this->view('includes/subview/ToastMsg') ?>
+<!-- TOAST MESSAGE ENDS -->
+<!-- RELOAD WALLET MODAL  -->
+<?php $this->view('includes/subview/reload_wallet'); ?>
+<?php $this->view('includes/footer'); ?>
+<script>
+    const myToastEl = document.getElementById('toastUpdate');
+    const myToast = bootstrap.Toast.getOrCreateInstance(myToastEl);
 
-        function updateImage() {
-            $("#picture").click();
-            picture.onchange = evt => {
-                const [file] = picture.files
-                if (file) {
-                    pic_preview.src = URL.createObjectURL(file)
-                }
+    function updateImage() {
+        $("#picture").click();
+        picture.onchange = evt => {
+            const [file] = picture.files
+            if (file) {
+                pic_preview.src = URL.createObjectURL(file)
             }
         }
+    }
 
-        function updateBuyerProfile() {
-            var form_data = new FormData();
-            var file_data = $("#picture").prop("files")[0];
-            form_data.append("file", file_data);
-            $.ajax({
-                url: " /Profile/edit_profile",
-                type: 'POST',
-                processData: false, // important
-                contentType: false, // important
-                data: form_data,
-                success: function(data) {
+    function updateBuyerProfile() {
+        var form_data = new FormData();
+        var file_data = $("#picture").prop("files")[0];
+        form_data.append("file", file_data);
+        $.ajax({
+            url: " /Profile/edit_profile",
+            type: 'POST',
+            processData: false, // important
+            contentType: false, // important
+            data: form_data,
+            success: function(data) {
 
-                }
+            }
 
-            })
+        })
 
-            $.ajax({
-                url: " /Profile/edit_profile",
-                type: "POST",
-                data: {
-                    update: 'update',
-                    // PROFILE
-                    first_name: $("#new_fname").val(),
-                    last_name: $("#new_lname").val(),
-                    // BUYER
-                    shipping_add: $("#new_shipping_add").val(),
-                    billing_add: $("#new_billing_add").val(),
+        $.ajax({
+            url: " /Profile/edit_profile",
+            type: "POST",
+            data: {
+                update: 'update',
+                // PROFILE
+                first_name: $("#new_fname").val(),
+                last_name: $("#new_lname").val(),
+                // BUYER
+                shipping_add: $("#new_shipping_add").val(),
+                billing_add: $("#new_billing_add").val(),
 
-                },
-                success: function(data) {
-                    showMsgToast();
-                }
-            })
+            },
+            success: function(data) {
+                showMsgToast();
+            }
+        })
 
-        }
+    }
 
 
 
-        function updateVendorProfile() {
+    function updateVendorProfile() {
 
-            var form_data = new FormData();
-            var file_data = $("#picture").prop("files")[0];
-            form_data.append("file", file_data);
+        var form_data = new FormData();
+        var file_data = $("#picture").prop("files")[0];
+        form_data.append("file", file_data);
 
-            $.ajax({
-                url: " /Profile/edit_profile",
-                type: 'POST',
-                processData: false, // important
-                contentType: false, // important
-                data: form_data,
-                success: function(data) {
+        $.ajax({
+            url: " /Profile/edit_profile",
+            type: 'POST',
+            processData: false, // important
+            contentType: false, // important
+            data: form_data,
+            success: function(data) {
 
-                }
-            })
-            $.ajax({
-                url: " /Profile/edit_profile",
-                type: "POST",
-                data: {
-                    update: 'update',
-                    // PROFILE
-                    first_name: $("#new_fname").val(),
-                    last_name: $("#new_lname").val(),
-                    // VENDOR
-                    vendor_desc: $("#new_vendor_desc").val(),
-                    vendor_location: $("#new_vendor_location").val(),
+            }
+        })
+        $.ajax({
+            url: " /Profile/edit_profile",
+            type: "POST",
+            data: {
+                update: 'update',
+                // PROFILE
+                first_name: $("#new_fname").val(),
+                last_name: $("#new_lname").val(),
+                // VENDOR
+                vendor_desc: $("#new_vendor_desc").val(),
+                vendor_location: $("#new_vendor_location").val(),
 
-                },
-                success: function(data) {
-                    showMsgToast();
+            },
+            success: function(data) {
+                showMsgToast();
 
-                }
-            })
-        }
+            }
+        })
+    }
 
-        function showMsgToast() {
-            myToast.show();
-            setTimeout(
-                function() {
-                    location.href = "/Main/profile";
-                }, 3000);
-        }
-        $(function() {
-            $("#edit_profile").click(function() {
-                var url = "/Profile/edit_profile"
-                $("#section_profile").remove();
-                $("#context").load(url + " #section_profile");
+    function showMsgToast() {
+        myToast.show();
+        console.log(myToast.isShown());
+        setTimeout(
+            function() {
+                location.href = "/Main/profile";
+            }, 2500);
+    }
+    $(function() {
+        $("#edit_profile").click(function() {
+            var url = "/Profile/edit_profile"
+            $("#section_profile").remove();
+            $("#context").load(url + " #section_profile");
 
-            })
-        });
-    </script>
+        })
+    });
+</script>
 
-    </body>
+</body>
 
-    </html>
+</html>
