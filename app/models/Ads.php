@@ -19,4 +19,13 @@ class Ads extends \app\core\Model {
                         'end_date'=>$this->end_date,
                         'prod_id'=>$this->prod_id]);
     }
+
+    public function getProduct(){
+        $SQL = "SELECT * from product inner join advertisement on product.prod_id =:prod_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['prod_id'=>$this->prod_id]);
+        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Product');
+        return $STMT->fetch();
+
+    }
 }

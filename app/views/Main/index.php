@@ -5,7 +5,7 @@
 </section>
 
 <section>
-    <h1>This section displays advertisement</h1>
+ <?php $this->view('includes/ads', $data['ads']) ?>
 </section>
 <section>
     <h1>This section display product catalogue</h1>
@@ -15,4 +15,5 @@
 <?php $this->view('includes/footer'); ?>
 <script src="/resources/js/main_script.js"></script>
 </body>
+
 </html>
