@@ -11,7 +11,7 @@
                     <th scope="col">Quantity</th>
                     <th scope="col">Cost</th>
                     <th scope="col">Status</th>
-                    <th scope="col">More info</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,7 +23,7 @@
                     <td>1</td>
                     <td>$999</td>
                     <td>Delivered </td>
-                    <td class="m-auto p-auto"><i class="bi bi-question-square align-bottom"></i></td>
+                    <td class="m-auto p-auto"><i class="bi bi-question-square align-bottom btn text-light"></i></td>
                 </tr>
             </tbody>
         </table>
@@ -39,7 +39,7 @@
                     <th scope="col">Category</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Cost</th>
-                    <th scope="col">More info</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,7 +51,8 @@
                     <td><?= $category->get($product->prod_cat_id) ?></td>
                     <td><?= $product->num_of_stock ?></td>
                     <td><?= $product->prod_cost ?></td>
-                    <td class="m-auto p-auto"><i class="bi bi-question-square align-bottom"></i></td>
+                    <td class="m-auto p-auto"><i class="bi bi-question-square btn text-light"></i><i class="bi bi-trash btn text-light"></i></td>
+                    
                 </tr>
                 <?php } ?>
                 <?php } ?>      

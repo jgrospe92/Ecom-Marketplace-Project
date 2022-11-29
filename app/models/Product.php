@@ -33,13 +33,14 @@ class Product extends \app\core\Model
 
     public function insert()
     {
-        $SQL = "INSERT INTO product(prod_name, prod_desc, prod_cost, num_of_stock, has_discount, product_image, vendor_id, prod_cat_id) VALUES (:prod_name, :prod_desc, :prod_cost,
+        $SQL = "INSERT INTO product(prod_name, prod_desc, date_added,prod_cost, num_of_stock, has_discount, product_image, vendor_id, prod_cat_id) VALUES (:prod_name, :prod_desc, :date_added, :prod_cost,
             :num_of_stock, :has_discount, :product_image, :vendor_id, :prod_cat_id)";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(
             [
                 'prod_name' => $this->prod_name,
                 'prod_desc' => $this->prod_desc,
+                'date_added' => $this->date_added,
                 'prod_cost' => $this->prod_cost,
                 'num_of_stock' => $this->num_of_stock,
                 'has_discount' => $this->has_discount,

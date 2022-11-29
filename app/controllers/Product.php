@@ -16,6 +16,7 @@ class Product extends \app\core\Controller {
             $product->prod_name = $_POST['product_name'];
             $product->prod_desc = $_POST['product_desc'];
             $product->prod_cost = $_POST['product_cost'];
+            $product->date_added = date("Y-m-d h:i:s");
             $product->num_of_stock = $_POST['stock'];
             $product->has_discount = 0;
             $filename = $this->saveFile($_FILES['product_image']);
@@ -24,6 +25,14 @@ class Product extends \app\core\Controller {
             $product->prod_cat_id = $_POST['product_category']+1;
             $product->insert();
             header('location:/Main/profile');
+
+         
+            // FOR DATE FUNCTIONS
+            // $d = strtotime("+3 Months");
+            // $Next3Months = date("Y-m-d", $d);
+            // $currentDate = date("Y-m-d");
+            // $newDate = date_diff(date_create($Next3Months),date_create($currentDate), true);
+            // echo  $newDate->format("%R%a days");
             
         } 
     }
