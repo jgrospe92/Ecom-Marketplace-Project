@@ -7,18 +7,17 @@
         <div class="container">
             <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
                 <div class="">
-                    <h1 class=" fst-italic text-center">Awesome Products</h1>
+                    <h1 class=" fst-italic text-center">Hot Deals</h1>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
-                <?php foreach ($data as $ads) {?>
+                <?php foreach ($data as $promotion) {?>
                     <?php
-                    $product = $ads->getProduct();
+                    $product = $promotion->get($promotion->prod_id);
                     ?>
                     <div class="col">
-                        <span class="badge bg-secondary">Sponsored</span>
                         <div class="card shadow-sm  " style="width: 18rem;">
-                            <div class="card-header"><?= $ads->description ?></div>
+                            <div class="card-header"></div>
                             <img src="/images/<?= $product->product_image ?>" class="card-img-top" width=100% height="225" style="object-fit:cover" alt="<?= $product->prod_name ?>">
                             <div class="card-body">
                                 <p class="card-title"><?= $product->prod_name ?></p>
@@ -45,4 +44,18 @@
             </div>
         </div>
     </div>
+<?php } else { ?>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+                <div class="">
+                    <h1 class=" fst-italic text-center">Hot Deals</h1>
+                </div>
+            </div>
+            <div class="alert alert-danger" role="alert">
+                    There are no discounted products, stay tuned for the next sale event!
+                </div>
+        </div>
+    </div>
+
 <?php } ?>

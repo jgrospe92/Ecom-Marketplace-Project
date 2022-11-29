@@ -7,9 +7,13 @@ class Main extends \app\core\Controller{
     public function index(){
         //TODO: display ads using with POST
         //TODO: display products and filter it by newest
+        $products = new \app\models\Product();
         $ads = new \app\models\Ads();
+        $promotions = new \app\models\Promotion();
+        $promotions = $promotions->getAll();
+        $products = $products->getAll();
         $ads = $ads->getAll();
-        $this->view('Main/index',['ads'=> $ads,]);
+        $this->view('Main/index',['ads'=> $ads, 'catalogue'=>$products, 'promotions'=>$promotions,]);
     }
 
     public function profile(){

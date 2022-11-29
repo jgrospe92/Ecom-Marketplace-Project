@@ -8,8 +8,10 @@
  <?php $this->view('includes/ads', $data['ads']) ?>
 </section>
 <section>
-    <h1>This section display product catalogue</h1>
-    <p>Sorted by the newest product added by default</p>
+    <?php $this->view('includes/catalogue', $data['catalogue']) ?>
+</section>
+<section>
+    <?php $this->view('includes/sale', $data['promotions']) ?>
 </section>
 
 <?php $this->view('includes/footer'); ?>
