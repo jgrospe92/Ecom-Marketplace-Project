@@ -40,14 +40,23 @@ $categories = $data['categories'];
                                                 <label class="text-muted" for="expire_date">Product Cost (CAD)
                                                 </label>
                                                 <input type="text" class="form-control validate" name="product_cost" required>
-                                                <!-- <input id="expire_date" name="expire_date" type="text" class="form-control validate hasDatepicker" data-large-mode="true"> -->
                                             </div>
                                             <div class="form-group w-25 mb-3 col-xs-12 col-sm-6">
                                                 <label class="text-muted" for="stock">Units In Stock
                                                 </label>
                                                 <input id="stock" name="stock" type="text" class="form-control validate" required="">
                                             </div>
+                                            <div class="form-group form-check mb-3 col-xs-12 col-sm-6">
+                                                <input name="has_ads" class="form-check-input" type="checkbox" id="has_ads" checked>
+                                                <label class="form-check-label" for="has_ads">
+                                                    Ads (flat rate 5 CAD)
+                                                </label>
+                                                <label class="text-muted" for="start_date">Start: <input id="startDate" name="startDate" type="date" class="form-control " > </label>
+                                                <label lass="text-muted" for="end_date">Ends: <input id="endDate" name="endDate" type="date" class="form-control " ></label>
+
+                                            </div>
                                         </div>
+
                                         <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                                             <div class="custom-file mt-3 mb-3">
                                                 <img id="product_preview" src="/resources/images/item_image.png" class="img-fluid d-flex justify-content-center m-auto p-auto" style="max-height: 250px;" alt="product photo"><br>

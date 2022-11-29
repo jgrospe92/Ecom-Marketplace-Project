@@ -1,9 +1,9 @@
 <?php $this->view('includes/header') ?>
 
 <?php
-   // CATEGORY
-   $categories = new \app\models\Category();
-   $categories = $categories->getAll();
+// CATEGORY
+$categories = new \app\models\Category();
+$categories = $categories->getAll();
 
 if ($data['role'] == 'buyer') {
 
@@ -264,6 +264,20 @@ if ($data['role'] == 'buyer') {
             $("#context").load(url + " #section_profile");
 
         })
+    });
+
+    $('#has_ads').click(function(e) {
+
+        if ($(e.target).is(':checked')) {
+            $('#endDate').prop('disabled', false);
+            $('#startDate').prop('disabled', false);
+            alert('Enable Button B');
+        } else {
+            $('#startDate').prop('disabled', true);
+            $('#endDate').prop('disabled', true);
+            alert('Disable Button B');
+        }
+
     });
 </script>
 
