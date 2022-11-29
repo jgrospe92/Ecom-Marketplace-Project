@@ -53,30 +53,9 @@ max-height: clamp(5em,10vh,250px) !important;
 overflow: auto !important;
 }
 
+/* ADD PRODUCT MODAL STARTS */
 
-
-/* .carousel-inner .carousel-item img {
-
-  max-height: 80% !important;
-  width: 100% !important;
-  margin: 0 auto;
-  object-fit: contain;
-}
-@media screen and (min-width:950px){
-
-  .carousel-inner {
-
-    height: 450px !important;
-  }
-
-  .carousel-inner .carousel-item .img {
-
-    max-height: 250 !important;
-  	margin: auto;
-    object-fit: contain;
-  }
-
-} */
+/* ADD PRODUCT MODAL ENDS */
 
 
 

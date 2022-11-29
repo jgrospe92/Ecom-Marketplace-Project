@@ -1,5 +1,7 @@
 <?php
 
+
+
 if ($data['role'] == 'buyer') {
 
     $profile = $data['profile'];
@@ -13,6 +15,14 @@ if ($data['role'] == 'buyer') {
     $lname = ucfirst($profile->last_name);
     $fullname = ucfirst($profile->first_name) . " " . ucfirst($profile->last_name);
     $vendor = $data['vendor'];
+
+    //PRODUCTS
+    $products = new \app\models\Product();
+    $products = $products->getMyProducts($vendor->vendor_id);
+
+    // CATEGORY
+    $categories = new \app\models\Category();
+    $categories = $categories->getAll();
 }
 
 ?>
@@ -74,7 +84,7 @@ if ($data['role'] == 'buyer') {
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <p class="lead fw-normal mb-0">Order History</p>
                                 </div>
-                                <?php $this->view('includes/table', $profile) ?>
+                                <?php $this->view('includes/table', ['profile' => $profile]) ?>
                             </div>
                         </div>
                     </div>
@@ -96,7 +106,7 @@ if ($data['role'] == 'buyer') {
                                     <button onclick="updateImage()" id="upload_new_prof" type="button" class="btn btn-outline-dark mb-2 btn-sm w-75 m-auto p-auto" data-mdb-ripple-color="dark" style="z-index: 1;">
                                         UPLOAD
                                     </button>
-                                    <button onclick="updateVendorProfile(); showUpdateProfileToast();" type="button" class="btn btn-outline-dark btn-sm w-75 mb-2 m-auto p-auto" data-mdb-ripple-color="dark" style="z-index: 1;">
+                                    <button onclick="updateVendorProfile();" type="button" class="btn btn-outline-dark btn-sm w-75 mb-2 m-auto p-auto" data-mdb-ripple-color="dark" style="z-index: 1;">
                                         SAVE
                                     </button>
                                     <input id="picture" type="file" name="picture" hidden>
@@ -140,7 +150,7 @@ if ($data['role'] == 'buyer') {
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <p class="lead fw-normal mb-0">Order History</p>
                                 </div>
-                                <?php $this->view('includes/table', $profile) ?>
+                                <?php $this->view('includes/table', ['profile' => $profile, 'products' => $products]) ?>
                             </div>
                         </div>
                     </div>
@@ -149,4 +159,3 @@ if ($data['role'] == 'buyer') {
         </section>
     </div>
 <?php } ?>
-

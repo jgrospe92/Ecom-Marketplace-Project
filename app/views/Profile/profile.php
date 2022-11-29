@@ -2,6 +2,7 @@
 
 <?php
 
+
 if ($data['role'] == 'buyer') {
 
     $profile = $data['profile'];
@@ -11,9 +12,13 @@ if ($data['role'] == 'buyer') {
     $profile = $data['profile'];
     $vendor = $data['vendor'];
     $fullname = ucfirst($profile->first_name) . " " . ucfirst($profile->last_name);
+    //PRODUCTS
     $products = new \app\models\Product();
     $products = $products->getMyProducts($vendor->vendor_id);
-  
+
+    // CATEGORY
+    $categories = new \app\models\Category();
+    $categories = $categories->getAll();
 }
 
 ?>
@@ -68,7 +73,7 @@ if ($data['role'] == 'buyer') {
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <p class="lead fw-normal mb-0">Order History</p>
                                 </div>
-                                <?php $this->view('includes/table', $profile) ?>
+                                <?php $this->view('includes/table', ['profile' => $profile]) ?>
                             </div>
                         </div>
                     </div>
@@ -127,8 +132,13 @@ if ($data['role'] == 'buyer') {
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <p class="lead fw-normal mb-0">Product Listing</p>
+                                    <!-- Button trigger modal STARTS -->
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                                        ADD ITEM
+                                    </button>
+                                    <!-- Button trigger modal ENDS -->
                                 </div>
-                                <?php $this->view('includes/table', ['profile'=>$profile, 'products'=>$products])?>
+                                <?php $this->view('includes/table', ['profile' => $profile, 'products' => $products]) ?>
                             </div>
                         </div>
                     </div>
@@ -137,16 +147,19 @@ if ($data['role'] == 'buyer') {
         </section>
     <?php } ?>
     <!-- PROFILE VENDOR ENDS -->
+    <!-- SUB VIEW ADD PRODUCT STARTS -->
+    <?php if(isset( $categories)) {$this->view('includes/subview/add_product',  ['categories' => $categories]);} ?>
+    <!-- SUB VIEW ADD PRODUCT ENDS -->
     <!-- TOAST MESSAGE STARTS -->
-
     <?php $this->view('includes/subview/ToastMsg') ?>
     <!-- TOAST MESSAGE ENDS -->
     <!-- RELOAD WALLET MODAL  -->
     <?php $this->view('includes/subview/reload_wallet'); ?>
     <?php $this->view('includes/footer'); ?>
     <script>
-        
-        
+        const myToastEl = document.getElementById('toastUpdate');
+        const myToast = bootstrap.Toast.getOrCreateInstance(myToastEl)
+
         function updateImage() {
             $("#picture").click();
             picture.onchange = evt => {
@@ -168,7 +181,7 @@ if ($data['role'] == 'buyer') {
                 contentType: false, // important
                 data: form_data,
                 success: function(data) {
-                    
+
                 }
 
             })
@@ -190,26 +203,17 @@ if ($data['role'] == 'buyer') {
                     showMsgToast();
                 }
             })
-         
+
         }
-        function showMsgToast(){
-            let toastLiveExample = document.getElementById('toastUpdate');
-                let toast = new bootstrap.Toast(toastLiveExample);
-                toast.show();
-                setTimeout(
-                    function() 
-                    {
-                        location.href = "/Main/profile";
-                    }, 3000);
-        }
-      
-            
+
+
+
         function updateVendorProfile() {
-            
+
             var form_data = new FormData();
             var file_data = $("#picture").prop("files")[0];
             form_data.append("file", file_data);
-          
+
             $.ajax({
                 url: " /Profile/edit_profile",
                 type: 'POST',
@@ -217,7 +221,7 @@ if ($data['role'] == 'buyer') {
                 contentType: false, // important
                 data: form_data,
                 success: function(data) {
-                  
+
                 }
             })
             $.ajax({
@@ -235,18 +239,24 @@ if ($data['role'] == 'buyer') {
                 },
                 success: function(data) {
                     showMsgToast();
+
                 }
             })
         }
-        
+
+        function showMsgToast() {
+            myToast.show();
+            setTimeout(
+                function() {
+                    location.href = "/Main/profile";
+                }, 3000);
+        }
         $(function() {
-          
             $("#edit_profile").click(function() {
-              
                 var url = "/Profile/edit_profile"
                 $("#section_profile").remove();
                 $("#context").load(url + " #section_profile");
-                // // $("#context").load(url + " #section_profile").hide().fadeIn('slow');
+
             })
         });
     </script>

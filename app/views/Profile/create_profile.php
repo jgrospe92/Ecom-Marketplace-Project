@@ -83,7 +83,7 @@
                                         </div>
                                         <hr class="mt-0 mb-4">
                                         <div class="row pt-1">
-                                        <div class="col-6 mb-3">
+                                            <div class="col-6 mb-3">
                                                 <h6>Virtual Wallet</h6>
                                                 <label class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" for="credit">Add Credit</label>
                                             </div>
@@ -174,10 +174,10 @@
                         </div>
                         <div class="col-5">
                             <label for="reload_amount" class="col-form-label">Amount</label>
-                            
+
                         </div>
                         <div class="col-5">
-                           <input type="text" id="reload_amount" class="form-control w-50" aria-describedby="reload_amount_line">
+                            <input type="text" id="reload_amount" class="form-control w-50" aria-describedby="reload_amount_line">
                         </div>
                     </div>
                 </div>
@@ -191,22 +191,22 @@
     <!-- MODAL ENDS -->
     <!-- TOAST FOR MODAL STARTS -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="modalToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <img src="/resources/images/profits.png" class="rounded me-2" alt="...">
-                    <strong class="me-auto">Success</strong>
-                    <small id="currenTime"></small>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">
-                    <p id="addedAmount"></p>
-                </div>
+        <div id="modalToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="/resources/images/profits.png" class="rounded me-2" alt="...">
+                <strong class="me-auto">Success</strong>
+                <small id="currenTime"></small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <p id="addedAmount"></p>
             </div>
         </div>
-     <!-- TOAST FOR MODAL ENDS -->
+    </div>
+    <!-- TOAST FOR MODAL ENDS -->
     <!-- IMAGE PREVIEW -->
     <script>
-          function debugMe(value){
+        function debugMe(value) {
             console.log(value);
         }
 
@@ -215,10 +215,10 @@
         }
 
         // Modal Script
-        var hasCreditNum ;
-        var hasCreditName ;
+        var hasCreditNum;
+        var hasCreditName;
         var hasDate;
-        var hasSecNum ;
+        var hasSecNum;
         var hasAmount;
 
         var totalAmount = 0;
@@ -227,40 +227,40 @@
         var expDate;
         var amount;
 
-        $("#card_number").focusout(function (){
+        $("#card_number").focusout(function() {
             credit_num = $("#card_number").val();
             hasCreditNum = (!credit_num) ? false : true
             checkIfValid();
-       
+
         })
 
-        $("#card_holder").focusout(function (){
+        $("#card_holder").focusout(function() {
             creditName = $("#card_holder").val();
             hasCreditName = (!creditName) ? false : true;
             checkIfValid();
         })
 
-        $("#card_expiration").focusout(function (){
+        $("#card_expiration").focusout(function() {
             expDate = new Date($("#card_expiration").val());
             hasDate = (isNaN(expDate)) ? false : true
             checkIfValid();
         })
 
-        $("#card_csc").focusout(function (){
+        $("#card_csc").focusout(function() {
             scs = $("#card_csc").val();
             hasSecNum = (!scs) ? false : true;
             checkIfValid();
         })
 
-        $("#reload_amount").focusout(function (){
+        $("#reload_amount").focusout(function() {
             amount = $("#reload_amount").val();
             hasAmount = (!amount) ? false : true;
             debugMe(hasAmount);
             checkIfValid();
-            
+
         })
 
-        $("#reload_virtual_wallet").on('click', function(){
+        $("#reload_virtual_wallet").on('click', function() {
             totalAmount += round(amount, 2)
             var value = totalAmount.toString();
             $("#credit").val(value);
@@ -269,32 +269,32 @@
             let toast = new bootstrap.Toast(toastLiveExample);
             toast.show();
             clearForm();
-           
+
         })
 
-        function clearForm(){
+        function clearForm() {
             $("#card_number").val("");
             $("#card_holder").val("");
             $("#card_expiration").val("");
             $("#card_csc").val("");
             $("#reload_amount").val("");
 
-            hasCreditNum = false; 
-            hasCreditName = false; 
+            hasCreditNum = false;
+            hasCreditName = false;
             hasDate = false;
             hasSecNum = false;
             hasAmount = false;
             $("#reload_virtual_wallet").attr("disabled", true);
         }
-        
-        function checkIfValid(){
-            if (hasCreditNum && hasCreditNum && hasAmount && hasDate && hasSecNum && hasAmount){
+
+        function checkIfValid() {
+            if (hasCreditNum && hasCreditNum && hasAmount && hasDate && hasSecNum && hasAmount) {
                 $("#reload_virtual_wallet").removeAttr("disabled");
             } else {
                 $("#reload_virtual_wallet").attr("disabled", true)
             }
-        }    
-        
+        }
+
         // image preview
         picture.onchange = evt => {
             const [file] = picture.files
@@ -302,6 +302,7 @@
                 pic_preview.src = URL.createObjectURL(file)
             }
         }
+
         // AJAX CALLS
         $('#btnCancel').on('click', function(e) {
             e.preventDefault();
