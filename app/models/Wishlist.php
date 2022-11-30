@@ -30,10 +30,11 @@ class Wishlist extends \app\core\Model {
         ]);
     }
 
-    public function delete($wishlist_id){
-        $SQL = "DELETE FROM wishlist WHERE wishlist_id=:wishlist_id";
+    public function delete(){
+        $SQL = "DELETE FROM wishlist WHERE buyer_id=:buyer_id AND prod_id=:prod_id";
         $STMT = self::$_connection->prepare($SQL);
-        $STMT->execute(['wishlist_id'=>$this->wishlist_id]);
+        $STMT->execute(['buyer_id'=>$this->buyer_id,
+                        'prod_id'=>$this->prod_id]);
     }
 
      // CHeck if product is in wishlist

@@ -200,4 +200,13 @@ class Product extends \app\core\Controller {
         
         }
     }
+
+    public function removeFromWishlist($prod_id){
+        $buyer = new \app\models\Buyer();
+        $buyer = $buyer->getBuyerUsingProfileId($_SESSION['profile_id']);
+        $wishlist = new \app\models\Wishlist();
+        $wishlist->buyer_id = $buyer->buyer_id;
+        $wishlist->prod_id = $prod_id;
+        $wishlist->delete();
+    }
 }
