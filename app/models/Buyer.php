@@ -59,13 +59,23 @@ class Buyer extends \app\core\Model
                         'buyer_id'=>$this->buyer_id]);
     }
 
-    // GET WISHLIST
-    public function checkWishlist(){
-        $SQL = "SELECT * FROM wishlist WHERE buyer_id=:buyer_id";
+    // Check if buyer has a wishlist
+    public function buyerCheckWishlist(){
+        $SQL = "SELECT wishlist.* from wishlist INNER JOIN buyer ON wishlist.buyer_id =:buyer_id";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(['buyer_id'=>$this->buyer_id]);
-        $colcount = $STMT->fetchColumn();
-        return $colcount;
-       
+        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Wishlist');
+        return $STMT->fetchAll();
+        
     }
+
+    // public function getMyWishlistProducts(){
+    //     $SQL = "SELECT wishlist.date_added, product.* from wishlist INNER JOIN product ON wishlist.prod_id =:prod_id";
+    //     $STMT = self::$_connection->prepare($SQL);
+    //     $STMT->execute(['prod_id'=>$this->prod_id]);
+    //     $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Product');
+    //     return $STMT->fetchAll();
+        
+    // }
+
 }

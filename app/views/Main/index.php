@@ -5,13 +5,13 @@
 </section>
 
 <section>
- <?php $this->view('includes/ads', $data['ads']) ?>
+ <?php $this->view('includes/ads',['ads'=>$data['ads'], 'buyer'=>$data['buyer']], ) ?>
 </section>
 <section>
-    <?php $this->view('includes/catalogue', $data['catalogue']) ?>
+    <?php $this->view('includes/catalogue', ['catalogue'=> $data['catalogue'], 'buyer'=>$data['buyer']] ) ?>
 </section>
 <section>
-    <?php $this->view('includes/sale', $data['promotions']) ?>
+    <?php $this->view('includes/sale', ['promotions'=>$data['promotions'], 'buyer'=>$data['buyer']] ) ?>
 </section>
 
 <?php $this->view('includes/footer'); ?>

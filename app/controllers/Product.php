@@ -1,6 +1,8 @@
 <?php
 namespace app\controllers;
 
+use app\models\Wishlist;
+
 class Product extends \app\core\Controller {
 
     public function insert(){
@@ -180,5 +182,22 @@ class Product extends \app\core\Controller {
         $categories = $categories->getAll();
       
         echo $this->view('/includes/subview/editProduct', ['product'=>$product, 'categories'=>$categories]);
+    }
+
+    public function addToWishList() {
+        $wishlist = new \app\models\Wishlist();
+
+        if (!$wishlist->checkInkWishList($_GET['prod_id'])) {
+            $wishlist->buyer_id = $_GET['buyer_id'];
+            $wishlist->date_added = date("Y-m-d");
+            $wishlist->prod_id = $_GET['prod_id'];
+            $wishlist->insert();
+            echo "bi bi-heart-fill";
+        } else {
+            $wishlist = $wishlist->checkInkWishList($_GET['prod_id']);
+            $wishlist->delete($wishlist->wishlist_id);
+            echo "bi bi-heart";
+        
+        }
     }
 }

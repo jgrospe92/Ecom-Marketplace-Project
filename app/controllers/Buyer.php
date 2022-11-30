@@ -8,8 +8,8 @@ class Buyer extends \app\core\Controller{
 
         $buyer = new \app\models\Buyer();
         $buyer = $buyer->getBuyerByBuyerID($buyer_id);
-        $wishlist = $buyer->checkWishlist();
-        var_dump($wishlist);
-        $this->view('Buyer/wishlist');
+        $wishlist = $buyer->buyerCheckWishlist();
+        
+        $this->view('Buyer/wishlist', $wishlist);
     }
 }

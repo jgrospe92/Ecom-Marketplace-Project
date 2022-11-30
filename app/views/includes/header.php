@@ -50,7 +50,7 @@
                 $cart = '<button type="button" class="btn btn-success">
                 <i class="bi bi-cart pe-2"></i><span id="item_counter" class="badge text-bg-secondary">0</span>
                 </button>';
-                $dashboard = 'href="/Buyer/wishlist/<?= $buyer->buyer_id?>" ';
+                $dashboard = '/Buyer/wishlist/'. $buyer->buyer_id;
                 $dashboard_name = 'Wishlist';
                 $dashboard_two = ' <l1><a class="list-group-item list-group-item-action" href="">Order History</a></l1>';
             } else {
@@ -143,7 +143,7 @@
         <div class="offcanvas-body">
             <ul class="list-group">
                 <l1><a class="list-group-item list-group-item-action" href="/Main/profile">Profile</a></l1>
-                <l1><a class="list-group-item list-group-item-action" <?= $dashboard ?>><?= $dashboard_name ?></a></l1>
+                <l1><a class="list-group-item list-group-item-action" href="<?=$dashboard?>"><?= $dashboard_name ?></a></l1>
                 <?=  $dashboard_two ?>
                 <l1><a class="list-group-item list-group-item-action" href="">Virtual Wallet $<?= $virtualWallet  ?></a></l1>
             </ul>

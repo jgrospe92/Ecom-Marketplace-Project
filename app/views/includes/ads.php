@@ -2,6 +2,9 @@
     <?php
     $product = new \app\models\Product();
     $category = new \app\models\Category();
+    $wishlist = new \app\models\Wishlist();
+    $buyer = $data['buyer'];
+
     ?>
     <div class="album py-5 bg-light">
         <div class="container">
@@ -11,7 +14,7 @@
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
-                <?php foreach ($data as $ads) {?>
+                <?php foreach ($data['ads'] as $ads) {?>
                     <?php
                     $product = $ads->getProduct();
                     ?>
@@ -32,8 +35,8 @@
                                 <strong>$<?= $product->prod_cost ?></strong>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary"><i onclick="checkDetails(<?=$product->prod_id?>);" class="bi bi-question-square"></i></i></button>
-                                        <button <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-heart"></i></button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"><i onclick="checkDetails(<?=$product->prod_id?>);"  class="bi bi-question-square"></i></i></button>
+                                        <button onclick="addToWishlist(<?=$product->prod_id?>, <?=$buyer->buyer_id ?>);" <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i id="ads<?=$product->prod_id?>"<?= $wishlist->checkInkWishList($product->prod_id) ? "class='bi bi-heart-fill'" : "class='bi bi-heart'"; ?>></i></button>
                                         <button <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
                                     </div>
                                     <small class="text-muted">QTY <?= $product->num_of_stock ?></small>
@@ -61,6 +64,18 @@
             }
         })
        
+    }
+
+    function addToWishlist(prod_id, buyer_id){
+        $.ajax({
+            type: 'GET',
+            url: '/Product/addToWishList/',
+            data: {prod_id : prod_id, buyer_id: buyer_id},
+            success: function(data){
+                var currentClass = $('#ads'+prod_id).attr("class");
+                $('#ads'+prod_id).addClass(data).removeClass(currentClass);
+            }
+        })
     }
 
 </script>
