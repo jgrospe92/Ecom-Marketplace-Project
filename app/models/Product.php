@@ -15,12 +15,21 @@ class Product extends \app\core\Model
     }
 
     public function getAds(){
-        $SQL = "SELECT * from advertisement inner join product on product.prod_id =:prod_id";
+        $SQL = "SELECT advertisement.* from advertisement inner join product on advertisement.prod_id =:prod_id";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(['prod_id'=>$this->prod_id]);
         $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Ads');
         return $STMT->fetch();
     }
+
+    public function getPromotion(){
+        $SQL = "SELECT promotion.* from promotion inner join product on promotion.prod_id =:prod_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['prod_id'=>$this->prod_id]);
+        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Promotion');
+        return $STMT->fetch();
+    }
+
 
     public function get($prod_id)
     {
@@ -38,6 +47,7 @@ class Product extends \app\core\Model
         $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Product');
         return $STMT->fetchAll();
     }
+
 
     public function insert()
     {
@@ -61,10 +71,10 @@ class Product extends \app\core\Model
         return self::$_connection->lastInsertId();
     }
 
-    public function edit()
+    public function update()
     {
         $SQL = "UPDATE product SET prod_name=:prod_name, prod_desc=:prod_desc, prod_cost=:prod_cost,
-            num_of_stock=:num_of_stock, has_discount=:has_discount, vendor_id=:vendor_id, prod_cat_id=:prod_cat_id WHERE prod_id=:prod_id";
+            num_of_stock=:num_of_stock, has_discount=:has_discount, prod_cat_id=:prod_cat_id WHERE prod_id=:prod_id";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(
             [
@@ -73,7 +83,6 @@ class Product extends \app\core\Model
                 'prod_cost' => $this->prod_cost,
                 'num_of_stock' => $this->num_of_stock,
                 'has_discount' => $this->has_discount,
-                'vendor_id' => $this->vendor_id,
                 'prod_cat_id' => $this->prod_cat_id,
                 'prod_id' => $this->prod_id,
             ]

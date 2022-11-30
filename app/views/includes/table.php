@@ -44,28 +44,29 @@
             </thead>
             <tbody>
                 <!-- TODO: Loop through the order details -->
-                <?php if (count($data['products']) > 0 ){ ?>
-                <?php foreach($data['products'] as $product){ ?>
-                <tr id=<?=$product->prod_id ?>>
-                    <td><?= $product->prod_name ?></td>
-                    <td><?= $category->get($product->prod_cat_id) ?></td>
-                    <td><?= $product->num_of_stock ?></td>
-                    <td><?= $product->prod_cost ?></td>
-                    <td class="m-auto p-auto"><i onclick="checkDetails(<?=$product->prod_id?>);" class="bi bi-question-square btn text-light"></i><i class="bi bi-pencil-square btn text-light" ></i><i onclick="deleteItem(<?=$product->prod_id?>);" class="bi bi-trash btn text-light"></i></td>  
-                </tr>
+                <?php if (count($data['products']) > 0) { ?>
+                    <?php foreach ($data['products'] as $product) { ?>
+                        <tr id=<?= $product->prod_id ?>>
+                            <td><?= $product->prod_name ?></td>
+                            <td><?= $category->get($product->prod_cat_id) ?></td>
+                            <td><?= $product->num_of_stock ?></td>
+                            <td><?= $product->prod_cost ?></td>
+                            <td class="m-auto p-auto"><i onclick="checkDetails(<?= $product->prod_id ?>);" class="bi bi-question-square btn text-light"></i><i onclick="showEditProduct(<?= $product->prod_id ?>);" class="bi bi-pencil-square btn text-light"></i><i onclick="deleteItem(<?= $product->prod_id ?>);" class="bi bi-trash btn text-light"></i></td>
+                        </tr>
+                    <?php } ?>
                 <?php } ?>
-                <?php } ?>      
             </tbody>
         </table>
-        <?php if (count($data['products']) == 0 ){ 
+        <?php if (count($data['products']) == 0) {
 
             echo '<div class="alert alert-danger" role="alert">
             <i class="bi bi-exclamation-octagon-fill me-2"></i> Oh no!! You don\'t have any listing!
           </div>';
-        }?>
+        } ?>
     </div>
 <?php } ?>
 <div id="check_details"></div>
+<div id="edit_product"></div>
 <style>
     #table_body {
         max-height: clamp(5em, 30vh, 350px) !important;
@@ -75,21 +76,32 @@
 
 <!-- PRODUCT DETAILS STARTS -->
 <script>
-    
-    function checkDetails(id){
+    function checkDetails(id) {
         $.ajax({
             type: 'GET',
-            url: '/Product/details/'+id,
-            success: function(data){
-                
+            url: '/Product/details/' + id,
+            success: function(data) {
+
                 $('#check_details').html(data);
-                console.log(data);
+
                 $('#productDetailModal').modal('show')
             }
         })
-       
+
     }
 
+    function showEditProduct(id) {
+        $.ajax({
+            type: 'GET',
+            url: '/Product/showEditProduct/' + id,
+            success: function(data) {
+
+                $('#edit_product').html(data);
+
+                $('#editProductModel').modal('show')
+            }
+        })
+    }
 </script>
 
 <!-- PRODUCT DETAILS ENDS -->

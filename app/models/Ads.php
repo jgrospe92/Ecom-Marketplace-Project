@@ -28,4 +28,24 @@ class Ads extends \app\core\Model {
         $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Product');
         return $STMT->fetch();
     }
+
+    public function update(){
+        $SQL = "UPDATE advertisement SET description=:description, start_date=:start_date, end_date=:end_date WHERE ads_id=:ads_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute([
+            'description'=>$this->description,
+            'start_date'=>$this->start_date,
+            'end_date'=>$this->end_date,
+            'ads_id'=>$this->ads_id,
+        ]);
+    }
+
+    public function get(){
+        $SQL = "SELECT * from advertisement WHERE ads_id=:ads_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['ads_id'=>$this->ads_id]);
+        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Ads');
+        return $STMT->fetch();
+
+    }
 }
