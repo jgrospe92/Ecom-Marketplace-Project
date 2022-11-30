@@ -121,9 +121,14 @@ class Product extends \app\core\Controller {
                 }
             }
 
-            $filename = $this->saveFile($_FILES['product_image']);
-            unlink("images/$product->product_image");
-            $product->product_image = $filename;
+            if ($_FILES['product_image']['size'] > 0) {
+                $filename = $this->saveFile($_FILES['product_image']);
+                unlink("images/$product->product_image");
+                $product->product_image =   $filename;
+            } else {
+                $product->product_image =  $product->product_image;
+            }
+        
             $product->prod_cat_id = $_POST['product_category']+1;
             $product->update();
 

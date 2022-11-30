@@ -74,7 +74,7 @@ class Product extends \app\core\Model
     public function update()
     {
         $SQL = "UPDATE product SET prod_name=:prod_name, prod_desc=:prod_desc, prod_cost=:prod_cost,
-            num_of_stock=:num_of_stock, has_discount=:has_discount, prod_cat_id=:prod_cat_id WHERE prod_id=:prod_id";
+            num_of_stock=:num_of_stock, has_discount=:has_discount, has_ads=:has_ads, product_image=:product_image, prod_cat_id=:prod_cat_id WHERE prod_id=:prod_id";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(
             [
@@ -83,6 +83,8 @@ class Product extends \app\core\Model
                 'prod_cost' => $this->prod_cost,
                 'num_of_stock' => $this->num_of_stock,
                 'has_discount' => $this->has_discount,
+                'has_ads' => $this->has_ads,
+                'product_image'=>$this->product_image,
                 'prod_cat_id' => $this->prod_cat_id,
                 'prod_id' => $this->prod_id,
             ]

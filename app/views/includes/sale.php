@@ -13,11 +13,12 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
                 <?php foreach ($data as $promotion) {?>
                     <?php
-                    $product = $promotion->get($promotion->prod_id);
+                    $product = $promotion->getProduct($promotion->prod_id);
                     ?>
                     <div class="col">
+                    <span class="badge bg-secondary">On Sale!</span>
                         <div class="card shadow-sm  " style="width: 18rem;">
-                            <div class="card-header"></div>
+                            <div class="card-header"><?= $promotion->promo_name ?></div>
                             <img src="/images/<?= $product->product_image ?>" class="card-img-top" width=100% height="225" style="object-fit:cover" alt="<?= $product->prod_name ?>">
                             <div class="card-body">
                                 <p class="card-title"><?= $product->prod_name ?></p>

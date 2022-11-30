@@ -3,9 +3,12 @@
 $categories = $data['categories'];
 $product = $data['product'];
 $ads = new \app\models\Ads();
+$promo = new \app\models\Promotion();
 if ($product->getAds()) {
     $ads = $product->getAds();
 }
+$promoName = ($promo = $product->getPromotion() ) ? $promo->promo_name : "" ;
+$discountPercent = ($promo = $product->getPromotion() ) ? $promo->discount_percent : "" ;
 
 ?>
 <div class="modal fade" id="editProductModel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -66,22 +69,22 @@ if ($product->getAds()) {
 
                                             </div>
                                             <div class="form-group form-check mb-3 col-xs-12 col-sm-6">
-                                                <input id="has_discount" name="has_discount" class="form-check-input" type="checkbox">
+                                                <input <?php if ($product->has_discount > 0) {echo "checked"; } ?> id="has_discount" name="has_discount" class="form-check-input" type="checkbox">
                                                 <label class="form-check-label pe-3" for="has_discount">
                                                     Set Promotion
                                                 </label>
-                                                <input class="form-control ms-2" placeholder="ex. 5%" type="text" name="promotion_percent">
-                                                <input class="form-control ms-2" placeholder="Title ex. Black Friday" type="text" name="promotion_name">
+                                                <input value="<?=$discountPercent?>" class="form-control ms-2" placeholder="ex. 5%" type="text" name="promotion_percent">
+                                                <input value="<?= $promoName?>" class="form-control ms-2" placeholder="Title ex. Black Friday" type="text" name="promotion_name">
                                             </div>
                                         </div>
 
                                         <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                                             <div class="custom-file mt-3 mb-3">
-                                                <img id="product_preview" src="/images/<?= $product->product_image ?>" class="img-fluid d-flex justify-content-center m-auto p-auto" style="max-height: 250px;" alt="product photo"><br>
+                                                <img id="product_preview_update" src="/images/<?= $product->product_image?>" class="img-fluid d-flex justify-content-center m-auto p-auto" style="max-height: 250px;" alt="product photo"><br>
                                                 <button onclick="uploadProductImg()" type="button" class="btn btn-outline-dark btn-sm mb-2 d-flex justify-content-center m-auto p-auto" data-mdb-ripple-color="dark" style="z-index: 1;">
                                                     UPLOAD IMAGE
                                                 </button>
-                                                <input class='form-control' type="file" name="product_image" id="product_image" hidden />
+                                                <input class='form-control' type="file" name="product_image" id="edit_product_image" hidden />
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -102,11 +105,11 @@ if ($product->getAds()) {
 <script>
     function uploadProductImg() {
 
-        $("#product_image").click();
-        product_image.onchange = evt => {
-            const [file] = product_image.files
+        $("#edit_product_image").click();
+        edit_product_image.onchange = evt => {
+            const [file] = edit_product_image.files
             if (file) {
-                product_preview.src = URL.createObjectURL(file);
+                product_preview_update.src = URL.createObjectURL(file);
             }
         }
     }
