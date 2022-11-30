@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 18, 2022 at 09:33 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.19
+-- Host: 127.0.0.1
+-- Generation Time: Nov 30, 2022 at 03:45 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,11 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `marketplace`
 --
-
-DROP DATABASE IF EXISTS `marketplace`;
-
-CREATE DATABASE `marketplace`;
-USE `marketplace`;
 
 -- --------------------------------------------------------
 
@@ -47,8 +42,8 @@ CREATE TABLE `admin` (
 CREATE TABLE `advertisement` (
   `ads_id` int(11) NOT NULL,
   `description` varchar(250) NOT NULL,
-  `start_data` date NOT NULL,
-  `end_data` date NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
   `prod_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -65,13 +60,6 @@ CREATE TABLE `buyer` (
   `credit` varchar(11) NOT NULL,
   `profile_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `buyer`
---
-
-INSERT INTO `buyer` (`buyer_id`, `shipping_add`, `billing_add`, `credit`, `profile_id`) VALUES
-(1, '4210 ave', '4210 ave', '300', 1);
 
 -- --------------------------------------------------------
 
@@ -110,12 +98,15 @@ CREATE TABLE `order_details` (
 
 CREATE TABLE `product` (
   `prod_id` int(11) NOT NULL,
-  `pod_name` varchar(50) NOT NULL,
+  `prod_name` varchar(50) NOT NULL,
   `prod_desc` text NOT NULL,
-  `rating` int(6) NOT NULL,
-  `prod_cost` float NOT NULL,
+  `date_added` datetime NOT NULL,
+  `rating` int(6) DEFAULT NULL,
+  `prod_cost` int(11) NOT NULL,
   `num_of_stock` int(11) NOT NULL,
   `has_discount` tinyint(1) NOT NULL,
+  `has_ads` tinyint(1) NOT NULL,
+  `product_image` varchar(90) NOT NULL,
   `vendor_id` int(11) NOT NULL,
   `prod_cat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -145,6 +136,20 @@ CREATE TABLE `prod_category` (
   `prod_category` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `prod_category`
+--
+
+INSERT INTO `prod_category` (`prod_cat_id`, `prod_category`) VALUES
+(1, 'App & Games'),
+(2, 'App & Games'),
+(3, 'Automotive'),
+(4, 'Books'),
+(5, 'Clothing'),
+(6, 'Electronics'),
+(7, 'Grocery'),
+(8, 'Other');
+
 -- --------------------------------------------------------
 
 --
@@ -159,13 +164,6 @@ CREATE TABLE `profile` (
   `profile_photo` varchar(30) DEFAULT 'blank.jpg',
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `profile`
---
-
-INSERT INTO `profile` (`profile_id`, `first_name`, `last_name`, `role`, `profile_photo`, `user_id`) VALUES
-(1, 'jeffrey', 'Grospe', 'buyer', '6377934dd1fb5.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -225,13 +223,6 @@ CREATE TABLE `user` (
   `secret_key` varchar(90) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`user_id`, `username`, `password_hash`, `secret_key`) VALUES
-(2, 'jeffrey', '$2y$10$0ANGn/EN.n5xDtKGo2YMWe9VvFocvS.pzYi9N4PWbDCDOqoUg0nHa', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -241,7 +232,7 @@ INSERT INTO `user` (`user_id`, `username`, `password_hash`, `secret_key`) VALUES
 CREATE TABLE `vendor` (
   `vendor_id` int(11) NOT NULL,
   `vendor_name` varchar(100) NOT NULL,
-  `vendor_profit` float NOT NULL,
+  `vendor_profit` varchar(11) NOT NULL,
   `vendor_desc` text NOT NULL,
   `vendor_location` varchar(150) NOT NULL,
   `profile_id` int(11) DEFAULT NULL
@@ -332,8 +323,8 @@ ALTER TABLE `order_details`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`prod_id`),
-  ADD UNIQUE KEY `prod_cat_id` (`prod_cat_id`),
-  ADD KEY `vendor_id` (`vendor_id`);
+  ADD KEY `vendor_id` (`vendor_id`),
+  ADD KEY `prod_cat_id` (`prod_cat_id`) USING BTREE;
 
 --
 -- Indexes for table `product_rating`
@@ -432,7 +423,7 @@ ALTER TABLE `advertisement`
 -- AUTO_INCREMENT for table `buyer`
 --
 ALTER TABLE `buyer`
-  MODIFY `buyer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `buyer_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `order`
@@ -462,13 +453,13 @@ ALTER TABLE `product_rating`
 -- AUTO_INCREMENT for table `prod_category`
 --
 ALTER TABLE `prod_category`
-  MODIFY `prod_cat_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `prod_cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `promotion`
@@ -486,7 +477,7 @@ ALTER TABLE `shipping`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `vendor`

@@ -17,7 +17,7 @@
                     ?>
                     <div class="col">
                         <span class="badge bg-secondary">Sponsored</span>
-                        <div class="card shadow-sm  " style="width: 18rem;">
+                        <div class="card shadow-sm h-100 " style="width: 18rem;">
                             <div class="card-header"><?= $ads->description ?></div>
                             <img src="/images/<?= $product->product_image ?>" class="card-img-top" width=100% height="225" style="object-fit:cover" alt="<?= $product->prod_name ?>">
                             <div class="card-body">
@@ -33,8 +33,8 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary"><i onclick="checkDetails(<?=$product->prod_id?>);" class="bi bi-question-square"></i></i></button>
-                                        <button <?php if($_SESSION['role'] == 'vendor') echo "disabled" ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-heart"></i></button>
-                                        <button <?php if($_SESSION['role'] == 'vendor') echo "disabled" ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
+                                        <button <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-heart"></i></button>
+                                        <button <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
                                     </div>
                                     <small class="text-muted">QTY <?= $product->num_of_stock ?></small>
                                 </div>

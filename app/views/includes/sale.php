@@ -17,7 +17,7 @@
                     ?>
                     <div class="col">
                     <span class="badge bg-secondary">On Sale!</span>
-                        <div class="card shadow-sm  " style="width: 18rem;">
+                        <div class="card shadow-sm h-100 " style="width: 18rem;">
                             <div class="card-header"><?= $promotion->promo_name ?></div>
                             <img src="/images/<?= $product->product_image ?>" class="card-img-top" width=100% height="225" style="object-fit:cover" alt="<?= $product->prod_name ?>">
                             <div class="card-body">
@@ -29,12 +29,12 @@
                                 </small>
                                 <p class="card-text"><?= $product->prod_desc ?></p>
                                 <p class="card-text text-muted"><em><?php echo  $category->get($product->prod_cat_id)?></em></p>
-                                <strong>$<?= $product->prod_cost ?></strong>
+                                <em><del>was$<?= $product->prod_cost ?></del></em><strong class="ms-2">$<?php $newPrice = $product->prod_cost - ($product->prod_cost * $promotion->discount_percent / 100); echo $newPrice; ?> </strong>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary"><i onclick="checkDetails(<?=$product->prod_id?>);" class="bi bi-question-square"></i></i></button>
-                                        <button <?php if($_SESSION['role'] == 'vendor') echo "disabled" ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-heart"></i></button>
-                                        <button <?php if($_SESSION['role'] == 'vendor') echo "disabled" ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
+                                        <button <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-heart"></i></button>
+                                        <button <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
                                     </div>
                                     <small class="text-muted">QTY <?= $product->num_of_stock ?></small>
                                 </div>

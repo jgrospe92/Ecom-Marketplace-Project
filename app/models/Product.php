@@ -7,7 +7,7 @@ class Product extends \app\core\Model
 
     public function getAll()
     {
-        $SQL = "SELECT * from product ORDER BY date_added";
+        $SQL = "SELECT * from product ORDER BY date_added DESC";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute();
         $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Product');
