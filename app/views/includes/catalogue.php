@@ -36,7 +36,7 @@
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary"><i onclick="checkDetails(<?=$product->prod_id?>);" class="bi bi-question-square"></i></i></button>
                                         <button onclick="addToWishlist2(<?=$product->prod_id?>, <?=$buyer->buyer_id ?>);" <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i id="<?=$product->prod_id?>"<?= $wishlist->checkInkWishList($product->prod_id) ? "class='bi bi-heart-fill'" : "class='bi bi-heart'"; ?>></i></button>
-                                        <button <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
+                                        <button  onclick="addToCart(<?=$product->prod_id?>)" <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
                                     </div>
                                     <small class="text-muted">QTY <?= $product->num_of_stock ?></small>
                                 </div>
@@ -65,7 +65,6 @@
 
 <div id="check_details"></div>
 <script>
-    
     function checkDetails(id){
         $.ajax({
             type: 'GET',
@@ -87,6 +86,18 @@
             success: function(data){
                 var currentClass = $('#'+prod_id).attr("class");
                 $('#'+prod_id).addClass(data).removeClass(currentClass);
+            }
+        })
+    }
+
+    function addToCart($prod_id) {
+        
+        $.ajax({
+            type: 'GET',
+            url: '/Buyer/addToCart/'+$prod_id,
+            success: function(data){
+                var currentCartCount = parseInt($('#item_counter').text());
+                $('#item_counter').text(++currentCartCount);
             }
         })
     }
