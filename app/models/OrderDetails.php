@@ -25,4 +25,10 @@ class OrderDetails extends \app\core\Model {
         ]);
 
     }
+
+    public function delete($id) {
+        $SQL = "DELETE FROM order_details WHERE order_details_id=:order_details_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['order_details_id'=>$id]);
+    }
 }

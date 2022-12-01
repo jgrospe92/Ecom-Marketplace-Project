@@ -13,6 +13,15 @@ class Buyer extends \app\core\Controller{
         $this->view('Buyer/wishlist', $wishlist);
     }
 
+    public function cart(){
+        $order = new \app\models\Order();
+        $buyer = new \app\models\Buyer();
+        $buyer = $buyer->getBuyerUsingProfileId($_SESSION['profile_id']);
+        $order = $order->getUnpaidOrder($buyer->buyer_id);
+
+        $this->view('Buyer/cart',  $order);
+    }
+
     public function addToCart($prod_id){
         $buyer = new \app\models\Buyer();
         $product = new \app\models\Product();
@@ -47,5 +56,10 @@ class Buyer extends \app\core\Controller{
             $orderDetails->insert();
         }
 
+    }
+
+    public function removeFromCart($prod_id){
+        $order_details = new \app\models\OrderDetails();
+        $order_details->delete($_GET['order_details_id']);
     }
 }

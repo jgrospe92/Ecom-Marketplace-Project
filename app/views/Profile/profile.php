@@ -167,8 +167,6 @@ if ($data['role'] == 'buyer') {
     const myToast = bootstrap.Toast.getOrCreateInstance(myToastEl);
 
     function deleteItem($pro_id) {
-
-
         $.ajax({
             type: 'GET',
             url: "/Product/delete/" + $pro_id,

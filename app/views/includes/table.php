@@ -17,13 +17,16 @@
             <tbody>
                 <!-- TODO: Loop through the order details -->
                 <tr>
-                    <th scope="row">175334</th>
+                <div class="alert alert-danger" role="alert">
+                <i class="bi bi-exclamation-octagon-fill me-2"></i> Order history is empty!
+                </div>
+                    <!-- <th scope="row">175334</th>
                     <td>Steam deck</td>
                     <td>Electronics</td>
                     <td>1</td>
                     <td>$999</td>
                     <td>Delivered </td>
-                    <td class="m-auto p-auto"><i class="bi bi-question-square align-bottom btn text-light"></i></td>
+                    <td class="m-auto p-auto"><i class="bi bi-question-square align-bottom btn text-light"></i></td> -->
                 </tr>
             </tbody>
         </table>

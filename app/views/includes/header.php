@@ -56,9 +56,9 @@
                     $itemsOnMyCart  = 0;
                 }
 
-               
+                
                 $virtualWallet = number_format((float)$buyer->credit, 2, '.', '');
-                $cart = '<button type="button" class="btn btn-success">
+                $cart = '<button onclick="location.href = \'/Buyer/cart/\'" type="button" class="btn btn-success">
                 <i class="bi bi-cart pe-2"></i><span id="item_counter" class="badge text-bg-secondary">'. $itemsOnMyCart .'</span></button>';
                 $dashboard = '/Buyer/wishlist/'. $buyer->buyer_id;
                 $dashboard_name = 'Wishlist';
