@@ -67,7 +67,7 @@
                 $vendor = new \app\models\Vendor();
                 $vendor = $vendor->getVendorUsingProfileId($_SESSION['profile_id']);
                 $cart = '';
-                $dashboard = 'href="/Vendor/dashboard/<?= $vendor->vendor_id?>"';
+                $dashboard = "";
                 $dashboard_name = "Dashboard";
                 $virtualWallet =  number_format((float)$vendor->vendor_profit, 2, '.', '');
                 $dashboard_two = '';
@@ -153,10 +153,13 @@
         <div class="offcanvas-body">
             <ul class="list-group">
                 <l1><a class="list-group-item list-group-item-action" href="/Main/profile">Profile</a></l1>
-                <l1><a class="list-group-item list-group-item-action" href="<?=$dashboard?>"><?= $dashboard_name ?></a></l1>
+                <l1><a class="list-group-item list-group-item-action" href="<?=$dashboard?>"><?=$dashboard_name?></a></l1>
                 <?=  $dashboard_two ?>
                 <l1><a class="list-group-item list-group-item-action" href="">Virtual Wallet $<?= $virtualWallet  ?></a></l1>
             </ul>
 
         </div>
     </div>
+    <br>
+    <br>
+    <br>

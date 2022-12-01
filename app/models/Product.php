@@ -30,7 +30,6 @@ class Product extends \app\core\Model
         return $STMT->fetch();
     }
 
-
     public function get($prod_id)
     {
         $SQL = "SELECT * FROM product WHERE prod_id=:prod_id";

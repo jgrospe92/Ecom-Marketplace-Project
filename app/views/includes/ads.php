@@ -16,7 +16,7 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
                 <?php foreach ($data['ads'] as $ads) {?>
                     <?php
-                    $product = $ads->getProduct();
+                    $product = $product->get($ads->prod_id);
                     ?>
                     <div class="col">
                         <span class="badge bg-secondary">Sponsored</span>
@@ -36,8 +36,8 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary"><i onclick="checkDetails(<?=$product->prod_id?>);"  class="bi bi-question-square"></i></i></button>
-                                        <button onclick="addToWishlist(<?=$product->prod_id?>, <?=$buyer->buyer_id ?>);" <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i id="ads<?=$product->prod_id?>"<?= $wishlist->checkInkWishList($product->prod_id) ? "class='bi bi-heart-fill'" : "class='bi bi-heart'"; ?>></i></button>
-                                        <button <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
+                                        <button onclick="addToWishlist(<?=$product->prod_id?>, <?php if ($buyer) {$buyer->buyer_id; }?>);" <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i id="ads<?=$product->prod_id?>"<?= $wishlist->checkInkWishList($product->prod_id) ? "class='bi bi-heart-fill'" : "class='bi bi-heart'"; ?>></i></button>
+                                        <button onclick="addToCartAds(<?=$product->prod_id?>)" <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
                                     </div>
                                     <small class="text-muted">QTY <?= $product->num_of_stock ?></small>
                                 </div>
@@ -74,6 +74,17 @@
             success: function(data){
                 var currentClass = $('#ads'+prod_id).attr("class");
                 $('#ads'+prod_id).addClass(data).removeClass(currentClass);
+            }
+        })
+    }
+    function addToCartAds($prod_id) {
+        
+        $.ajax({
+            type: 'GET',
+            url: '/Buyer/addToCart/'+$prod_id,
+            success: function(data){
+                var currentCartCount = parseInt($('#item_counter').text());
+                $('#item_counter').text(++currentCartCount);
             }
         })
     }

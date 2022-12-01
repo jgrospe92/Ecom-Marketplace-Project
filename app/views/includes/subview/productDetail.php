@@ -2,6 +2,9 @@
 <?php
     $ads = new \app\models\Ads();
     $ads = $data->getAds();
+    
+    $vendor = new \app\models\Vendor();
+    $vendor = $vendor->getVendorByID($data->vendor_id);
 ?>
 <div class="modal fade" id="productDetailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable  modal-lg">
@@ -27,7 +30,7 @@
                                                 <img src="/resources/images/star.png" alt="">
                                             <?php } ?></span>
                                         </div>
-                                        <span class="review-no">41 reviews</span>
+                                        <span class="review-no">Vendor: <?= $vendor->vendor_name ?></span>
                                     </div>
                                     <p class="product-description">Description: <span><?= $data->prod_desc ?></span></p>
                                     <p class="product-description">Date Listed: <span><?php $date = strtotime($data->date_added); echo date('l jS \of F Y h:i:s A',$date ) ?></span></p>

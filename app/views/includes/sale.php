@@ -4,7 +4,6 @@
     $category = new \app\models\Category();
     $wishlist = new \app\models\Wishlist();
     $buyer = $data['buyer'];
-
     ?>
     <div class="album py-5 bg-light">
         <div class="container">
@@ -14,9 +13,9 @@
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
-                <?php foreach ($data['promotions'] as $promotion) {?>
+                <?php foreach ($data['promotions'] as $promotion) { ?>
                     <?php
-                    $product = $promotion->getProduct($promotion->prod_id);
+                    $product = $product->get($promotion->prod_id);
                     ?>
                     <div class="col">
                     <span class="badge bg-secondary">On Sale!</span>
@@ -35,9 +34,9 @@
                                 <em><del>was$<?= $product->prod_cost ?></del></em><strong class="ms-2">$<?php $newPrice = $product->prod_cost - ($product->prod_cost * $promotion->discount_percent / 100); echo $newPrice; ?> </strong>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary"><i onclick="checkDetails(<?=$product->prod_id?>);" class="bi bi-question-square"></i></i></button>
-                                        <button onclick="addToWishlist3(<?=$product->prod_id?>, <?=$buyer->buyer_id ?>);" <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i id="promo<?=$product->prod_id?>"<?= $wishlist->checkInkWishList($product->prod_id) ? "class='bi bi-heart-fill'" : "class='bi bi-heart'"; ?>></i></button>
-                                        <button <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"><i onclick="checkDetails3(<?=$product->prod_id?>);" class="bi bi-question-square"></i></i></button>
+                                        <button onclick="addToWishlist3(<?=$product->prod_id?>,  <?php if ($buyer) {$buyer->buyer_id; }?>);" <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i id="promo<?=$product->prod_id?>"<?= $wishlist->checkInkWishList($product->prod_id) ? "class='bi bi-heart-fill'" : "class='bi bi-heart'"; ?>></i></button>
+                                        <button onclick="addToCartSales(<?=$product->prod_id?>)" <?php $active = (isset($_SESSION['role']) == 'buyer') ? "" : "disabled"; echo $active ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
                                     </div>
                                     <small class="text-muted">QTY <?= $product->num_of_stock ?></small>
                                 </div>
@@ -63,16 +62,16 @@
     </div>
 
 <?php } ?>
-<div id="check_details"></div>
+<div id="check_detailSale"></div>
 <script>
     
-    function checkDetails(id){
+    function checkDetails3(id){
         $.ajax({
             type: 'GET',
             url: '/Product/details/'+id,
             success: function(data){
-                
-                $('#check_details').html(data);
+                $('#check_details').html("");
+                $('#check_detailSale').html(data);
                 console.log(data);
                 $('#productDetailModal').modal('show')
             }
@@ -92,4 +91,15 @@
         })
     }
 
+    function addToCartSales($prod_id) {
+        
+        $.ajax({
+            type: 'GET',
+            url: '/Buyer/addToCart/'+$prod_id,
+            success: function(data){
+                var currentCartCount = parseInt($('#item_counter').text());
+                $('#item_counter').text(++currentCartCount);
+            }
+        })
+    }
 </script>
