@@ -20,7 +20,7 @@
                         <div class="container-fliud">
                             <div class="wrapper">
                                 <div class="">
-                                    <img src="/images/<?= $data->product_image ?>" style="max-height:450px" class="w-100 rounded-start rounded-end" alt="...">
+                                    <img src="/images/<?= $data->product_image ?>" style="max-height:450px; object-fit:cover" class="w-100 rounded-start rounded-end" alt="...">
                                 </div>
                                 <div class="card-body">
                                     <h3 class="product-title"><?= $data->prod_name ?></h3>

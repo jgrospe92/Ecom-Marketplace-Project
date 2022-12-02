@@ -37,7 +37,7 @@ $total = 0;
 									<img src="/images/<?= $product->product_image ?>" class="img-fluid img-thumbnail" alt="<?= $product->prod_name ?>">
 								</td>
 								<td><?= $product->prod_name ?></td>
-								<td><?= $product->prod_desc ?></td>
+								<td class="col-3"><?= $product->prod_desc ?></td>
 								<td><?= $categoryStr ?></td>
 								<td>$<span id="w-price<?=$product->prod_id?>"><?= $product->prod_cost ?></span></td>
 								<td class="d-flex just-content-start p-0"><i onclick="deleteItem(<?= $product->prod_id ?>);" class="btn bi bi-trash p-1"></i> <i class="btn bi bi-bag-plus p-1"></i></td>

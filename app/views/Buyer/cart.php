@@ -21,10 +21,10 @@ $total = 0;
 						<th scope="col">Order #</th>
 						<th scope="col">Product Image</th>
 						<th scope="col">Product Name</th>
-						<th scope="col">Product Description</th>
+						<th  scope="col">Product Description</th>
 						<th scope="col">Category</th>
 						<th scope="col">Price</th>
-                        <th scope="col">Order Status</th>
+                        <th scope="col">Status</th>
 						<th scope="col">Action</th>
 
 					</tr>
@@ -42,11 +42,11 @@ $total = 0;
 									<img src="/images/<?= $product->product_image ?>" class="img-fluid img-thumbnail" alt="<?= $product->prod_name ?>">
 								</td>
 								<td><?= $product->prod_name ?></td>
-								<td><?= $product->prod_desc ?></td>
+								<td class="col-3"><?= $product->prod_desc ?></td>
 								<td><?= $categoryStr ?></td>
 								<td>$<span id="w-price<?=$product->prod_id?>"><?= $product->prod_cost ?></span></td>
                                 <td><?=$order->order_status ?></td>
-								<td class="d-flex just-content-start p-0"><i onclick="deleteItem(<?=$product->prod_id ?> ,<?= $orderDetail->order_details_id ?>);" class="btn bi bi-trash p-1"></i> <i class="btn bi bi-bag-plus p-1"></i></td>
+								<td class="d-flex just-content-start p-0"><i onclick="deleteItem(<?=$product->prod_id ?> ,<?= $orderDetail->order_details_id ?>);" class="btn bi bi-trash p-1"></i></i></td>
 								<?php $total += intval($product->prod_cost) ?>
 							</tr>
 						<?php } ?>
@@ -65,7 +65,9 @@ $total = 0;
 					<td></td>
 					<td></td>
 					<td></td>
-					<td>TOTAL:$<span id="w-totalPrice"><?= $total ?></span> </td>
+					<td></td>
+					<td>TOTAL:$<span id="w-totalPrice"><?= $total ?></span></td>
+					<td><button <?= $total > 0 ? "" : "disabled" ?> class="btn btn-small btn-success">CHECKOUT</button></td>
 				</tfoot>
 			</table>
 		</div>
