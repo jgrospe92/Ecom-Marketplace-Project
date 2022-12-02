@@ -36,9 +36,9 @@
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary"><i onclick="checkDetails(<?=$product->prod_id?>);" class="bi bi-question-square"></i></i></button>
                                         <button onclick="addToWishlist2(<?=$product->prod_id?>, <?=$buyerID?>);" <?= \app\core\Helper::disableButtons(); ?> type="button" class="btn btn-sm btn-outline-secondary"><i id="<?=$product->prod_id?>" <?=\app\core\Helper::clearFavoriteIcon($product->prod_id)?>></i></button>
-                                        <button onclick="addToCart(<?=$product->prod_id?>)"<?= \app\core\Helper::disableButtons(); ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
+                                        <button id="cat_cart<?=$product->prod_id?>" onclick="addToCart(<?=$product->prod_id?>)"<?= \app\core\Helper::disableAddToCartButtons($product->prod_id); ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
                                     </div>
-                                    <small class="text-muted">QTY <?= $product->num_of_stock ?></small>
+                                    <small class="text-muted">QTY <span id="c-qty-<?=$product->prod_id?>"><?= $product->num_of_stock ?></span></small>
                                 </div>
                             </div>
                         </div>
@@ -98,6 +98,20 @@
             success: function(data){
                 var currentCartCount = parseInt($('#item_counter').text());
                 $('#item_counter').text(++currentCartCount);
+
+                
+                var currentQTY = parseInt($('#c-qty-' + $prod_id).text());
+                var newQTY = --currentQTY
+                $('#a-qty-' + $prod_id).text(newQTY);
+                $('#c-qty-' + $prod_id).text(newQTY);
+                $('#s-qty-' + $prod_id).text(newQTY);
+
+                if (newQTY == 0) {
+                    $('#ads_cart'+$prod_id).attr('disabled', true);
+                    $('#sales_cart'+$prod_id).attr('disabled', true);
+                    $('#cat_cart'+$prod_id).attr('disabled', true);
+                }
+
             }
         })
     }

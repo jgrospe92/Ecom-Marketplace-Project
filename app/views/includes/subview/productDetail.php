@@ -36,10 +36,10 @@
                                     <p class="product-description">Date Listed: <span><?php $date = strtotime($data->date_added); echo date('l jS \of F Y h:i:s A',$date ) ?></span></p>
                                     <h4 class="price"><span>$<?= $data->prod_cost ?></span></h4>
                                     <p class="text-muted"><span>QTY: <?= $data->num_of_stock ?></span></p>
-                                    <p class="text-muted"><span>Advertised: <?php if($data->has_ads > 0) {echo "YES";} else {echo "No";}?>
+                                    <p class="text-muted"><span>Advertised: <?php if($data->has_ads > 0 ) {echo "YES";} else {echo "No";}?>
                                     <?php
                                         if($data->has_ads> 0) {
-                                            $newDate = date_diff(date_create($ads->start_date),date_create($ads->end_date), true);
+                                            $newDate = date_diff(date_create(date("Y-m-d")),date_create($ads->end_date), true);
                                             echo $newDate->format("%R%a days");
                                         }
                                     ?></span></p>

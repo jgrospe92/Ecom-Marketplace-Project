@@ -90,16 +90,31 @@ class Product extends \app\core\Model
         );
     }
 
+    public function updateQty(){
+        $SQL = "UPDATE product SET num_of_stock=:num_of_stock WHERE prod_id=:prod_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['num_of_stock'=>$this->num_of_stock,
+                        'prod_id'=>$this->prod_id]);
+    }
+    
+
     public function delete(){
         $SQL = "DELETE FROM product WHERE prod_id=:prod_id";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute(['prod_id'=>$this->prod_id]);
     }
 
-    // 1 for true and 0 for false
+    
     public function hasDiscount(){
         $SQL = "UPDATE product SET has_discount=:has_discount WHERE prod_id=:prod_id";
         $STMT = self::$_connection->prepare($SQL);
-        $STMT->execute(['prod_id'=>'prod_id']);
+        $STMT->execute(['prod_id'=>$this->prod_id]);
+    }
+
+    public function hasAdsUpdate(){
+        $SQL = "UPDATE product SET has_ads=:has_ads WHERE prod_id=:prod_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['has_ads'=>$this->has_ads,
+                        'prod_id'=>$this->prod_id]);
     }
 }

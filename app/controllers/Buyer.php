@@ -28,6 +28,9 @@ class Buyer extends \app\core\Controller{
         $orderDetails = new \app\models\OrderDetails();
 
         $product = $product->get($prod_id);
+        --$product->num_of_stock;
+        // decrement QTY
+        $product->updateQty();
         $buyer = $buyer->getBuyerUsingProfileId($_SESSION['profile_id']);
         
         $order = new \app\models\Order();
@@ -60,6 +63,12 @@ class Buyer extends \app\core\Controller{
 
     public function removeFromCart($prod_id){
         $order_details = new \app\models\OrderDetails();
+        $product = new \app\models\Product();
         $order_details->delete($_GET['order_details_id']);
+
+        // increment QTY
+        $product = $product->get($prod_id);
+        ++$product->num_of_stock;
+        $product->updateQty();
     }
 }

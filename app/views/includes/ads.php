@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
-                <?php foreach ($data['ads'] as $ads) {?>
+                <?php foreach ($data['ads'] as $ads) { ?>
                     <?php
                     $product = $product->get($ads->prod_id);
                     ?>
@@ -31,15 +31,15 @@
                                     <?php } ?>
                                 </small>
                                 <p class="card-text"><?= $product->prod_desc ?></p>
-                                <p class="card-text text-muted"><em><?php echo  $category->get($product->prod_cat_id)?></em></p>
+                                <p class="card-text text-muted"><em><?php echo  $category->get($product->prod_cat_id) ?></em></p>
                                 <strong>$<?= $product->prod_cost ?></strong>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary"><i onclick="checkDetails(<?=$product->prod_id?>);"  class="bi bi-question-square"></i></i></button>
-                                        <button onclick="addToWishlist(<?=$product->prod_id?>, <?= $buyerID ?>);" <?= \app\core\Helper::disableButtons(); ?> type="button" class="btn btn-sm btn-outline-secondary"><i id="ads <?=$product->prod_id?>"<?=\app\core\Helper::clearFavoriteIcon($product->prod_id)?> ></i></button>
-                                        <button onclick="addToCartAds(<?=$product->prod_id?>)" <?= \app\core\Helper::disableButtons(); ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"><i onclick="checkDetails(<?= $product->prod_id ?>);" class="bi bi-question-square"></i></i></button>
+                                        <button onclick="addToWishlist(<?= $product->prod_id ?>, <?= $buyerID ?>);" <?= \app\core\Helper::disableButtons(); ?> type="button" class="btn btn-sm btn-outline-secondary"><i id="ads <?= $product->prod_id ?>" <?= \app\core\Helper::clearFavoriteIcon($product->prod_id) ?>></i></button>
+                                        <button id="ads_cart<?=$product->prod_id?>" onclick="addToCartAds(<?= $product->prod_id ?>)" <?= \app\core\Helper::disableAddToCartButtons($product->prod_id); ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
                                     </div>
-                                    <small class="text-muted">QTY <?= $product->num_of_stock ?></small>
+                                    <small class="text-muted">QTY <span id="a-qty-<?= $product->prod_id ?>"><?= $product->num_of_stock ?></span></small>
                                 </div>
                             </div>
                         </div>
@@ -51,42 +51,56 @@
 <?php } ?>
 <div id="check_details"></div>
 <script>
-    
-    function checkDetails(id){
+    function checkDetails(id) {
         $.ajax({
             type: 'GET',
-            url: '/Product/details/'+id,
-            success: function(data){
-                
+            url: '/Product/details/' + id,
+            success: function(data) {
+
                 $('#check_details').html(data);
                 console.log(data);
                 $('#productDetailModal').modal('show')
             }
         })
-       
+
     }
 
-    function addToWishlist(prod_id, buyer_id){
+    function addToWishlist(prod_id, buyer_id) {
         $.ajax({
             type: 'GET',
             url: '/Product/addToWishList/',
-            data: {prod_id : prod_id, buyer_id: buyer_id},
-            success: function(data){
-                var currentClass = $('#ads'+prod_id).attr("class");
-                $('#ads'+prod_id).addClass(data).removeClass(currentClass);
-            }
-        })
-    }
-    function addToCartAds($prod_id) {
-        
-        $.ajax({
-            type: 'GET',
-            url: '/Buyer/addToCart/'+$prod_id,
-            success: function(data){
-                var currentCartCount = parseInt($('#item_counter').text());
-                $('#item_counter').text(++currentCartCount);
+            data: {
+                prod_id: prod_id,
+                buyer_id: buyer_id
+            },
+            success: function(data) {
+                var currentClass = $('#ads' + prod_id).attr("class");
+                $('#ads' + prod_id).addClass(data).removeClass(currentClass);
             }
         })
     }
 
+    function addToCartAds($prod_id) {
+            
+        $.ajax({
+            type: 'GET',
+            url: '/Buyer/addToCart/' + $prod_id,
+            success: function(data) {
+                var currentCartCount = parseInt($('#item_counter').text());
+                $('#item_counter').text(++currentCartCount);
+
+                var currentQTY = parseInt($('#a-qty-' + $prod_id).text());
+                var newQTY = --currentQTY
+                $('#a-qty-' + $prod_id).text(newQTY);
+                $('#c-qty-' + $prod_id).text(newQTY);
+                $('#s-qty-' + $prod_id).text(newQTY);
+
+                if (newQTY == 0) {
+                    $('#ads_cart'+$prod_id).attr('disabled', true);
+                    $('#sales_cart'+$prod_id).attr('disabled', true);
+                    $('#cat_cart'+$prod_id).attr('disabled', true);
+                }
+            }
+        })
+    }
 </script>

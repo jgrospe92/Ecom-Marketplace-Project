@@ -21,7 +21,7 @@ $total = 0;
 						<th scope="col">Order #</th>
 						<th scope="col">Product Image</th>
 						<th scope="col">Product Name</th>
-						<th  scope="col">Product Description</th>
+						<th scope="col">Product Description</th>
 						<th scope="col">Category</th>
 						<th scope="col">Price</th>
                         <th scope="col">Status</th>
@@ -30,13 +30,14 @@ $total = 0;
 					</tr>
 				</thead>
 				<tbody class="table-striped table-group-divider">
-					<?php if (count($orderDetails) > 0) { ?>
+					<?php if (count($orderDetails) > 0) { $i = 0; ?>
+						
 						<?php foreach ($orderDetails as $orderDetail) { ?>
 							<?php
 							$product = $product->get($orderDetail->prod_id);
 							$categoryStr  = $category->get($product->prod_cat_id);
 							?>
-							<tr id="w<?= $product->prod_id?>" class="table-group-divider">
+							<tr id="w<?=++$i?>" class="table-group-divider">
 								<th scope="row"><?= $order->order_number ?></th>
 								<td class="w-25">
 									<img src="/images/<?= $product->product_image ?>" class="img-fluid img-thumbnail" alt="<?= $product->prod_name ?>">
@@ -46,7 +47,7 @@ $total = 0;
 								<td><?= $categoryStr ?></td>
 								<td>$<span id="w-price<?=$product->prod_id?>"><?= $product->prod_cost ?></span></td>
                                 <td><?=$order->order_status ?></td>
-								<td class="d-flex just-content-start p-0"><i onclick="deleteItem(<?=$product->prod_id ?> ,<?= $orderDetail->order_details_id ?>);" class="btn bi bi-trash p-1"></i></i></td>
+								<td class="d-flex just-content-start p-0"><i onclick="deleteItem(<?=$i?> ,<?=$product->prod_id ?> ,<?= $orderDetail->order_details_id ?>);" class="btn bi bi-trash p-1"></i></i></td>
 								<?php $total += intval($product->prod_cost) ?>
 							</tr>
 						<?php } ?>
@@ -75,7 +76,8 @@ $total = 0;
 </div>
 <SCript>
 
-	function deleteItem($pro_id, $order_id) {
+	function deleteItem(id,$pro_id, $order_id) {
+
 		$.ajax({
 			type: 'GET',
 			url: "/Buyer/removeFromCart/"+ $pro_id,
@@ -85,7 +87,7 @@ $total = 0;
 				$itemPrice =  parseInt($('#w-price'+$pro_id).text());
 				$newTotal = $currentTotal  - $itemPrice 
 
-				$("#w" + $pro_id).fadeOut('slow', function() {
+				$("#w" + id).fadeOut('slow', function() {
 					$(this).remove();
 					$('#w-totalPrice').text($newTotal)
 				});

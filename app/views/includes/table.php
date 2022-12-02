@@ -61,7 +61,6 @@
             </tbody>
         </table>
         <?php if (count($data['products']) == 0) {
-
             echo '<div class="alert alert-danger" role="alert">
             <i class="bi bi-exclamation-octagon-fill me-2"></i> Oh no!! You don\'t have any listing!
           </div>';

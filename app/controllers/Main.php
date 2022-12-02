@@ -2,11 +2,14 @@
 
 namespace app\controllers;
 
+use app\core\Helper;
+
 class Main extends \app\core\Controller{
 
     public function index(){
         //TODO: display ads using with POST
         //TODO: display products and filter it by newest
+    
         $buyer = new \app\models\Buyer();
         $buyer = $buyer->getBuyerUsingProfileId($_SESSION['profile_id']);
         $products = new \app\models\Product();
@@ -14,6 +17,7 @@ class Main extends \app\core\Controller{
         $promotions = new \app\models\Promotion();
         $promotions = $promotions->getAll();
         $products = $products->getAll();
+        Helper::verifyPromoDate();
         $ads = $ads->getAll();
         $this->view('Main/index',['ads'=> $ads, 'catalogue'=>$products, 'promotions'=>$promotions, 'buyer'=>$buyer]);
     }

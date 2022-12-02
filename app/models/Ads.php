@@ -3,12 +3,29 @@ namespace app\models;
 
 class Ads extends \app\core\Model {
 
-    public function getAll(){
-        $SQL = "SELECT * from advertisement WHERE `start_date` <= end_date";
+    public function checkForExpiredPromo(){
+        $SQL = "SELECT * from advertisement";
         $STMT = self::$_connection->prepare($SQL);
         $STMT->execute();
         $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Ads');
         return $STMT->fetchAll();
+    }
+
+    public function getAll(){
+        $SQL = "SELECT * from advertisement WHERE DATE(end_date) > CURDATE()";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute();
+        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Ads');
+        return $STMT->fetchAll();
+    }
+
+    public function checkAdsEndDate($ads_id) {
+        $SQL = "SELECT DATEDIFF(end_date, CURRENT_DATE) as date_interval FROM advertisement WHERE ads_id=:ads_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['ads_id'=>$ads_id]);
+        $STMT->setFetchMode(\PDO::FETCH_ASSOC);
+        return $STMT->fetch()['date_interval'];
+
     }
 
 
@@ -47,5 +64,11 @@ class Ads extends \app\core\Model {
         $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Ads');
         return $STMT->fetch();
 
+    }
+
+    public function delete(){
+        $SQL = "DELETE from advertisement WHERE ads_id=:ads_id";
+        $STMT = self::$_connection->prepare($SQL);
+        $STMT->execute(['ads_id'=>$this->ads_id]);
     }
 }
