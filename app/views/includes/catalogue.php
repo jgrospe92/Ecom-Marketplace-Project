@@ -4,10 +4,10 @@
     $category = new \app\models\Category();
     $wishlist = new \app\models\Wishlist();
     $buyer = $data['buyer'];
-  
+    $buyerID = $buyer ? $buyer->buyer_id : 0;
     ?>
-    <div class="album py-5 bg-light">
-        <div class="container " >
+    <div id="section_catalogue" class="album py-5 bg-light">
+        <div  class="container " >
             <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
                 <div class="">
                     <h1 class=" fst-italic text-center">Newest</h1>
@@ -35,8 +35,8 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary"><i onclick="checkDetails(<?=$product->prod_id?>);" class="bi bi-question-square"></i></i></button>
-                                        <button onclick="addToWishlist2(<?=$product->prod_id?>, <?php if ($buyer) {$buyer->buyer_id; }?>);" <?php $active = isset($_SESSION['role']) ? ($_SESSION['role'] == 'buyer' ? "" : "disabled") : "disabled"; echo $active; ?> type="button" class="btn btn-sm btn-outline-secondary"><i id="<?=$product->prod_id?>"<?= $wishlist->checkInkWishList($product->prod_id) ? "class='bi bi-heart-fill'" : "class='bi bi-heart'"; ?>></i></button>
-                                        <button onclick="addToCart(<?=$product->prod_id?>)" <?php $active = isset($_SESSION['role']) ? ($_SESSION['role'] == 'buyer' ? "" : "disabled") : "disabled"; echo $active; ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
+                                        <button onclick="addToWishlist2(<?=$product->prod_id?>, <?=$buyerID?>);" <?= \app\core\Helper::disableButtons(); ?> type="button" class="btn btn-sm btn-outline-secondary"><i id="<?=$product->prod_id?>"<?= $wishlist->checkInkWishList($product->prod_id) ? "class='bi bi-heart-fill'" : "class='bi bi-heart'"; ?>></i></button>
+                                        <button onclick="addToCart(<?=$product->prod_id?>)"<?= \app\core\Helper::disableButtons(); ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
                                     </div>
                                     <small class="text-muted">QTY <?= $product->num_of_stock ?></small>
                                 </div>

@@ -103,12 +103,12 @@
                                 Products
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Newest</a></li>
-                                <li><a class="dropdown-item" href="#">Hot picks!</a></li>
+                                <li><a class="dropdown-item" href="#section_catalogue">Newest</a></li>
+                                <li><a class="dropdown-item" href="#section_ads">Hot picks!</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">On sale</a></li>
+                                <li><a class="dropdown-item" href="#section_promo">On sale</a></li>
                             </ul>
                         </li>
                         <!-- <li class="nav-item">
