@@ -50,10 +50,10 @@ class Buyer extends \app\core\Model
     }
 
     // Check if buyer has a wishlist
-    public function buyerCheckWishlist(){
-        $SQL = "SELECT wishlist.* from wishlist INNER JOIN buyer ON wishlist.buyer_id =:buyer_id";
+    public function buyerCheckWishlist($buyer_id){
+        $SQL = "SELECT * from wishlist WHERE buyer_id =:buyer_id";
         $STMT = self::$_connection->prepare($SQL);
-        $STMT->execute(['buyer_id'=>$this->buyer_id]);
+        $STMT->execute(['buyer_id'=>$buyer_id]);
         $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Wishlist');
         return $STMT->fetchAll();
         

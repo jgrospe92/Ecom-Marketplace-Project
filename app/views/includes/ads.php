@@ -36,7 +36,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary"><i onclick="checkDetails(<?= $product->prod_id ?>);" class="bi bi-question-square"></i></i></button>
-                                        <button onclick="addToWishlist(<?= $product->prod_id ?>, <?= $buyerID ?>);" <?= \app\core\Helper::disableButtons(); ?> type="button" class="btn btn-sm btn-outline-secondary"><i id="ads <?= $product->prod_id ?>" <?= \app\core\Helper::clearFavoriteIcon($product->prod_id) ?>></i></button>
+                                        <button onclick="addToWishlistAds(<?= $product->prod_id ?>, <?= $buyerID ?>);" <?= \app\core\Helper::disableButtons(); ?> type="button" class="btn btn-sm btn-outline-secondary"><i id="ads<?= $product->prod_id ?>" <?= \app\core\Helper::clearFavoriteIcon($product->prod_id,  $buyerID) ?>></i></button>
                                         <button id="ads_cart<?=$product->prod_id?>" onclick="addToCartAds(<?= $product->prod_id ?>)" <?= \app\core\Helper::disableAddToCartButtons($product->prod_id); ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
                                     </div>
                                     <small class="text-muted">QTY <span id="a-qty-<?= $product->prod_id ?>"><?= $product->num_of_stock ?></span></small>
@@ -65,7 +65,8 @@
 
     }
 
-    function addToWishlist(prod_id, buyer_id) {
+    function addToWishlistAds(prod_id, buyer_id) {
+
         $.ajax({
             type: 'GET',
             url: '/Product/addToWishList/',
@@ -76,6 +77,7 @@
             success: function(data) {
                 var currentClass = $('#ads' + prod_id).attr("class");
                 $('#ads' + prod_id).addClass(data).removeClass(currentClass);
+        
             }
         })
     }

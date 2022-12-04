@@ -88,7 +88,6 @@ $total = 0;
 <!-- FOOTER STARTS -->
 <?php $this->view('includes/footer') ?>
 <!-- FOOTER ENDS -->
-<script src="/resources/js/main_script.js"></script>
 </body>
 
 </html>
