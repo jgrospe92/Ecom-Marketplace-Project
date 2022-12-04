@@ -10,14 +10,14 @@
                     <div class="card-body p-md-5">
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"><?=_("Sign up")?></p>
 
                                 <form method="post" class="mx-1 mx-md-4">
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
                                             <input type="text" name="username" id="username" class="form-control" />
-                                            <label class="form-label" for="username"> Username</label>
+                                            <label class="form-label" for="username"><?=_("Username")?></label>
                                         </div>
                                     </div>
 
@@ -25,7 +25,7 @@
                                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
                                             <input type="password" name="password" id="password" class="form-control" />
-                                            <label class="form-label" for="password">Password</label>
+                                            <label class="form-label" for="password"><?=_("Password")?></label>
                                         </div>
                                     </div>
 
@@ -33,7 +33,7 @@
                                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
                                             <input type="password" name="password_verify" id="password_verify" class="form-control" />
-                                            <label class="form-label" for="password_verify">Repeat your password</label>
+                                            <label class="form-label" for="password_verify"><?=_("Repeat your password")?></label>
                                         </div>
                                     </div>
 
@@ -41,23 +41,23 @@
                                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
                                             <select id="role " required name="role" class="form-select" aria-label="Default select example">
-                                                <option selected value="buyer">Buyer</option>
-                                                <option value="vendor">Vendor</option>
+                                                <option selected value="buyer"><?_("Buyer")?></option>
+                                                <option value="vendor"><?_("Vendor")?></option>
                                             </select>
-                                            <label class="form-label" for="user_role">Account type</label>
+                                            <label class="form-label" for="user_role"><?=_("Account type")?></label>
                                         </div>
                                     </div>
 
                                     <div class="form-check d-flex justify-content-center mb-5">
                                         <input class="form-check-input me-2" type="checkbox" value="" required id="form2Example3c" />
                                         <label class="form-check-label" for="form2Example3">
-                                            I agree all statements in <a href="#!">Terms of service</a>
+                                        <?_("I agree all statements in")?> <a href="#!"><?= _("Terms of service")?></a>
                                         </label>
                                     </div>
 
                                     <div class="d-flex justify-content-start mx-4 mb-3 mb-lg-4 ">
-                                        <a class="btn btn-danger btn-lg me-2 me-lg-4" href="/Main/index">CANCEL</a>
-                                        <button type="submit" id="regUser" name='action' class="btn btn-primary btn-lg">REGISTER</button>
+                                        <a class="btn btn-danger btn-lg me-2 me-lg-4" href="/Main/index"><?=_("CANCEL")?> </a>
+                                        <button type="submit" id="regUser" name='action' class="btn btn-primary btn-lg"><?=_("REGISTER")?> </button>
                                     </div>
                                 </form>
 
@@ -82,7 +82,7 @@ if (isset($_GET['error'])) {
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <img src="/resources/images/warning.png" class="rounded me-2" alt="...">
-                <strong class="me-auto">Invalid Credentials</strong>
+                <strong class="me-auto"><?=_("Invalid Credentials")?> </strong>
                 <small id="currenTime"></small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>

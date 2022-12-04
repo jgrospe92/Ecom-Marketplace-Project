@@ -3,7 +3,7 @@
             <div id="modalToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
                     <img src="/resources/images/profits.png" class="rounded me-2" alt="...">
-                    <strong class="me-auto">Success</strong>
+                    <strong class="me-auto"><?=_("Success")?></strong>
                     <small id="currenTime"></small>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
@@ -18,37 +18,37 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Reload virtual wallet</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><?=_("Reload virtual wallet")?></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div id="modal_payment" class="row g-3 align-items-center">
                         <div class="col-5">
-                            <label for="card_number" class="col-form-label">Credit Card Number</label>
+                            <label for="card_number" class="col-form-label"><?=_("Credit Card Number")?></label>
                         </div>
                         <div class="col-5">
                             <input type="text" maxlength="16" id="card_number" class="form-control" aria-describedby="card_number">
                         </div>
                         <div class="col-5">
-                            <label for="card_holder" class="col-form-label">Card Holder Name</label>
+                            <label for="card_holder" class="col-form-label"><?=_("Card Holder Name")?></label>
                         </div>
                         <div class="col-5">
                             <input type="text" id="card_holder" class="form-control" aria-describedby="card_holder">
                         </div>
                         <div class="col-5">
-                            <label for="card_expiration" class="col-form-label">Expiration date</label>
+                            <label for="card_expiration" class="col-form-label"><?=_("Expiration date")?></label>
                         </div>
                         <div class="col-5">
                             <input type="month" id="card_expiration" class="form-control" aria-describedby="card_expiration">
                         </div>
                         <div class="col-5">
-                            <label for="card_csc" maxlength="3" class="col-form-label">Security Number</label>
+                            <label for="card_csc" maxlength="3" class="col-form-label"><?=_("Security Number")?></label>
                         </div>
                         <div class="col-5">
                             <input type="password" id="card_csc" class="form-control w-25" aria-describedby="card_csc">
                         </div>
                         <div class="col-5">
-                            <label for="reload_amount" class="col-form-label">Amount</label>
+                            <label for="reload_amount" class="col-form-label"><?=_("Amount")?></label>
                             
                         </div>
                         <div class="col-5">
@@ -57,8 +57,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="clearForm()" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id="reload_virtual_wallet" type="button" data-bs-dismiss="modal" class="btn btn-primary" disabled>Done</button>
+                    <button type="button" onclick="clearForm()" class="btn btn-secondary" data-bs-dismiss="modal"><?=_("Close")?></button>
+                    <button id="reload_virtual_wallet" type="button" data-bs-dismiss="modal" class="btn btn-primary" disabled><?=_("Done")?></button>
                 </div>
             </div>
         </div>

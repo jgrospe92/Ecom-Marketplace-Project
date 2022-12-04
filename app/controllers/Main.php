@@ -23,7 +23,7 @@ class Main extends \app\core\Controller{
     }
 
     public function profile(){
-
+       
         if (($_SESSION['role']) == 'buyer'){
             $profile = new \app\models\Profile();
             $buyer = new \app\models\Buyer();

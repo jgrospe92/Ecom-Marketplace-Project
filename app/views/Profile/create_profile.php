@@ -15,29 +15,29 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body p-4">
-                                        <h6>Create your <span><?= $_SESSION['role']; ?></span> Profile</h6>
+                                        <h6><?=_("Create your")?><span><?= $_SESSION['role']; ?></span><?=_("Profile")?></h6>
                                         <hr class="mt-0 mb-4">
                                         <div class="row pt-1">
-                                            <h6>Contact Info</h6>
+                                            <h6><?=_("Contact Info")?></h6>
                                             <div class="col-6 mb-3">
-                                                <label for="fname">First Name: <input id="fname" type="text" name="first_name" required></label>
+                                                <label for="fname"><?=_("First Name: ")?><input id="fname" type="text" name="first_name" required></label>
                                             </div>
                                             <div class="col-6 mb-3">
-                                                <label for="lname">Last Name: <input id="lname" type="text" name="last_name" required></label>
+                                                <label for="lname"><?=_("Last Name: ")?><input id="lname" type="text" name="last_name" required></label>
                                             </div>
                                         </div>
-                                        <h6>Address</h6>
+                                        <h6><?=_("Address")?></h6>
                                         <div class="col-6 mb-3">
-                                            <label for="shipping_add">Shipping Address: <input id="shipping_add" type="text" name="shipping_add" required></label><br>
+                                            <label for="shipping_add"><?=_("Shipping Address: ")?><input id="shipping_add" type="text" name="shipping_add" required></label><br>
                                         </div>
                                         <div class="col-6 mb-3">
-                                            <label for="billing_add">Billing Address: <input id="billing_add" type="text" name="billing_add" required></label><br>
+                                            <label for="billing_add"><?=_("Billing Address: ")?><input id="billing_add" type="text" name="billing_add" required></label><br>
                                         </div>
                                         <hr class="mt-0 mb-4">
                                         <div class="row pt-1">
                                             <div class="col-6 mb-3">
-                                                <h6>Virtual Wallet</h6>
-                                                <label class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" for="credit">Add Credit</label>
+                                                <h6><?=_("Virtual Wallet")?></h6>
+                                                <label class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" for="credit"><?=_("Add Credit")?></label>
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <br><input class="form-control-plaintext" value="0.00" id="credit" type="text" name="credit" readonly required>
@@ -56,36 +56,36 @@
                                 <!-- VENDOR STARTS -->
                                 <div class="col-md-4  gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
                                     <img id="pic_preview" src="/resources/images/blank.jpg" class="img-fluid my-5" style="max-width:150px" alt="profile photo"><br>
-                                    <label id="label_image" class="btn btn-secondary" for="picture">Upload<input id="picture" type="file" name="profile_photo"></label>
+                                    <label id="label_image" class="btn btn-secondary" for="picture"><?=_("Upload")?><input id="picture" type="file" name="profile_photo"></label>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body p-4">
-                                        <h6>Create your <span><?= $_SESSION['role']; ?></span> Profile</h6>
+                                        <h6><?=_("Create your")?><span><?= $_SESSION['role']; ?></span><?=_("Profile")?></h6>
                                         <hr class="mt-0 mb-4">
                                         <div class="row pt-1">
-                                            <h6>Contact Info</h6>
+                                            <h6><?=_("Contact Info")?></h6>
                                             <div class="col-6 mb-3">
-                                                <label for="fname">First Name: <input id="fname" type="text" name="first_name" required></label>
+                                                <label for="fname"><?=_("First Name: ")?><input id="fname" type="text" name="first_name" required></label>
                                             </div>
                                             <div class="col-6 mb-3">
-                                                <label for="lname">Last Name: <input id="lname" type="text" name="last_name" required></label>
+                                                <label for="lname"><?=_("Last Name: ")?><input id="lname" type="text" name="last_name" required></label>
                                             </div>
                                         </div>
-                                        <h6>Store details</h6>
+                                        <h6><?=_("Store details")?></h6>
                                         <div class="col-6 mb-3">
-                                            <label for="store_name">Store Name: <input id="store_name" type="text" name="vendor_name" required></label><br>
+                                            <label for="store_name"><?=_("Store Name: ")?><input id="store_name" type="text" name="vendor_name" required></label><br>
                                         </div>
                                         <div class="col-6 mb-3">
-                                            <label for="description">Store Description: <textarea rows='3' cols="50" id="description" placeholder="Tell us something about your store" name="vendor_desc" required></textarea></label>
+                                            <label for="description"><?=_("Store Description: ")?><textarea rows='3' cols="50" id="description" placeholder="Tell us something about your store" name="vendor_desc" required></textarea></label>
                                         </div>
                                         <div class="col-6 mb-3">
-                                            <label for="store_location">Store Location: <input id="store_location" type="text" name="vendor_location" required></label>
+                                            <label for="store_location"><?=_("Store Location: ")?><input id="store_location" type="text" name="vendor_location" required></label>
                                         </div>
                                         <hr class="mt-0 mb-4">
                                         <div class="row pt-1">
                                             <div class="col-6 mb-3">
-                                                <h6>Virtual Wallet</h6>
-                                                <label class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" for="credit">Add Credit</label>
+                                                <h6><?=_("Virtual Wallet")?></h6>
+                                                <label class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" for="credit"><?=_("Add Credit")?></label>
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <br><input class="form-control-plaintext" value="0.00" id="credit" type="text" name="credit" readonly required>

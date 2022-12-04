@@ -10,7 +10,7 @@
         <div  class="container " >
             <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
                 <div class="">
-                    <h1 class=" fst-italic text-center">Newest</h1>
+                    <h1 class=" fst-italic text-center"><?=_("Newest")?></h1>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-3 ">
@@ -38,7 +38,7 @@
                                         <button onclick="addToWishlistCatalogue(<?=$product->prod_id?>, <?=$buyerID?>);" <?= \app\core\Helper::disableButtons(); ?> type="button" class="btn btn-sm btn-outline-secondary"><i id="<?=$product->prod_id?>" <?=\app\core\Helper::clearFavoriteIcon($product->prod_id, $buyerID)?>></i></button>
                                         <button id="cat_cart<?=$product->prod_id?>" onclick="addToCart(<?=$product->prod_id?>)"<?= \app\core\Helper::disableAddToCartButtons($product->prod_id); ?> type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-bag-plus"></i></button>
                                     </div>
-                                    <small class="text-muted">QTY <span id="c-qty-<?=$product->prod_id?>"><?= $product->num_of_stock ?></span></small>
+                                    <small class="text-muted"><?=_("QTY")?> <span id="c-qty-<?=$product->prod_id?>"><?= $product->num_of_stock ?></span></small>
                                 </div>
                             </div>
                         </div>
@@ -52,10 +52,10 @@
         <div class="container">
             <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
                 <div class="">
-                    <h1 class=" fst-italic text-center">Newest</h1>
+                    <h1 class=" fst-italic text-center"><?=_("Newest")?></h1>
                 </div>
                 <div class="alert alert-danger" role="alert">
-                There is no product listing!
+                <?=_("There is no product listing!")?>
                 </div>
             </div>
         </div>

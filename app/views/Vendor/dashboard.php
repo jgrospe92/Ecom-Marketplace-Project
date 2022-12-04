@@ -1,6 +1,6 @@
 <?php $this->view('includes/header'); ?>
 
-<h2>Vendor Dashboard</h2>
+<h2><?=_("Vendor Dashboard")?></h2>
 
 <!-- FOOTER STARTS -->
 <?php $this->view('includes/footer') ?>

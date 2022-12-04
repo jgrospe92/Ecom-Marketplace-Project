@@ -14,13 +14,13 @@ $total = 0;
 			<table class="table table-sm table ">
 				<thead>
 					<tr>
-						<th scope="col">Date Added</th>
-						<th scope="col">Product Image</th>
-						<th scope="col">Product Name</th>
-						<th scope="col">Product Description</th>
-						<th scope="col">Category</th>
-						<th scope="col">Price</th>
-						<th scope="col">Action</th>
+						<th scope="col"><?_("Date Added")?></th>
+						<th scope="col"><?=_("Product Image")?></th>
+						<th scope="col"><?=_("Product Name")?></th>
+						<th scope="col"><?=_("Product Description")?></th>
+						<th scope="col"><?=_("Category")?></th>
+						<th scope="col"><?=_("Price")?></th>
+						<th scope="col"><?=_("Action")?></th>
 
 					</tr>
 				</thead>
@@ -47,7 +47,7 @@ $total = 0;
 					<?php } else { ?>
 						<tr>
 							<div class="alert alert-danger" role="alert">
-								<i class="bi bi-exclamation-lg"></i>Ops! Wishlist is empty!
+								<i class="bi bi-exclamation-lg"></i><?=_("Ops! Wishlist is empty!")?>
 							</div>
 						</tr>
 					<?php } ?>
@@ -59,7 +59,7 @@ $total = 0;
 					<td></td>
 					<td></td>
 					<td></td>
-					<td>TOTAL:$<span id="w-totalPrice"><?= $total ?></span> </td>
+					<td><?=_("TOTAL:$")?><span id="w-totalPrice"><?= $total ?></span> </td>
 				</tfoot>
 			</table>
 		</div>

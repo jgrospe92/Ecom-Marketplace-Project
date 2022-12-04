@@ -2,23 +2,23 @@
 <?php if ($data['profile']->role == 'buyer') { ?>
     <div id="table_body" class="table-responsive">
         <table class="table table-dark table-striped table-hover table-bordered caption-top">
-            <caption>Order by latest</caption>
+            <caption><?=_("Order by latest")?></caption>
             <thead class="sticky-top">
                 <tr>
-                    <th class="w-25" scope="col">Order Number</th>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Cost</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
+                    <th class="w-25" scope="col"><?=_("Order Number")?></th>
+                    <th scope="col"><?=_("Product Name")?></th>
+                    <th scope="col"><?=_("Category")?></th>
+                    <th scope="col"><?=_("Quantity")?></th>
+                    <th scope="col"><?=_("Cost")?></th>
+                    <th scope="col"><?=_("Status")?></th>
+                    <th scope="col"><?=_("Action")?></th>
                 </tr>
             </thead>
             <tbody>
                 <!-- TODO: Loop through the order details -->
                 <tr>
                 <div class="alert alert-danger" role="alert">
-                <i class="bi bi-exclamation-octagon-fill me-2"></i> Order history is empty!
+                <i class="bi bi-exclamation-octagon-fill me-2"></i><?=_("Order history is empty!")?>
                 </div>
                     <!-- <th scope="row">175334</th>
                     <td>Steam deck</td>
@@ -35,14 +35,14 @@
     <?php $products = $data['products']; ?>
     <div id="table_body" class="table-responsive">
         <table class="table table-dark table-striped table-hover table-bordered caption-top">
-            <caption>Order by latest</caption>
+            <caption><?=_("Order by latest")?></caption>
             <thead class="sticky-top">
                 <tr>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Cost</th>
-                    <th class="w-25" scope="col">Action</th>
+                    <th scope="col"><?=_("Product Name")?></th>
+                    <th scope="col"><?=_("Category")?></th>
+                    <th scope="col"><?=_("Quantity")?></th>
+                    <th scope="col"><?=_("Cost")?></th>
+                    <th class="w-25" scope="col"><?=_("Action")?></th>
                 </tr>
             </thead>
             <tbody>

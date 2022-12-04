@@ -36,10 +36,10 @@ if ($data['role'] == 'buyer') {
                                     <img id="pic_preview" src="/images/<?= $profile->profile_photo ?>" alt="Profile photo" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1; max-height: 180px; object-fit: contain;">
 
                                     <button onclick="updateImage()" id="upload_new_prof" type="button" class="btn btn-outline-dark mb-2 btn-sm w-75 m-auto p-auto" data-mdb-ripple-color="dark" style="z-index: 1;">
-                                        UPLOAD
+                                        <?=_("UPLOAD")?>
                                     </button>
                                     <button onclick="updateBuyerProfile()" type="button" class="btn btn-outline-dark btn-sm w-75 mb-2 m-auto p-auto" data-mdb-ripple-color="dark" style="z-index: 1;">
-                                        SAVE
+                                        <?=_("SAVE")?>
                                     </button>
                                     <input id="picture" type="file" name="picture" hidden>
                                 </div>
@@ -53,33 +53,33 @@ if ($data['role'] == 'buyer') {
                                 <div class="d-flex justify-content-end text-center py-1">
                                     <div>
                                         <p class="mb-1 h5">253</p>
-                                        <p class="small text-muted mb-0">Purchased</p>
+                                        <p class="small text-muted mb-0"><?=_("Purchased")?></p>
                                     </div>
                                     <div class="px-3">
                                         <p class="mb-1 h5">1026</p>
-                                        <p class="small text-muted mb-0">Reviewed</p>
+                                        <p class="small text-muted mb-0"><?=_("Reviewed")?></p>
                                     </div>
                                     <div>
                                         <p class="mb-1 h5">478</p>
-                                        <p class="small text-muted mb-0">Followers</p>
+                                        <p class="small text-muted mb-0"><?=_("Followers")?></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body p-4 text-black">
                                 <div class="mb-5">
-                                    <p class="lead fw-normal mb-1">Info</p>
+                                    <p class="lead fw-normal mb-1"><?=_("Info")?></p>
                                     <div class="p-4" style="background-color: #f8f9fa;">
                                         <div class="row">
-                                            <p class="font-italic  mb-1">Shipping : <input class="form-control col-auto" id="new_shipping_add" type="text" value="<?= $buyer->shipping_add ?>"></p>
-                                            <p class="font-italic  mb-1">Billing : <input class="form-control col-auto" id="new_billing_add" type="text" value="<?= $buyer->billing_add ?>"></p>
-                                            <p class="font-italic mb-0">Virtual Wallet : $<span id="virtualWallet"><?= $buyer->credit; ?></span></p>
+                                            <p class="font-italic  mb-1"><?=_("Shipping : ")?><input class="form-control col-auto" id="new_shipping_add" type="text" value="<?= $buyer->shipping_add ?>"></p>
+                                            <p class="font-italic  mb-1"><?=_("Billing : ")?><input class="form-control col-auto" id="new_billing_add" type="text" value="<?= $buyer->billing_add ?>"></p>
+                                            <p class="font-italic mb-0"><?=_("Virtual Wallet : $")?><span id="virtualWallet"><?= $buyer->credit; ?></span></p>
                                         </div>
-                                        <label class="btn btn-success mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" for="credit">Add Credit</label>
+                                        <label class="btn btn-success mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" for="credit"><?=_("Add Credit")?></label>
 
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <p class="lead fw-normal mb-0">Order History</p>
+                                    <p class="lead fw-normal mb-0"><?=_("Order History")?></p>
                                 </div>
                                 <?php $this->view('includes/table', ['profile' => $profile]) ?>
                             </div>
