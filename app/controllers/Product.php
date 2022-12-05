@@ -4,7 +4,7 @@ namespace app\controllers;
 use app\models\Wishlist;
 
 class Product extends \app\core\Controller {
-
+    #[\app\filters\Login]
     public function insert(){
         
         if (isset($_POST['action'])) {
@@ -53,6 +53,7 @@ class Product extends \app\core\Controller {
         } 
     }
 
+    #[\app\filters\Login]
     public function update($prod_id){
 
         if (isset($_POST['update'])) {
@@ -153,6 +154,7 @@ class Product extends \app\core\Controller {
 
     }
 
+    #[\app\filters\Login]
     public function delete($prod_id){
         $vendor = new \app\models\Vendor();
         $vendor = $vendor->getVendorUsingProfileId($_SESSION['profile_id']);

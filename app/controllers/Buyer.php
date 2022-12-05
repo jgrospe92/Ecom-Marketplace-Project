@@ -4,14 +4,15 @@ namespace app\controllers;
 
 class Buyer extends \app\core\Controller{
 
+    #[\app\filters\Login]
     public function wishlist($buyer_id){
-
         $buyer = new \app\models\Buyer();
         $buyer = $buyer->getBuyerByBuyerID($buyer_id);
         $wishlist = $buyer->buyerCheckWishlist($buyer->buyer_id);
         $this->view('Buyer/wishlist', $wishlist);
     }
 
+    #[\app\filters\Login]
     public function cart(){
         $order = new \app\models\Order();
         $buyer = new \app\models\Buyer();
@@ -21,6 +22,7 @@ class Buyer extends \app\core\Controller{
         $this->view('Buyer/cart',  $order);
     }
 
+    
     public function addToCart($prod_id){
         $buyer = new \app\models\Buyer();
         $product = new \app\models\Product();

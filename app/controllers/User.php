@@ -6,7 +6,6 @@ class User extends \app\core\Controller {
 	//NOTE: USER LOGIN
     public function index()
 	{
-	
 		if (isset($_POST['action'])){
 			$user = new \app\models\User();
 			$user = $user->get($_POST['username']);
@@ -32,8 +31,6 @@ class User extends \app\core\Controller {
     //NOTE: Register account for buyer and vendor
     public function register()
     {
-		
-		
 		if (isset($_POST['action'])){
 			if ($_POST['password'] == $_POST['password_verify']) {
 				$user = new \app\models\User();
@@ -60,6 +57,7 @@ class User extends \app\core\Controller {
     }
 
     //NOTE: LOGOUT USER
+	#[\app\filters\Login]
     public function logout()
     {
 		session_destroy();

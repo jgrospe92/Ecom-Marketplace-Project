@@ -22,6 +22,7 @@ class Main extends \app\core\Controller{
         $this->view('Main/index',['ads'=> $ads, 'catalogue'=>$products, 'promotions'=>$promotions, 'buyer'=>$buyer]);
     }
 
+    #[\app\filters\Login]
     public function profile(){
        
         if (($_SESSION['role']) == 'buyer'){

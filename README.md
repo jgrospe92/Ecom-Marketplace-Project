@@ -1,10 +1,11 @@
 # Online Marketplace :chart_with_upwards_trend:
 Academic school project in 420-411-VA ECOMMERCE COURSE
 
-- [Online Marketplace :chart_with_upwards_trend:](#online-marketplace-chart_with_upwards_trend)
+- [Online Marketplace :chart\_with\_upwards\_trend:](#online-marketplace-chart_with_upwards_trend)
 - [Project Description :newspaper:](#project-description-newspaper)
 - [Goal of the project :dart:](#goal-of-the-project-dart)
 - [Features :memo:](#features-memo)
+- [Project Guidelines](#project-guidelines)
 - [Project time Estimation :calendar:](#project-time-estimation-calendar)
 - [Project Team :goat:](#project-team-goat)
   - [TEAM NAME](#team-name)
@@ -30,21 +31,27 @@ To demonstrate our knowledge in web development using proper MVC design pattern 
 4. As a buyer, I can see sales and other promotions
 5. As a buyer, I can see product details and product review
 6. As a buyer, I can modify my profile info/shipping
-7. As a buyer, I can search up products
-8. As a buyer, i can checkout my order
-9. As a buyer, I can check other user profile
-10. As a buyer, I can see my purchase history
+7. As a buyer, I can search up products (postponed)
+8. As a buyer, i can add product to my cart
+9. As a buyer, I can check other user profile (postponed)
+10. As a buyer, I can see my purchase history (postponed)
+11. As a buyer, I can add money to my virtual wallet using credit info
 - - -
 **Client/Sellers** :bust_in_silhouette:
 
 1. As a seller, i can register, login and logout
 2. As a seller, I can add, modify and delete product from my listing
 3. As a seller, I can create and modify my seller profile
-4. As a seller, I can view product purchase history, add shipping tracking numbers and mark them as shipped.
+4. As a seller, I can view product purchase history, add shipping tracking numbers and mark them as shipped (postponed)
 5. As a seller, I can modify the product cost and and quantity
-6. As a seller, I can monitor my sales daily, weekly, monthly and annually.
-7. As a seller, I can check other user profile
+6. As a seller, I can monitor my sales daily, weekly, monthly and annually (postponed)
+7. As a seller, I can check other user profile (postponed)
 8. As a seller, I can advertise my online store from the main marketplace page
+9. As a seller, I can put my products on sale
+10. As a seller, I can add money to my virtual wallet using credit info
+
+# Project Guidelines
+
 
 # Project time Estimation :calendar:
 

@@ -81,7 +81,8 @@ class Profile extends \app\core\Controller
             $this->view('Profile/create_profile');
         }
     }
-
+    
+    #[\app\filters\Login]
     public function updateWallet()
     {
         if (($_SESSION['role']) == 'buyer') {
