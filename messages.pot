@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-04 17:02-0500\n"
+"POT-Creation-Date: 2022-12-04 19:38-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,6 +93,14 @@ msgstr ""
 msgid "There is no product listing!"
 msgstr ""
 
+#: app/views/includes/header.php:2
+msgid "ltr"
+msgstr ""
+
+#: app/views/includes/header.php:42
+msgid "Welcome "
+msgstr ""
+
 #: app/views/includes/header.php:96
 msgid "Home"
 msgstr ""
@@ -113,28 +121,28 @@ msgstr ""
 msgid "On sale"
 msgstr ""
 
-#: app/views/includes/header.php:124
+#: app/views/includes/header.php:125
 msgid "Choose Language"
 msgstr ""
 
-#: app/views/includes/header.php:125
+#: app/views/includes/header.php:126
 msgid "English"
 msgstr ""
 
-#: app/views/includes/header.php:126
+#: app/views/includes/header.php:127
 msgid "French"
 msgstr ""
 
-#: app/views/includes/header.php:130
+#: app/views/includes/header.php:131
 msgid "Search"
 msgstr ""
 
-#: app/views/includes/header.php:155 app/views/Profile/create_profile.php:18
+#: app/views/includes/header.php:179 app/views/Profile/create_profile.php:18
 #: app/views/Profile/create_profile.php:63
 msgid "Profile"
 msgstr ""
 
-#: app/views/includes/header.php:158
+#: app/views/includes/header.php:182
 msgid "Virtual Wallet $"
 msgstr ""
 

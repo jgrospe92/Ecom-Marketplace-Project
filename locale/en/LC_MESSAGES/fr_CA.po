@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-04 17:02-0500\n"
-"PO-Revision-Date: 2022-12-04 18:12-0500\n"
+"POT-Creation-Date: 2022-12-04 19:38-0500\n"
+"PO-Revision-Date: 2022-12-04 19:40-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_CA\n"
@@ -95,6 +95,14 @@ msgstr "Le plus récent"
 msgid "There is no product listing!"
 msgstr "Il n'y a aucun produit répertorié !"
 
+#: app/views/includes/header.php:2
+msgid "ltr"
+msgstr ""
+
+#: app/views/includes/header.php:42
+msgid "Welcome "
+msgstr "Bonjour "
+
 #: app/views/includes/header.php:96
 msgid "Home"
 msgstr "Accueil"
@@ -115,28 +123,28 @@ msgstr "Choix Chaud!"
 msgid "On sale"
 msgstr "En soldes"
 
-#: app/views/includes/header.php:124
+#: app/views/includes/header.php:125
 msgid "Choose Language"
 msgstr "Choisissez la langue"
 
-#: app/views/includes/header.php:125
+#: app/views/includes/header.php:126
 msgid "English"
 msgstr "Anglais"
 
-#: app/views/includes/header.php:126
+#: app/views/includes/header.php:127
 msgid "French"
 msgstr "Français"
 
-#: app/views/includes/header.php:130
+#: app/views/includes/header.php:131
 msgid "Search"
 msgstr "Chercher"
 
-#: app/views/includes/header.php:155 app/views/Profile/create_profile.php:18
+#: app/views/includes/header.php:179 app/views/Profile/create_profile.php:18
 #: app/views/Profile/create_profile.php:63
 msgid "Profile"
 msgstr "Profil"
 
-#: app/views/includes/header.php:158
+#: app/views/includes/header.php:182
 msgid "Virtual Wallet $"
 msgstr "Portefeuille virtuel $"
 
@@ -154,7 +162,9 @@ msgstr "été$"
 
 #: app/views/includes/sale.php:60
 msgid "There are no discounted products, stay tuned for the next sale event!"
-msgstr "Il n'y a pas de produits en promotion, restez à l'écoute pour la prochaine vente !"
+msgstr ""
+"Il n'y a pas de produits en promotion, restez à l'écoute pour la prochaine "
+"vente !"
 
 #: app/views/includes/subview/add_product.php:9
 msgid "Add Product"

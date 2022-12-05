@@ -39,7 +39,7 @@
             if ($profile) {
                 $name = $profile->first_name;
             }
-            $currentUser = "<p><?=_('Welcome')?>, " . $name;
+            $currentUser = "<p>". _("Welcome ") . $name . "</p>";
             $profile_icon = ' <a class="btn btn-outline-primary" type="button"
                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-person-bounding-box"></i></a>';
             if ($profile->role == 'buyer') {
@@ -62,7 +62,8 @@
                 <i class="bi bi-cart pe-2"></i><span id="item_counter" class="badge text-bg-secondary">' . $itemsOnMyCart . '</span></button>';
                 $dashboard = '/Buyer/wishlist/' . $buyer->buyer_id;
                 $dashboard_name = 'Wishlist';
-                $dashboard_two = ' <l1><a class="list-group-item list-group-item-action" href="">Order History</a></l1>';
+                // $dashboard_two = ' <l1><a class="list-group-item list-group-item-action" href="">Order History</a></l1>';
+                $dashboard_two = "";
             } else {
                 $vendor = new \app\models\Vendor();
                 $vendor = $vendor->getVendorUsingProfileId($_SESSION['profile_id']);
@@ -171,7 +172,7 @@
     <!-- OFF CANVAS -->
     <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
-            <h2 class="offcanvas-title text-light" id="offcanvasRightLabel"><?= $currentUser ?>!</h2>
+            <h2 class="offcanvas-title text-light" id="offcanvasRightLabel"><?= $currentUser ?></h2>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
