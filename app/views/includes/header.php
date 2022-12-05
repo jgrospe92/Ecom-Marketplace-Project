@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  dir='<?= _('ltr') ?>' lang='<?= $lang ?>'>
+<html dir='<?= _('ltr') ?>' lang='<?= $lang ?>'>
 
 <head>
     <meta charset="UTF-8">
@@ -48,19 +48,19 @@
                 $buyer = new \app\models\Buyer();
                 $buyer = $buyer->getBuyerUsingProfileId($_SESSION['profile_id']);
                 $itemsOnMyCart = 0;
-                if ($oderCart->getUnpaidOrder($buyer->buyer_id)){
+                if ($oderCart->getUnpaidOrder($buyer->buyer_id)) {
                     $oderCart = $oderCart->getUnpaidOrder($buyer->buyer_id);
                     $oderDetails = $oderDetails->getAll($oderCart->order_id);
-                    $itemsOnMyCart = count($oderDetails) > 0 ? count($oderDetails) : "0" ;
+                    $itemsOnMyCart = count($oderDetails) > 0 ? count($oderDetails) : "0";
                 } else {
                     $itemsOnMyCart  = 0;
                 }
 
-                
+
                 $virtualWallet = number_format((float)$buyer->credit, 2, '.', '');
                 $cart = '<button onclick="location.href = \'/Buyer/cart/\'" type="button" class="btn btn-success">
-                <i class="bi bi-cart pe-2"></i><span id="item_counter" class="badge text-bg-secondary">'. $itemsOnMyCart .'</span></button>';
-                $dashboard = '/Buyer/wishlist/'. $buyer->buyer_id;
+                <i class="bi bi-cart pe-2"></i><span id="item_counter" class="badge text-bg-secondary">' . $itemsOnMyCart . '</span></button>';
+                $dashboard = '/Buyer/wishlist/' . $buyer->buyer_id;
                 $dashboard_name = 'Wishlist';
                 $dashboard_two = ' <l1><a class="list-group-item list-group-item-action" href="">Order History</a></l1>';
             } else {
@@ -93,22 +93,22 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/Main/index"><?=_("Home")?></a>
+                            <a class="nav-link active" aria-current="page" href="/Main/index"><?= _("Home") ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><?=_("About us")?></a>
+                            <a class="nav-link" href="#"><?= _("About us") ?></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <?=_("Products")?>
+                                <?= _("Products") ?>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#section_catalogue"><?=_("Newest")?></a></li>
-                                <li><a class="dropdown-item" href="#section_ads"><?=_("Hot picks!")?></a></li>
+                                <li><a class="dropdown-item" href="#section_catalogue"><?= _("Newest") ?></a></li>
+                                <li><a class="dropdown-item" href="#section_ads"><?= _("Hot picks!") ?></a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#section_promo"><?=_("On sale")?></a></li>
+                                <li><a class="dropdown-item" href="#section_promo"><?= _("On sale") ?></a></li>
                             </ul>
                         </li>
                         <!-- <li class="nav-item">
@@ -120,14 +120,15 @@
                     <form class="d-flex " role="search">
                         <div class="d-flex align-items-center">
                             <!-- LOCALIZATION STARTS -->
-                            <select class="form-control form-select w-50 me-2" aria-label="Default select example">
+
+                            <select onchange="changeLocale(this);" class="form-control form-select w-50 me-2" aria-label="Default select example">
                                 <option selected><?=_("Choose Language")?></option>
-                                <option value="english"><?=_("English")?></option>
-                                <option value="french"><?=_("French")?></option>
+                                <option <?= \app\core\Helper::checkEnLocale() ?> value="english"><?= _("English") ?></option>
+                                <option <?= \app\core\Helper::checkFrLocale() ?>  value="french"><?= _("French") ?></option>
                             </select>
                             <!-- LOCALIZATION ENDS -->
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit"><?=_("Search")?></button>
+                            <button class="btn btn-outline-success" type="submit"><?= _("Search") ?></button>
                         </div>
 
                     </form>
@@ -137,7 +138,30 @@
                         <?= $profile_icon ?>
                         <?= $cart ?>
                     </form>
-
+                    <script>
+                        function changeLocale(language){
+                            if(language.value == "french") {
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/Main/makeSessionLang",
+                                    data: {lang : language.value},
+                                    success: function(data) {
+                                        location.href = data;
+                                    }
+                                })
+                            } else {
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/Main/makeSessionLang",
+                                    data: {lang : language.value},
+                                    success: function(data) {  
+                                        location.href = data;
+                                        
+                                    }
+                                })
+                            }
+                        }
+                    </script>
 
                 </div>
             </div>
@@ -152,10 +176,10 @@
         </div>
         <div class="offcanvas-body">
             <ul class="list-group">
-                <l1><a class="list-group-item list-group-item-action" href="/Main/profile"><?=_("Profile")?></a></l1>
-                <l1><a class="list-group-item list-group-item-action" href="<?=$dashboard?>"><?=$dashboard_name?></a></l1>
-                <?=  $dashboard_two ?>
-                <l1><a class="list-group-item list-group-item-action" href=""><?=_("Virtual Wallet $")?><?= $virtualWallet  ?></a></l1>
+                <l1><a class="list-group-item list-group-item-action" href="/Main/profile"><?= _("Profile") ?></a></l1>
+                <l1><a class="list-group-item list-group-item-action" href="<?= $dashboard ?>"><?= $dashboard_name ?></a></l1>
+                <?= $dashboard_two ?>
+                <l1><a class="list-group-item list-group-item-action" href=""><?= _("Virtual Wallet $") ?><?= $virtualWallet  ?></a></l1>
             </ul>
 
         </div>

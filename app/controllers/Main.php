@@ -9,7 +9,7 @@ class Main extends \app\core\Controller{
     public function index(){
         //TODO: display ads using with POST
         //TODO: display products and filter it by newest
-    
+        // $_SESSION['lang'] = 'English';
         $buyer = new \app\models\Buyer();
         $buyer = $buyer->getBuyerUsingProfileId($_SESSION['profile_id']);
         $products = new \app\models\Product();
@@ -40,5 +40,21 @@ class Main extends \app\core\Controller{
             $this->view('Profile/profile', ['profile'=>$profile, 'vendor'=>$vendor, 'role'=>$profile->role,]);
         }
         
+    }
+
+    public function makeSessionLang(){
+        $lang = $_GET['lang'];
+
+        if ($lang == "french") {
+            $_SESSION['lang'] = 'French';
+            echo "/Main/index?lang=fr_CA";
+          
+        } else {
+            $_SESSION['lang'] = 'English';
+            echo "/Main/index?lang=en_CA";
+      
+        }
+        
+
     }
 }

@@ -57,4 +57,14 @@ class Helper{
             }
         }
     }
+
+    public static function checkEnLocale(){
+        return ($_SESSION['lang'] == "English") ? "selected" : "";
+       
+    }
+
+    public static function checkFrLocale(){
+       return ($_SESSION['lang'] == "French") ? "selected" : "";
+       
+    }
 }
