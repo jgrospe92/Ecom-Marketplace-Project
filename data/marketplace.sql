@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 18, 2022 at 09:33 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.19
+-- Host: 127.0.0.1
+-- Generation Time: Dec 05, 2022 at 02:17 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,12 +20,10 @@ SET time_zone = "+00:00";
 --
 -- Database: `marketplace`
 --
-
-DROP DATABASE IF EXISTS `marketplace`;
+DROP DATABASE IF EXISTS marketplace;
 
 CREATE DATABASE `marketplace`;
-USE `marketplace`;
-
+USE marketplace;
 -- --------------------------------------------------------
 
 --
@@ -47,10 +45,17 @@ CREATE TABLE `admin` (
 CREATE TABLE `advertisement` (
   `ads_id` int(11) NOT NULL,
   `description` varchar(250) NOT NULL,
-  `start_data` date NOT NULL,
-  `end_data` date NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
   `prod_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `advertisement`
+--
+
+INSERT INTO `advertisement` (`ads_id`, `description`, `start_date`, `end_date`, `prod_id`) VALUES
+(1, 'Hot Picks!', '2022-11-29', '2022-12-06', 1);
 
 -- --------------------------------------------------------
 
@@ -71,7 +76,8 @@ CREATE TABLE `buyer` (
 --
 
 INSERT INTO `buyer` (`buyer_id`, `shipping_add`, `billing_add`, `credit`, `profile_id`) VALUES
-(1, '4210 ave', '4210 ave', '300', 1);
+(1, 'Montreal, CA', 'Montreal, CA', '500', 2),
+(2, 'Ontario, CA', 'Ontario, CA', '0.00', 4);
 
 -- --------------------------------------------------------
 
@@ -81,11 +87,18 @@ INSERT INTO `buyer` (`buyer_id`, `shipping_add`, `billing_add`, `credit`, `profi
 
 CREATE TABLE `order` (
   `order_id` int(11) NOT NULL,
-  `order_number` int(7) NOT NULL,
+  `order_number` varchar(11) NOT NULL,
   `order_date` date NOT NULL,
   `order_status` enum('paid','unpaid') NOT NULL,
   `buyer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`order_id`, `order_number`, `order_date`, `order_status`, `buyer_id`) VALUES
+(6, '142145240', '2022-12-01', 'unpaid', 1);
 
 -- --------------------------------------------------------
 
@@ -95,12 +108,19 @@ CREATE TABLE `order` (
 
 CREATE TABLE `order_details` (
   `order_details_id` int(11) NOT NULL,
-  `unit_price` float NOT NULL,
-  `unit_discount` float NOT NULL,
+  `unit_price` int(11) NOT NULL,
+  `unit_discount` int(11) NOT NULL,
   `unit_qty` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `prod_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`order_details_id`, `unit_price`, `unit_discount`, `unit_qty`, `order_id`, `prod_id`) VALUES
+(48, 999, 0, 1, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -110,15 +130,31 @@ CREATE TABLE `order_details` (
 
 CREATE TABLE `product` (
   `prod_id` int(11) NOT NULL,
-  `pod_name` varchar(50) NOT NULL,
+  `prod_name` varchar(50) NOT NULL,
   `prod_desc` text NOT NULL,
-  `rating` int(6) NOT NULL,
-  `prod_cost` float NOT NULL,
+  `date_added` datetime NOT NULL,
+  `rating` int(6) DEFAULT NULL,
+  `prod_cost` int(11) NOT NULL,
   `num_of_stock` int(11) NOT NULL,
   `has_discount` tinyint(1) NOT NULL,
+  `has_ads` tinyint(1) NOT NULL,
+  `product_image` varchar(90) NOT NULL,
   `vendor_id` int(11) NOT NULL,
   `prod_cat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`prod_id`, `prod_name`, `prod_desc`, `date_added`, `rating`, `prod_cost`, `num_of_stock`, `has_discount`, `has_ads`, `product_image`, `vendor_id`, `prod_cat_id`) VALUES
+(1, 'Steam Deck', 'Steam\'s handheld device!\r\nPortable PC\r\nRunning in Steam OS', '2022-11-30 03:49:20', NULL, 999, 9, 0, 1, '6386c4b01b6c4.jpg', 1, 6),
+(2, 'BoomBox', 'Vintage BoomBox', '2022-11-30 03:50:32', NULL, 250, 1, 0, 0, '6386c4f8318d1.jpg', 1, 8),
+(3, 'Iphone X', 'Open Box***\r\nLike new Condition', '2022-11-30 03:53:47', NULL, 800, 1, 1, 0, '6386c5bb2cc78.jpg', 1, 6),
+(4, 'Spiderman PS5', 'Spiderman Miles Morales', '2022-12-01 05:24:17', NULL, 90, 10, 0, 0, '63882c71912d9.jpg', 2, 2),
+(5, 'Horizon Forbidden West', 'Join Aloy as she braves the Forbidden West – a majestic but dangerous frontier that conceals mysterious new threats.\r\nPS5 Game', '2022-12-01 05:28:26', NULL, 60, 5, 1, 0, '63882d6a9f531.jpg', 2, 2),
+(6, 'Sony PS4 Platinum Wireless Headset', 'Hi quality gaming wireless headset', '2022-12-02 06:00:05', NULL, 250, 4, 0, 0, '638986559f7cc.jpg', 1, 6),
+(7, 'Mac M1', 'Perfect laptop for coding', '2022-12-04 09:17:52', NULL, 999, 4, 1, 0, '638d0070518c6.jpg', 1, 6);
 
 -- --------------------------------------------------------
 
@@ -145,6 +181,20 @@ CREATE TABLE `prod_category` (
   `prod_category` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `prod_category`
+--
+
+INSERT INTO `prod_category` (`prod_cat_id`, `prod_category`) VALUES
+(1, 'App & Games'),
+(2, 'App & Games'),
+(3, 'Automotive'),
+(4, 'Books'),
+(5, 'Clothing'),
+(6, 'Electronics'),
+(7, 'Grocery'),
+(8, 'Other');
+
 -- --------------------------------------------------------
 
 --
@@ -165,7 +215,10 @@ CREATE TABLE `profile` (
 --
 
 INSERT INTO `profile` (`profile_id`, `first_name`, `last_name`, `role`, `profile_photo`, `user_id`) VALUES
-(1, 'jeffrey', 'Grospe', 'buyer', '6377934dd1fb5.jpg', 2);
+(1, 'Peter', 'James', 'vendor', '6386c46589925.jpg', 1),
+(2, 'jeffrey', 'grospe', 'buyer', '6386cca35a177.jpg', 2),
+(3, 'Robert ', 'Downey', 'vendor', 'blank.jpg', 3),
+(4, 'Mike', 'Benz', 'buyer', '638cf2beb3040.jpg', 4);
 
 -- --------------------------------------------------------
 
@@ -179,6 +232,15 @@ CREATE TABLE `promotion` (
   `discount_percent` int(11) NOT NULL,
   `prod_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `promotion`
+--
+
+INSERT INTO `promotion` (`promo_id`, `promo_name`, `discount_percent`, `prod_id`) VALUES
+(1, 'OPEN BOX', 5, 3),
+(2, 'Cyber Monday', 10, 5),
+(3, 'Christmas Special', 2, 7);
 
 -- --------------------------------------------------------
 
@@ -230,7 +292,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password_hash`, `secret_key`) VALUES
-(2, 'jeffrey', '$2y$10$0ANGn/EN.n5xDtKGo2YMWe9VvFocvS.pzYi9N4PWbDCDOqoUg0nHa', NULL);
+(1, 'Peter', '$2y$10$7bIO.yRqetLEcMtaABe7ke1RJnUkPi1rlaYMJbT5pTovHzKp3eGly', NULL),
+(2, 'jeffrey', '$2y$10$r3o0vd5ocZEou6IKT2z/je4ZaRiiWnH1QLsb5J0URN6dM4eP2CUPK', NULL),
+(3, 'rj', '$2y$10$38U24aV1wrmbQgwCeGSbZuh8WvFRt3BTKaxA31hW3eT6E6ndkc9eK', NULL),
+(4, 'Mike', '$2y$10$OD9j84ecOZSFH1BR/6wfHeMlW17NEAijdP.bsXz/JoVKP/c0f3sjK', NULL);
 
 -- --------------------------------------------------------
 
@@ -241,11 +306,19 @@ INSERT INTO `user` (`user_id`, `username`, `password_hash`, `secret_key`) VALUES
 CREATE TABLE `vendor` (
   `vendor_id` int(11) NOT NULL,
   `vendor_name` varchar(100) NOT NULL,
-  `vendor_profit` float NOT NULL,
+  `vendor_profit` varchar(11) NOT NULL,
   `vendor_desc` text NOT NULL,
   `vendor_location` varchar(150) NOT NULL,
   `profile_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `vendor`
+--
+
+INSERT INTO `vendor` (`vendor_id`, `vendor_name`, `vendor_profit`, `vendor_desc`, `vendor_location`, `profile_id`) VALUES
+(1, 'Amazona', '2000', 'Hi, I sell awesome electronics ', 'Downtown, Montreal', 1),
+(2, 'EV Games', '1500', 'Your one stop online gaming store', 'Ontario, Canada', 3);
 
 -- --------------------------------------------------------
 
@@ -270,22 +343,18 @@ CREATE TABLE `vendor_rating` (
 CREATE TABLE `wishlist` (
   `wishlist_id` int(11) NOT NULL,
   `buyer_id` int(11) NOT NULL,
-  `name` varchar(80) NOT NULL,
-  `date_created` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wishlistdetails`
---
-
-CREATE TABLE `wishlistdetails` (
-  `wishlistDetails_id` int(11) NOT NULL,
   `date_added` date NOT NULL,
-  `wishlist_id` int(11) NOT NULL,
   `prod_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`wishlist_id`, `buyer_id`, `date_added`, `prod_id`) VALUES
+(61, 1, '2022-12-04', 6),
+(62, 1, '2022-12-04', 1),
+(63, 2, '2022-12-04', 4);
 
 --
 -- Indexes for dumped tables
@@ -332,8 +401,8 @@ ALTER TABLE `order_details`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`prod_id`),
-  ADD UNIQUE KEY `prod_cat_id` (`prod_cat_id`),
-  ADD KEY `vendor_id` (`vendor_id`);
+  ADD KEY `vendor_id` (`vendor_id`),
+  ADD KEY `prod_cat_id` (`prod_cat_id`) USING BTREE;
 
 --
 -- Indexes for table `product_rating`
@@ -408,15 +477,8 @@ ALTER TABLE `vendor_rating`
 --
 ALTER TABLE `wishlist`
   ADD PRIMARY KEY (`wishlist_id`),
-  ADD UNIQUE KEY `buyer_id_unique` (`buyer_id`) USING BTREE;
-
---
--- Indexes for table `wishlistdetails`
---
-ALTER TABLE `wishlistdetails`
-  ADD PRIMARY KEY (`wishlistDetails_id`),
-  ADD KEY `wishlist_id` (`wishlist_id`),
-  ADD KEY `prod_id` (`prod_id`);
+  ADD UNIQUE KEY `prod_id` (`prod_id`),
+  ADD KEY `buyer_id_unique` (`buyer_id`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -426,31 +488,31 @@ ALTER TABLE `wishlistdetails`
 -- AUTO_INCREMENT for table `advertisement`
 --
 ALTER TABLE `advertisement`
-  MODIFY `ads_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ads_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `buyer`
 --
 ALTER TABLE `buyer`
-  MODIFY `buyer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `buyer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `order_details_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `prod_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `prod_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `product_rating`
@@ -462,19 +524,19 @@ ALTER TABLE `product_rating`
 -- AUTO_INCREMENT for table `prod_category`
 --
 ALTER TABLE `prod_category`
-  MODIFY `prod_cat_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `prod_cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `promotion`
 --
 ALTER TABLE `promotion`
-  MODIFY `promo_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `promo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `shipping`
@@ -486,13 +548,13 @@ ALTER TABLE `shipping`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `vendor_rating`
@@ -501,10 +563,10 @@ ALTER TABLE `vendor_rating`
   MODIFY `vendorRating_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `wishlistdetails`
+-- AUTO_INCREMENT for table `wishlist`
 --
-ALTER TABLE `wishlistdetails`
-  MODIFY `wishlistDetails_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `wishlist`
+  MODIFY `wishlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- Constraints for dumped tables
@@ -598,14 +660,8 @@ ALTER TABLE `vendor_rating`
 -- Constraints for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  ADD CONSTRAINT `wishlist_buyer_fk` FOREIGN KEY (`buyer_id`) REFERENCES `buyer` (`buyer_id`);
-
---
--- Constraints for table `wishlistdetails`
---
-ALTER TABLE `wishlistdetails`
-  ADD CONSTRAINT `wishlistDetails_product` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`),
-  ADD CONSTRAINT `wishlistDetails_wishlist` FOREIGN KEY (`wishlist_id`) REFERENCES `wishlist` (`wishlist_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `wishlist_buyer_fk` FOREIGN KEY (`buyer_id`) REFERENCES `buyer` (`buyer_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `wishlist_prod_fk` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

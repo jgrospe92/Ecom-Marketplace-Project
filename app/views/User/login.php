@@ -12,7 +12,7 @@
 
                 <form method="post">
                     <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start pt-5">
-                        <p class="lead fw-normal mb-0 me-3">Sign in with</p>
+                        <p class="lead fw-normal mb-0 me-3"><?=_("Sign in with")?></p>
                         <button type="button" class="btn btn-primary btn-floating mx-1">
                             <i class="bi bi-google"></i>
                         </button>
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="divider d-flex align-items-center my-4">
-                        <p class="text-center fw-bold mx-3 mb-0">Or</p>
+                        <p class="text-center fw-bold mx-3 mb-0"><?=_("Or")?></p>
                     </div>
 
                     <!-- Username input -->
@@ -42,9 +42,9 @@
                     </div>
 
                     <div class="text-center text-lg-start mt-4 pt-2">
-                        <a href="/Main/index" class="btn btn-lg btn-danger" style="padding-left: 2.5rem; padding-right: 2.5rem;">CANCEL</a>
+                        <a href="/Main/index" class="btn btn-lg btn-danger" style="padding-left: 2.5rem; padding-right: 2.5rem;"><?=_("CANCEL")?> </a>
                         <input type="submit" id="loginUser" name="action" value="LOGIN" class="btn btn-success btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;"></input>
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href='/User/register' class="link-danger">REGISTER</a></p>
+                        <p class="small fw-bold mt-2 pt-1 mb-0"><?=_("Don't have an account?")?><a href='/User/register' class="link-danger"><?=_("REGISTER")?></a></p>
                     </div>
 
                 </form>
@@ -61,7 +61,7 @@ if (isset($_GET['error'])) {
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <img src="/resources/images/warning.png" class="rounded me-2" alt="...">
-                <strong class="me-auto">Invalid Credentials</strong>
+                <strong class="me-auto"><?=_("Invalid Credentials")?></strong>
                 <small id="currenTime"></small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>

@@ -5,14 +5,17 @@
 </section>
 
 <section>
-    <h1>This section displays advertisement</h1>
+ <?php $this->view('includes/ads',['ads'=>$data['ads'], 'buyer'=>$data['buyer']], ) ?>
 </section>
 <section>
-    <h1>This section display product catalogue</h1>
-    <p>Sorted by the newest product added by default</p>
+    <?php $this->view('includes/catalogue', ['catalogue'=> $data['catalogue'], 'buyer'=>$data['buyer']] ) ?>
+</section>
+<section>
+    <?php $this->view('includes/sale', ['promotions'=>$data['promotions'], 'buyer'=>$data['buyer']] ) ?>
 </section>
 
 <?php $this->view('includes/footer'); ?>
 <script src="/resources/js/main_script.js"></script>
 </body>
+
 </html>

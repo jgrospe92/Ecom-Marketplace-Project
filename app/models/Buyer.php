@@ -4,16 +4,6 @@ namespace app\models;
 
 class Buyer extends \app\core\Model
 {
-
-    public function get()
-    {
-        $SQL = "SELECT * FROM profile WHERE user_id=:user_id";
-        $STMT = self::$_connection->prepare($SQL);
-        $STMT->execute(['user_id' => $this->user_id]);
-        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Profile');
-        return $STMT->fetch();
-    }
-
     public function getBuyerByBuyerID($buyer_id)
     {
         $SQL = "SELECT * FROM buyer WHERE buyer_id=:buyer_id";
@@ -59,13 +49,23 @@ class Buyer extends \app\core\Model
                         'buyer_id'=>$this->buyer_id]);
     }
 
-    // GET WISHLIST
-    public function checkWishlist(){
-        $SQL = "SELECT * FROM wishlist WHERE buyer_id=:buyer_id";
+    // Check if buyer has a wishlist
+    public function buyerCheckWishlist($buyer_id){
+        $SQL = "SELECT * from wishlist WHERE buyer_id =:buyer_id";
         $STMT = self::$_connection->prepare($SQL);
-        $STMT->execute(['buyer_id'=>$this->buyer_id]);
-        $colcount = $STMT->fetchColumn();
-        return $colcount;
-       
+        $STMT->execute(['buyer_id'=>$buyer_id]);
+        $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Wishlist');
+        return $STMT->fetchAll();
+        
     }
+
+    // public function getMyWishlistProducts(){
+    //     $SQL = "SELECT wishlist.date_added, product.* from wishlist INNER JOIN product ON wishlist.prod_id =:prod_id";
+    //     $STMT = self::$_connection->prepare($SQL);
+    //     $STMT->execute(['prod_id'=>$this->prod_id]);
+    //     $STMT->setFetchMode(\PDO::FETCH_CLASS, 'app\models\Product');
+    //     return $STMT->fetchAll();
+        
+    // }
+
 }

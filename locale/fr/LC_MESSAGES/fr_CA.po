@@ -1,0 +1,525 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-04 17:02-0500\n"
+"PO-Revision-Date: 2022-12-04 18:12-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_CA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: app/views/Buyer/cart.php:21
+msgid "Order #"
+msgstr "Commande #"
+
+
+#: app/views/Buyer/cart.php:22 app/views/Buyer/wishlist.php:18
+msgid "Product Image"
+msgstr "Image du produit"
+
+#: app/views/Buyer/cart.php:23 app/views/Buyer/wishlist.php:19
+#: app/views/includes/subview/add_product.php:21
+#: app/views/includes/subview/editProduct.php:30 app/views/includes/table.php:9
+#: app/views/includes/table.php:41
+msgid "Product Name"
+msgstr "Nom du produit"
+
+#: app/views/Buyer/cart.php:24 app/views/Buyer/wishlist.php:20
+msgid "Product Description"
+msgstr "Description du produit"
+
+#: app/views/Buyer/cart.php:25 app/views/Buyer/wishlist.php:21
+#: app/views/includes/subview/add_product.php:30
+#: app/views/includes/subview/editProduct.php:39
+#: app/views/includes/table.php:10 app/views/includes/table.php:42
+msgid "Category"
+msgstr "Catégorie"
+
+#: app/views/Buyer/cart.php:26 app/views/Buyer/wishlist.php:22
+msgid "Price"
+msgstr "Prix"
+
+#: app/views/Buyer/cart.php:27 app/views/includes/table.php:13
+msgid "Status"
+msgstr "La situation"
+
+#: app/views/Buyer/cart.php:28 app/views/Buyer/wishlist.php:23
+#: app/views/includes/table.php:14 app/views/includes/table.php:45
+msgid "Action"
+msgstr "Action"
+
+#: app/views/Buyer/cart.php:57 app/views/Buyer/wishlist.php:50
+msgid "Ops! Wishlist is empty!"
+msgstr "Ops! La liste de souhaits est vide!"
+
+#: app/views/Buyer/cart.php:70 app/views/Buyer/wishlist.php:62
+msgid "TOTAL:$"
+msgstr "TOTAL:$"
+
+#: app/views/Buyer/cart.php:71
+msgid "CHECKOUT"
+msgstr "ACHETER"
+
+#: app/views/Buyer/wishlist.php:17
+msgid "Date Added"
+msgstr "Date Ajoutée"
+
+#: app/views/includes/ads.php:13
+msgid "Awesome Products"
+msgstr "Produits impressionnants"
+
+#: app/views/includes/ads.php:22
+msgid "Sponsored"
+msgstr "Sponsorisé"
+
+#: app/views/includes/ads.php:42 app/views/includes/catalogue.php:41
+#: app/views/includes/sale.php:42
+msgid "QTY"
+msgstr "Quantité"
+
+#: app/views/includes/catalogue.php:13 app/views/includes/catalogue.php:55
+#: app/views/includes/header.php:106
+msgid "Newest"
+msgstr "Le plus récent"
+
+#: app/views/includes/header.php:42
+msgid "Welcome "
+msgstr "Bonjour "
+
+#: app/views/includes/catalogue.php:58
+msgid "There is no product listing!"
+msgstr "Il n'y a aucun produit répertorié !"
+
+#: app/views/includes/header.php:96
+msgid "Home"
+msgstr "Accueil"
+
+#: app/views/includes/header.php:99
+msgid "About us"
+msgstr "À propos de nous"
+
+#: app/views/includes/header.php:103
+msgid "Products"
+msgstr "Des produits"
+
+#: app/views/includes/header.php:107
+msgid "Hot picks!"
+msgstr "Choix Chaud!"
+
+#: app/views/includes/header.php:111
+msgid "On sale"
+msgstr "En soldes"
+
+#: app/views/includes/header.php:124
+msgid "Choose Language"
+msgstr "Choisissez la langue"
+
+#: app/views/includes/header.php:125
+msgid "English"
+msgstr "Anglais"
+
+#: app/views/includes/header.php:126
+msgid "French"
+msgstr "Français"
+
+#: app/views/includes/header.php:130
+msgid "Search"
+msgstr "Chercher"
+
+#: app/views/includes/header.php:155 app/views/Profile/create_profile.php:18
+#: app/views/Profile/create_profile.php:63
+msgid "Profile"
+msgstr "Profil"
+
+#: app/views/includes/header.php:158
+msgid "Virtual Wallet $"
+msgstr "Portefeuille virtuel $"
+
+#: app/views/includes/sale.php:13 app/views/includes/sale.php:56
+msgid "Hot Deals"
+msgstr "Bonnes affaires"
+
+#: app/views/includes/sale.php:22
+msgid "On Sale!"
+msgstr "En soldes!"
+
+#: app/views/includes/sale.php:35
+msgid "was$"
+msgstr "été$"
+
+#: app/views/includes/sale.php:60
+msgid "There are no discounted products, stay tuned for the next sale event!"
+msgstr "Il n'y a pas de produits en promotion, restez à l'écoute pour la prochaine vente !"
+
+#: app/views/includes/subview/add_product.php:9
+msgid "Add Product"
+msgstr "Ajouter un produit"
+
+#: app/views/includes/subview/add_product.php:26
+#: app/views/includes/subview/editProduct.php:35
+msgid "Description"
+msgstr "Description du produit"
+
+#: app/views/includes/subview/add_product.php:32
+#: app/views/includes/subview/editProduct.php:41
+msgid "Select category"
+msgstr "Catégorie"
+
+#: app/views/includes/subview/add_product.php:40
+#: app/views/includes/subview/editProduct.php:51
+msgid "Product Cost (CAD)"
+msgstr "Coût du produit (CAD)"
+
+#: app/views/includes/subview/add_product.php:45
+#: app/views/includes/subview/editProduct.php:56
+msgid "Units In Stock"
+msgstr "Unités en stock"
+
+#: app/views/includes/subview/add_product.php:52
+#: app/views/includes/subview/editProduct.php:65
+msgid "Ads (flat rate 5 CAD)"
+msgstr "Annonces (forfait 5 CAD)"
+
+#: app/views/includes/subview/add_product.php:54
+#: app/views/includes/subview/editProduct.php:67
+msgid "Start: "
+msgstr "Commencer: "
+
+#: app/views/includes/subview/add_product.php:55
+#: app/views/includes/subview/editProduct.php:68
+msgid "Ends: "
+msgstr "Prend fin: "
+
+#: app/views/includes/subview/add_product.php:64
+#: app/views/includes/subview/editProduct.php:85
+msgid "UPLOAD IMAGE"
+msgstr "TÉLÉCHARGER L'IMAGE"
+
+#: app/views/includes/subview/add_product.php:70
+#: app/views/includes/subview/editProduct.php:91
+#: app/views/includes/subview/reload_wallet.php:60
+msgid "Close"
+msgstr "Fermer"
+
+#: app/views/includes/subview/add_product.php:71
+#: app/views/includes/subview/editProduct.php:92
+msgid "Save changes"
+msgstr "Garder"
+
+#: app/views/includes/subview/editProduct.php:18
+msgid "Edit Product"
+msgstr "Modifier le produit"
+
+#: app/views/includes/subview/editProduct.php:74
+msgid "Set Promotion"
+msgstr "Définir la promotion"
+
+#: app/views/includes/subview/productDetail.php:13
+msgid "Details"
+msgstr "Détails"
+
+#: app/views/includes/subview/productDetail.php:29
+msgid "Rating:"
+msgstr "Évaluation:"
+
+#: app/views/includes/subview/productDetail.php:33
+msgid "Vendor:"
+msgstr "Vendeur(euse):"
+
+#: app/views/includes/subview/productDetail.php:35
+msgid "Description:"
+msgstr "La description:"
+
+#: app/views/includes/subview/productDetail.php:36
+msgid "Date Listed:"
+msgstr "Date d'inscription :"
+
+#: app/views/includes/subview/productDetail.php:38
+msgid "QTY:"
+msgstr "Quantité:"
+
+#: app/views/includes/subview/productDetail.php:39
+msgid "Advertised:"
+msgstr "Annoncé :"
+
+#: app/views/includes/subview/productDetail.php:46
+msgid "Discounted:"
+msgstr "Remise :"
+
+#: app/views/includes/subview/productDetail.php:48
+msgid "Reviews:"
+msgstr "Commentaires:"
+
+#: app/views/includes/subview/productDetail.php:49
+msgid "No product review"
+msgstr "Pas d'avis sur le produit"
+
+#: app/views/includes/subview/reload_wallet.php:6
+#: app/views/includes/subview/ToastMsg.php:6
+msgid "Success"
+msgstr "Succès"
+
+#: app/views/includes/subview/reload_wallet.php:21
+msgid "Reload virtual wallet"
+msgstr "Recharger le portefeuille virtuel"
+
+#: app/views/includes/subview/reload_wallet.php:27
+msgid "Credit Card Number"
+msgstr "Numéro de Carte de Crédit"
+
+#: app/views/includes/subview/reload_wallet.php:33
+msgid "Card Holder Name"
+msgstr "Nom du titulaire"
+
+#: app/views/includes/subview/reload_wallet.php:39
+msgid "Expiration date"
+msgstr "Date d'expiration"
+
+#: app/views/includes/subview/reload_wallet.php:45
+msgid "Security Number"
+msgstr "Numéro de sécurité"
+
+#: app/views/includes/subview/reload_wallet.php:51
+msgid "Amount"
+msgstr "Montant"
+
+#: app/views/includes/subview/reload_wallet.php:61
+msgid "Done"
+msgstr "Fini"
+
+#: app/views/includes/subview/ToastMsg.php:11
+msgid "Profile Updated"
+msgstr "Profil mis à jour"
+
+#: app/views/includes/table.php:5 app/views/includes/table.php:38
+msgid "Order by latest"
+msgstr "Commander au plus tard"
+
+#: app/views/includes/table.php:8
+msgid "Order Number"
+msgstr "Numéro de commande"
+
+#: app/views/includes/table.php:11 app/views/includes/table.php:43
+msgid "Quantity"
+msgstr "Quantité"
+
+#: app/views/includes/table.php:12 app/views/includes/table.php:44
+msgid "Cost"
+msgstr "Coût"
+
+#: app/views/includes/table.php:21
+msgid "Order history is empty!"
+msgstr "L'historique des commandes est vide !"
+
+#: app/views/Profile/create_profile.php:18
+#: app/views/Profile/create_profile.php:63
+msgid "Create your"
+msgstr "Crée ton"
+
+#: app/views/Profile/create_profile.php:21
+#: app/views/Profile/create_profile.php:66
+msgid "Contact Info"
+msgstr "Informations de contact"
+
+#: app/views/Profile/create_profile.php:23
+#: app/views/Profile/create_profile.php:68
+msgid "First Name: "
+msgstr "Prénom: "
+
+#: app/views/Profile/create_profile.php:26
+#: app/views/Profile/create_profile.php:71
+msgid "Last Name: "
+msgstr "Nom de famille: "
+
+#: app/views/Profile/create_profile.php:29
+msgid "Address"
+msgstr "Adresse"
+
+#: app/views/Profile/create_profile.php:31
+msgid "Shipping Address: "
+msgstr "Adresse de livraison: "
+
+#: app/views/Profile/create_profile.php:34
+msgid "Billing Address: "
+msgstr "Adresse de facturation: "
+
+#: app/views/Profile/create_profile.php:39
+#: app/views/Profile/create_profile.php:87
+msgid "Virtual Wallet"
+msgstr "Portefeuille virtuel"
+
+#: app/views/Profile/create_profile.php:40
+#: app/views/Profile/create_profile.php:88
+#: app/views/Profile/edit_profile.php:77 app/views/Profile/profile.php:72
+#: app/views/Profile/profile.php:132
+msgid "Add Credit"
+msgstr "Ajouter un crédit"
+
+#: app/views/Profile/create_profile.php:59
+msgid "Upload"
+msgstr "Télécharger"
+
+#: app/views/Profile/create_profile.php:74
+msgid "Store details"
+msgstr "Détails du magasin"
+
+#: app/views/Profile/create_profile.php:76
+msgid "Store Name: "
+msgstr "Nom du magasin: "
+
+#: app/views/Profile/create_profile.php:79
+msgid "Store Description: "
+msgstr "Description du magasin : "
+
+#: app/views/Profile/create_profile.php:82
+msgid "Store Location: "
+msgstr "Emplacement du magasin: "
+
+#: app/views/Profile/edit_profile.php:39
+msgid "UPLOAD"
+msgstr "TÉLÉCHARGER"
+
+#: app/views/Profile/edit_profile.php:42
+msgid "SAVE"
+msgstr "ENREGISTRER"
+
+#: app/views/Profile/edit_profile.php:56 app/views/Profile/profile.php:53
+msgid "Purchased"
+msgstr "Acheté"
+
+#: app/views/Profile/edit_profile.php:60 app/views/Profile/profile.php:57
+msgid "Reviewed"
+msgstr "Révisé"
+
+#: app/views/Profile/edit_profile.php:64 app/views/Profile/profile.php:61
+#: app/views/Profile/profile.php:120
+msgid "Followers"
+msgstr "Suiveurs"
+
+#: app/views/Profile/edit_profile.php:70 app/views/Profile/profile.php:67
+#: app/views/Profile/profile.php:126
+msgid "Info"
+msgstr "Info"
+
+#: app/views/Profile/edit_profile.php:73 app/views/Profile/profile.php:69
+msgid "Shipping : "
+msgstr "Expédition : "
+
+#: app/views/Profile/edit_profile.php:74 app/views/Profile/profile.php:70
+msgid "Billing : "
+msgstr "Facturation : "
+
+#: app/views/Profile/edit_profile.php:75 app/views/Profile/profile.php:71
+#: app/views/Profile/profile.php:131
+msgid "Virtual Wallet : $"
+msgstr "Portefeuille virtuel : $"
+
+#: app/views/Profile/edit_profile.php:82 app/views/Profile/profile.php:76
+msgid "Order History"
+msgstr "Historique des commandes"
+
+#: app/views/Profile/profile.php:40 app/views/Profile/profile.php:99
+msgid "Edit profile"
+msgstr "Editer le profil"
+
+#: app/views/Profile/profile.php:112
+msgid "Rating"
+msgstr "Évaluation"
+
+#: app/views/Profile/profile.php:116
+msgid "Sold Products"
+msgstr "Produits vendus"
+
+#: app/views/Profile/profile.php:128
+msgid "Owner : "
+msgstr "Propriétaire : "
+
+#: app/views/Profile/profile.php:129
+msgid "Description : "
+msgstr "La description : "
+
+#: app/views/Profile/profile.php:130
+msgid "Location : "
+msgstr "Emplacement : "
+
+#: app/views/Profile/profile.php:136
+msgid "Product Listing"
+msgstr "Liste des produits"
+
+#: app/views/Profile/profile.php:139
+msgid "ADD ITEM"
+msgstr "AJOUTER UN ITEM"
+
+#: app/views/User/login.php:15
+msgid "Sign in with"
+msgstr "Se connecter avec"
+
+#: app/views/User/login.php:30
+msgid "Or"
+msgstr "Ou"
+
+#: app/views/User/login.php:45 app/views/User/register.php:59
+msgid "CANCEL"
+msgstr "ANNULER"
+
+#: app/views/User/login.php:47
+msgid "Don't have an account?"
+msgstr "Vous n'avez pas de compte ?"
+
+#: app/views/User/login.php:47 app/views/User/register.php:60
+msgid "REGISTER"
+msgstr "S'INSCRIRE"
+
+#: app/views/User/login.php:64 app/views/User/register.php:85
+msgid "Invalid Credentials"
+msgstr "Les informations d'identification invalides"
+
+#: app/views/User/register.php:13
+msgid "Sign up"
+msgstr "S'inscrire"
+
+#: app/views/User/register.php:20
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: app/views/User/register.php:28
+msgid "Password"
+msgstr "Mot de passe"
+
+#: app/views/User/register.php:36
+msgid "Repeat your password"
+msgstr "Répétez votre mot de passe"
+
+#: app/views/User/register.php:44
+msgid "Buyer"
+msgstr "Acheteur"
+
+#: app/views/User/register.php:45
+msgid "Vendor"
+msgstr "Vendeur"
+
+#: app/views/User/register.php:47
+msgid "Account type"
+msgstr "Type de compte"
+
+#: app/views/User/register.php:54
+msgid "I agree all statements in"
+msgstr "Je suis d'accord avec toutes les déclarations dans"
+
+#: app/views/User/register.php:54
+msgid "Terms of service"
+msgstr "Conditions d'utilisation"
+
+#: app/views/Vendor/dashboard.php:3
+msgid "Vendor Dashboard"
+msgstr "Tableau de bord du fournisseur"
