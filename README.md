@@ -133,6 +133,8 @@ coming soon...
 2. Filter feature
 3. Discounted price should apply to all instance of that item
 4. Cleaner code and use dry methodology
+5. Create an marketplace admin account
+6. Implement the service transaction between users
 
 
 # Project Team :goat:
