@@ -80,8 +80,9 @@ To demonstrate our knowledge in web development using proper MVC design pattern 
 7. Click MySQL admin to open the database dashboard
 8. Click import to load the database to the server
 9. The marketplace.sql database is located inside the htdocs/data
-10. In the same browser you can type in the url `localhost`
-11. You should then see the Marketplace
+10. IMPORTANT STEP: You have to enable `extension=intl` in the phi.ini file located in the xampp installation directory `C:\xampp\php. Search for intl and remove the `;` character to enable the extension. 
+11. In the same browser you can type in the url `localhost`
+12. You should then see the Marketplace
 
 ## Goal of the feature
 - The goal of the features are to simplify the process of Vendors selling their products online and help buyers to
