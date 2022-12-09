@@ -80,7 +80,7 @@ To demonstrate our knowledge in web development using proper MVC design pattern 
 7. Click MySQL admin to open the database dashboard
 8. Click import to load the database to the server
 9. The marketplace.sql database is located inside the htdocs/data
-10. IMPORTANT STEP: You have to enable `extension=intl` in the phi.ini file located in the xampp installation directory `C:\xampp\php. Search for intl and remove the `;` character to enable the extension. 
+10. IMPORTANT STEP: You have to enable `extension=intl` in the php.ini file located in the xampp installation directory `C:\xampp\php. Search for intl and remove the `;` character to enable the extension. 
 11. In the same browser you can type in the url `localhost`
 12. You should then see the Marketplace
 
@@ -108,7 +108,7 @@ Bootstraps Modal
 User profile
 : I model the user profile similar to other social platform like facebook and twitter. People are already use to this style that is why It is a good idea to style the user profile in the same way
 
-# Live Video Model
+# Live Video Demo 
 coming soon... 
 
 
