@@ -143,7 +143,7 @@ coming soon...
 - CodeBros
 ### Team member
     - Jeffrey Grospe
-    - Philip Rieck
+
 
 # Instructor :dragon:
 Michel Paquette
