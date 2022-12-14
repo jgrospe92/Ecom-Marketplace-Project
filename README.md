@@ -25,7 +25,7 @@ Academic school project in 420-411-VA ECOMMERCE COURSE
 
 # Project Description :newspaper:
 
-A web application that allows registered sellers to list their products for sale. A Registered or non registered user can buy these products online. This online web application will be a marketplace, which will act and function like the Amazon website. 
+A web application that allows registered sellers to list their products for sale. A Registered or non registered user can see the product listing however only the registered user can buy these products. This online web application will be a marketplace, which will act and function like the Amazon website. 
 
 
 # Project time Estimation :calendar:
