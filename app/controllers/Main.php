@@ -22,6 +22,8 @@ class Main extends \app\core\Controller{
         $this->view('Main/index',['ads'=> $ads, 'catalogue'=>$products, 'promotions'=>$promotions, 'buyer'=>$buyer]);
     }
 
+
+
     #[\app\filters\Login]
     public function profile(){
        
@@ -57,5 +59,9 @@ class Main extends \app\core\Controller{
         }
         
 
+    }
+
+    public function aboutUsPage(){
+        $this->view('About/index');
     }
 }
