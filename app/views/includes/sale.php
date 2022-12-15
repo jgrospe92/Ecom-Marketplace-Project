@@ -10,7 +10,7 @@
         <div  class="container">
             <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
                 <div class="">
-                    <h1 class=" fst-italic text-center"><?_("Hot Deals")?></h1>
+                    <h1 class=" fst-italic text-center"><?=_("Hot Deals")?></h1>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
@@ -19,7 +19,7 @@
                     $product = $product->get($promotion->prod_id);
                     ?>
                     <div class="col">
-                    <span class="badge bg-secondary"><?_("On Sale!")?></span>
+                    <span class="badge bg-secondary"><?=_("On Sale!")?></span>
                         <div class="card shadow-sm h-100 " style="width: 18rem;">
                             <div class="card-header"><?= $promotion->promo_name ?></div>
                             <img src="/images/<?= $product->product_image ?>" class="card-img-top" width=100% height="225" style="object-fit:cover" alt="<?= $product->prod_name ?>">

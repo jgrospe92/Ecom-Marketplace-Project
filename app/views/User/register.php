@@ -41,8 +41,8 @@
                                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
                                             <select id="role " required name="role" class="form-select" aria-label="Default select example">
-                                                <option selected value="buyer"><?_("Buyer")?></option>
-                                                <option value="vendor"><?_("Vendor")?></option>
+                                                <option selected value="buyer"><?=_("Buyer")?></option>
+                                                <option value="vendor"><?=_("Vendor")?></option>
                                             </select>
                                             <label class="form-label" for="user_role"><?=_("Account type")?></label>
                                         </div>

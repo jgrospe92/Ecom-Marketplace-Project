@@ -75,8 +75,8 @@
                                         <div class="col-6 mb-3">
                                             <label for="store_name"><?=_("Store Name: ")?><input id="store_name" type="text" name="vendor_name" required></label><br>
                                         </div>
-                                        <div class="col-6 mb-3">
-                                            <label for="description"><?=_("Store Description: ")?><textarea rows='3' cols="50" id="description" placeholder="Tell us something about your store" name="vendor_desc" required></textarea></label>
+                                        <div class="col-lg-10 col-6 mb-3">
+                                            <label for="description"><?=_("Store Description: ")?><textarea class="form-control" rows='3'  id="description" placeholder="Tell us something about your store" name="vendor_desc" required></textarea></label>
                                         </div>
                                         <div class="col-6 mb-3">
                                             <label for="store_location"><?=_("Store Location: ")?><input id="store_location" type="text" name="vendor_location" required></label>
