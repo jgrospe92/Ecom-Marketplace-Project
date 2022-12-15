@@ -108,8 +108,9 @@ Bootstraps Modal
 User profile
 : I model the user profile similar to other social platform like facebook and twitter. People are already use to this style that is why It is a good idea to style the user profile in the same way
 
-# Live Video Demo 
-[![Watch the demo](https://img.youtube.com/vi/Z_EJbFv/maxresdefault.jpg)](https://youtu.be/Z_EJbFv-YGI)
+# Live Video Demo (OPENS YOUTUBE) 
+[![Watch the video](https://img.youtube.com/vi/Z_EJbFv-YGI/maxresdefault.jpg)](https://youtu.be/Z_EJbFv-YGI)
+
 
 
 # Future Implementation
