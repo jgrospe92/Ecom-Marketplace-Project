@@ -4,6 +4,8 @@ namespace app\controllers;
 use app\models\Wishlist;
 
 class Product extends \app\core\Controller {
+
+    #[\app\filters\VendorAccess]
     #[\app\filters\Login]
     public function insert(){
         
@@ -183,6 +185,8 @@ class Product extends \app\core\Controller {
         echo $this->view('/includes/subview/editProduct', ['product'=>$product, 'categories'=>$categories]);
     }
 
+    #[\app\filters\BuyerAccess]
+    #[\app\filters\Login]
     public function addToWishList() {
         $wishlist = new \app\models\Wishlist();
 
@@ -199,7 +203,8 @@ class Product extends \app\core\Controller {
         
         }
     }
-    // TODO: FITLER FOR BUYER
+
+    #[\app\filters\BuyerAccess]
     #[\app\filters\Login]
     public function removeFromWishlist($prod_id){
         $buyer = new \app\models\Buyer();
