@@ -53,6 +53,7 @@ class Product extends \app\core\Controller {
         } 
     }
 
+    #[\app\filters\VendorAccess]
     #[\app\filters\Login]
     public function update($prod_id){
 
@@ -143,17 +144,11 @@ class Product extends \app\core\Controller {
 
             header('location:/Main/profile');
 
-            // FOR DATE FUNCTIONS
-            // $d = strtotime("+3 Months");
-            // $Next3Months = date("Y-m-d", $d);
-            // $currentDate = date("Y-m-d");
-            // $newDate = date_diff(date_create($Next3Months),date_create($currentDate), true);
-            // echo  $newDate->format("%R%a days");
-            
         } 
 
     }
 
+    #[\app\filters\VendorAccess]
     #[\app\filters\Login]
     public function delete($prod_id){
         $vendor = new \app\models\Vendor();
@@ -177,6 +172,8 @@ class Product extends \app\core\Controller {
     
     }
 
+    #[\app\filters\VendorAccess]
+    #[\app\filters\Login]
     public function showEditProduct($prod_id) {
         $product = new \app\models\Product();
         $product =   $product->get($prod_id);
@@ -202,7 +199,8 @@ class Product extends \app\core\Controller {
         
         }
     }
-
+    // TODO: FITLER FOR BUYER
+    #[\app\filters\Login]
     public function removeFromWishlist($prod_id){
         $buyer = new \app\models\Buyer();
         $buyer = $buyer->getBuyerUsingProfileId($_SESSION['profile_id']);

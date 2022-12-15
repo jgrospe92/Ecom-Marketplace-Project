@@ -81,7 +81,7 @@ class Profile extends \app\core\Controller
             $this->view('Profile/create_profile');
         }
     }
-    
+
     #[\app\filters\Login]
     public function updateWallet()
     {
@@ -107,6 +107,7 @@ class Profile extends \app\core\Controller
         }
     }
 
+    #[\app\filters\Login]
     public function edit_profile()
     {
         $profile = new \app\models\Profile();
