@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2022 at 02:17 AM
+-- Generation Time: Dec 15, 2022 at 06:17 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,10 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `marketplace`
 --
-DROP DATABASE IF EXISTS marketplace;
 
-CREATE DATABASE `marketplace`;
-USE marketplace;
 -- --------------------------------------------------------
 
 --
@@ -77,7 +74,8 @@ CREATE TABLE `buyer` (
 
 INSERT INTO `buyer` (`buyer_id`, `shipping_add`, `billing_add`, `credit`, `profile_id`) VALUES
 (1, 'Montreal, CA', 'Montreal, CA', '500', 2),
-(2, 'Ontario, CA', 'Ontario, CA', '0.00', 4);
+(2, 'Ontario, CA', 'Ontario, CA', '0.00', 4),
+(3, '4210 ave montreal', '4210 ave montreal', '200', 5);
 
 -- --------------------------------------------------------
 
@@ -98,7 +96,8 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`order_id`, `order_number`, `order_date`, `order_status`, `buyer_id`) VALUES
-(6, '142145240', '2022-12-01', 'unpaid', 1);
+(6, '142145240', '2022-12-01', 'unpaid', 1),
+(7, '2125997832', '2022-12-15', 'unpaid', 3);
 
 -- --------------------------------------------------------
 
@@ -120,7 +119,8 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`order_details_id`, `unit_price`, `unit_discount`, `unit_qty`, `order_id`, `prod_id`) VALUES
-(48, 999, 0, 1, 6, 1);
+(48, 999, 0, 1, 6, 1),
+(49, 60, 0, 1, 7, 5);
 
 -- --------------------------------------------------------
 
@@ -152,7 +152,7 @@ INSERT INTO `product` (`prod_id`, `prod_name`, `prod_desc`, `date_added`, `ratin
 (2, 'BoomBox', 'Vintage BoomBox', '2022-11-30 03:50:32', NULL, 250, 1, 0, 0, '6386c4f8318d1.jpg', 1, 8),
 (3, 'Iphone X', 'Open Box***\r\nLike new Condition', '2022-11-30 03:53:47', NULL, 800, 1, 1, 0, '6386c5bb2cc78.jpg', 1, 6),
 (4, 'Spiderman PS5', 'Spiderman Miles Morales', '2022-12-01 05:24:17', NULL, 90, 10, 0, 0, '63882c71912d9.jpg', 2, 2),
-(5, 'Horizon Forbidden West', 'Join Aloy as she braves the Forbidden West – a majestic but dangerous frontier that conceals mysterious new threats.\r\nPS5 Game', '2022-12-01 05:28:26', NULL, 60, 5, 1, 0, '63882d6a9f531.jpg', 2, 2),
+(5, 'Horizon Forbidden West', 'Join Aloy as she braves the Forbidden West – a majestic but dangerous frontier that conceals mysterious new threats.\r\nPS5 Game', '2022-12-01 05:28:26', NULL, 60, 4, 1, 0, '63882d6a9f531.jpg', 2, 2),
 (6, 'Sony PS4 Platinum Wireless Headset', 'Hi quality gaming wireless headset', '2022-12-02 06:00:05', NULL, 250, 4, 0, 0, '638986559f7cc.jpg', 1, 6),
 (7, 'Mac M1', 'Perfect laptop for coding', '2022-12-04 09:17:52', NULL, 999, 4, 1, 0, '638d0070518c6.jpg', 1, 6);
 
@@ -218,7 +218,8 @@ INSERT INTO `profile` (`profile_id`, `first_name`, `last_name`, `role`, `profile
 (1, 'Peter', 'James', 'vendor', '6386c46589925.jpg', 1),
 (2, 'jeffrey', 'grospe', 'buyer', '6386cca35a177.jpg', 2),
 (3, 'Robert ', 'Downey', 'vendor', 'blank.jpg', 3),
-(4, 'Mike', 'Benz', 'buyer', '638cf2beb3040.jpg', 4);
+(4, 'Mike', 'Benz', 'buyer', '638cf2beb3040.jpg', 4),
+(5, 'james', 'smith', 'buyer', 'blank.jpg', 9);
 
 -- --------------------------------------------------------
 
@@ -295,7 +296,8 @@ INSERT INTO `user` (`user_id`, `username`, `password_hash`, `secret_key`) VALUES
 (1, 'Peter', '$2y$10$7bIO.yRqetLEcMtaABe7ke1RJnUkPi1rlaYMJbT5pTovHzKp3eGly', NULL),
 (2, 'jeffrey', '$2y$10$r3o0vd5ocZEou6IKT2z/je4ZaRiiWnH1QLsb5J0URN6dM4eP2CUPK', NULL),
 (3, 'rj', '$2y$10$38U24aV1wrmbQgwCeGSbZuh8WvFRt3BTKaxA31hW3eT6E6ndkc9eK', NULL),
-(4, 'Mike', '$2y$10$OD9j84ecOZSFH1BR/6wfHeMlW17NEAijdP.bsXz/JoVKP/c0f3sjK', NULL);
+(4, 'Mike', '$2y$10$OD9j84ecOZSFH1BR/6wfHeMlW17NEAijdP.bsXz/JoVKP/c0f3sjK', NULL),
+(9, 'james', '$2y$10$FUdskpO9Q4uvY7MsjJADDerA0X9IgEcon80DmUPoIaLD90m23bQmu', NULL);
 
 -- --------------------------------------------------------
 
@@ -354,7 +356,10 @@ CREATE TABLE `wishlist` (
 INSERT INTO `wishlist` (`wishlist_id`, `buyer_id`, `date_added`, `prod_id`) VALUES
 (61, 1, '2022-12-04', 6),
 (62, 1, '2022-12-04', 1),
-(63, 2, '2022-12-04', 4);
+(63, 2, '2022-12-04', 4),
+(77, 3, '2022-12-15', 7),
+(78, 3, '2022-12-15', 6),
+(79, 3, '2022-12-15', 3);
 
 --
 -- Indexes for dumped tables
@@ -477,8 +482,8 @@ ALTER TABLE `vendor_rating`
 --
 ALTER TABLE `wishlist`
   ADD PRIMARY KEY (`wishlist_id`),
-  ADD UNIQUE KEY `prod_id` (`prod_id`),
-  ADD KEY `buyer_id_unique` (`buyer_id`) USING BTREE;
+  ADD KEY `buyer_id_unique` (`buyer_id`) USING BTREE,
+  ADD KEY `prod_id` (`prod_id`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -494,19 +499,19 @@ ALTER TABLE `advertisement`
 -- AUTO_INCREMENT for table `buyer`
 --
 ALTER TABLE `buyer`
-  MODIFY `buyer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `buyer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `order_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `order_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -530,7 +535,7 @@ ALTER TABLE `prod_category`
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `promotion`
@@ -548,7 +553,7 @@ ALTER TABLE `shipping`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `vendor`
@@ -566,7 +571,7 @@ ALTER TABLE `vendor_rating`
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `wishlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `wishlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- Constraints for dumped tables
