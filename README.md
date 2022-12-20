@@ -84,6 +84,9 @@ To demonstrate our knowledge in web development using proper MVC design pattern 
 11. In the same browser you can type in the url `localhost`
 12. You should then see the Marketplace
 
+## CodeCeption Test
+- To run the condeception test run `composer install` first
+
 ## Goal of the feature
 - The goal of the features are to simplify the process of Vendors selling their products online and help buyers to
 find the product they are looking for. The homepage is where all products can be seen. Any user is able to see all the listed products and so as the advertisement and promotional products
